@@ -2,5 +2,5 @@ using UnityEngine;
 
 public interface IDetector
 {
-    void OnPlayerDetected();
+    void OnPlayerDetected(PlayerDies player);
 }

@@ -7,40 +7,51 @@ public class RedLaser : MonoBehaviour, IDetector
     public GameObject laserPrefab;
     public float onTime;
     public float offTime;
-    
+
     private bool laserOn = true;
 
-    void Start() {
+    void Start()
+    {
         StartCoroutine(TurnOnOffLaser());
     }
 
-    private IEnumerator TurnOnOffLaser() {
-        while (true) {
+    private IEnumerator TurnOnOffLaser()
+    {
+        while (true)
+        {
             laserOn = !laserOn;
-            laserPrefab.SetActive(laserOn); 
+            laserPrefab.SetActive(laserOn);
             //SetActive activates and deactivates the laser based on the boolean
 
-            if (laserOn) 
+            if (laserOn)
             {
                 yield return new WaitForSeconds(onTime);
-            } 
-            else 
+            }
+            else
             {
                 yield return new WaitForSeconds(offTime);
             }
         }
     }
-    public void OnPlayerDetected() {
-        if (laserOn) 
+    public void OnPlayerDetected(PlayerDies player)
+    {
+        if (laserOn)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            {
+                Debug.Log("Player Detected by Camera");
+                player?.Dies();
+            }
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other) {
-        if (other.CompareTag("Player")) 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
         {
-            OnPlayerDetected();
+            PlayerDies player = other.GetComponent<PlayerDies>();
+            OnPlayerDetected(player);
+
         }
+
     }
 }
