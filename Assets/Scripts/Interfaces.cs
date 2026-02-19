@@ -1,14 +1,6 @@
 using UnityEngine;
 
-public interface IHoldable
+public interface IDetector
 {
-    public void OnPickUp();
-}
-public interface IEater
-{
-    public void Feed();
-}
-
-public interface IFeedable
-{
+    void OnPlayerDetected(PlayerDies player);
 }
