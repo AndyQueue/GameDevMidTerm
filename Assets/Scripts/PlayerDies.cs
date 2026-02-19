@@ -11,14 +11,10 @@ public class PlayerDies : MonoBehaviour
         if (isDead) return;
 
         isDead = true;
+
         Debug.Log("Player Died");
-
-        StartCoroutine(ReloadScene());
-    }
-
-    IEnumerator ReloadScene()
-    {
-        yield return new WaitForSeconds(2f);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
+
+
 }
