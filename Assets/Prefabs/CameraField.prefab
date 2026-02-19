@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 15, y: 25, z: 1}
+  m_LocalScale: {x: 6, y: 8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -105,8 +105,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02189f167f3a941a58e775be94f45101, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraDetector
-  speed: 0
-  range: 0
 --- !u!60 &-184890979293761109
 PolygonCollider2D:
   m_ObjectHideFlags: 0
