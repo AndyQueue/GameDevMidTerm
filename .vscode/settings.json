@@ -67,5 +67,5 @@
         "*.sln": "*.csproj",
         "*.slnx": "*.csproj"
     },
-    "dotnet.defaultSolution": "SpyGame.slnx"
+    "dotnet.defaultSolution": "GameDevMidTerm.slnx"
 }
