@@ -4,24 +4,29 @@ using UnityEngine.SceneManagement;
 
 public class RedLaser : MonoBehaviour, IDetector
 {
-    public GameObject laserPrefab;
     public float onTime;
     public float offTime;
 
     private bool laserOn = true;
+    private SpriteRenderer spriteRenderer;
+    private Collider2D laserCollider;
 
     void Start()
     {
-        StartCoroutine(TurnOnOffLaser());
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        laserCollider = GetComponent<Collider2D>();
+        StartCoroutine(LaserTimer());
     }
 
-    private IEnumerator TurnOnOffLaser()
+    private IEnumerator LaserTimer()
     {
         while (true)
         {
             laserOn = !laserOn;
-            laserPrefab.SetActive(laserOn);
-            //SetActive activates and deactivates the laser based on the boolean
+
+            spriteRenderer.enabled = laserOn;
+            laserCollider.enabled = laserOn;
+            //enables physics and visual of laser
 
             if (laserOn)
             {
@@ -46,7 +51,7 @@ public class RedLaser : MonoBehaviour, IDetector
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        if (laserOn && other.CompareTag("Player"))
         {
             PlayerDies player = other.GetComponent<PlayerDies>();
             OnPlayerDetected(player);
