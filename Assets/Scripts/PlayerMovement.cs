@@ -5,7 +5,6 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float jumpForce = 5f;
     [SerializeField] private float groundCheckDistance = 0.1f;
@@ -14,7 +13,9 @@ public class PlayerMovement : MonoBehaviour
     private InputAction jumpAction;
     private InputAction duckAction;
     private Rigidbody2D rb;
-    private Vector2 movement;
+    private float horizontalInput;
+    private bool jumpRequested;
+    private bool duckRequested;
 
     private void Awake()
     {
@@ -36,61 +37,64 @@ public class PlayerMovement : MonoBehaviour
     public void OnMove(InputValue input)
     {
         // Only use horizontal input for movement; up/down reserved for jump/duck
-        Vector2 inputVec = input.Get<Vector2>();
-        movement = new Vector2(inputVec.x, 0f);
-    }
+        Vector2 move = input.Get<Vector2>();
+        horizontalInput = move.x;
 
+    }
     public Vector2 GetMovementDirection()
     {
-        return movement;
+        return new Vector2(horizontalInput, 0f);
     }
-
     private bool IsGrounded()
     {
         Vector2 origin = transform.position;
         RaycastHit2D hit = Physics2D.Raycast(origin, Vector2.down, groundCheckDistance, groundLayer);
-#if UNITY_EDITOR
         Debug.DrawRay(origin, Vector2.down * groundCheckDistance, hit.collider != null ? Color.green : Color.red);
-#endif
         return hit.collider != null;
     }
-
     private void HandleJump(ref Vector2 velocity)
     {
-        if (jumpAction != null && jumpAction.WasPressedThisFrame() && IsGrounded())
+        if (!jumpRequested) { return; }
+        Debug.Log("Jump pressed");
+        if (IsGrounded())
         {
-            Debug.Log("Jump pressed");
+            jumpRequested = false; // consume the jump
             velocity.y = jumpForce;
         }
     }
-
-    private void HandleDuck(ref Vector2 velocity)
+    private void HandleDuck()
     {
-        if (duckAction != null && duckAction.WasPressedThisFrame())
+        if (!duckRequested) { return; }
+        Debug.Log("Duck pressed");
+        if (IsGrounded())
         {
-            Debug.Log("Duck pressed");
-            velocity.y = -jumpForce;
+            duckRequested = false; // consume the duck
+            // Duck here
         }
     }
-
-    void Update()
+    
+// Mainly used for sensing player input (updated every frame)
+    private void Update()
     {
+        // Read input every rendered frame
+        if (jumpAction != null && jumpAction.WasPressedThisFrame() && !jumpRequested && IsGrounded()) { jumpRequested = true; }
+        if (duckAction != null && duckAction.WasPressedThisFrame() && !duckRequested && IsGrounded()) { duckRequested = true; }
+    }
+// Mainly used for applying physics movement (updated at fixed time steps)
+    private void FixedUpdate()
+    {
+        // Apply physics movement at fixed time steps
         Vector2 velocity = rb.linearVelocity;
+        velocity.x = horizontalInput * moveSpeed;
 
-        // apply left/right movement
-        Vector2 moveDir = GetMovementDirection();
-        velocity.x = moveDir.x * moveSpeed;
-
-        // face left/right when moving horizontally
-        if (Mathf.Abs(velocity.x) > 0.001f)
-        {
-            transform.right = new Vector2(Mathf.Sign(velocity.x), 0f);
-        }
-
-        // handle jump (up key) and duck (down key)
+        // jump preserves horizontal velocity
         HandleJump(ref velocity);
-        HandleDuck(ref velocity);
+        // doesn't do anything yet
+        HandleDuck();
 
+        // Apply the final velocity to the Rigidbody
         rb.linearVelocity = velocity;
     }
+// Logic between Update and FixedUpdate: https://docs.unity3d.com/6000.3/Documentation/ScriptReference/Rigidbody-linearVelocity.html 
+// We should confirm with Benno.
 }
