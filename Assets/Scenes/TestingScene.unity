@@ -481,6 +481,7 @@ GameObject:
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
   - component: {fileID: 519420030}
+  - component: {fileID: 519420033}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -607,6 +608,20 @@ Transform:
   - {fileID: 438420040}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &519420033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37943ebec40474eba8edd74df457e5ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CameraController
+  cameraTarget: {fileID: 564614430}
+  followOffsetX: 1
 --- !u!1 &564614399 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8844369261425865787, guid: 1770dc290ae1f604ba94216def34f829, type: 3}
@@ -662,6 +677,11 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 0.78, y: 1.125}
   m_Direction: 0
+--- !u!4 &564614430 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2947214246309801366, guid: 1770dc290ae1f604ba94216def34f829, type: 3}
+  m_PrefabInstance: {fileID: 1628587840}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -1113,6 +1133,7 @@ GameObject:
   - component: {fileID: 1775922910}
   - component: {fileID: 1775922909}
   - component: {fileID: 1775922908}
+  - component: {fileID: 1775922912}
   - component: {fileID: 1775922911}
   m_Layer: 0
   m_Name: TemporaryKey
@@ -1243,6 +1264,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22134f1056e7642c497364362651c785, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Key
+--- !u!114 &1775922912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1775922907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 199d4888924864adca1e9469b7d876a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::KeyAnimation
+  animationFPS: 15
+  spriteAnimation:
+  - {fileID: -8213642910555375008, guid: 63ba9320e64b8a44a9ed9b3997f29d01, type: 3}
+  - {fileID: -8213642910555375008, guid: 63ba9320e64b8a44a9ed9b3997f29d01, type: 3}
+  - {fileID: -8213642910555375008, guid: 63ba9320e64b8a44a9ed9b3997f29d01, type: 3}
+  - {fileID: -8213642910555375008, guid: 63ba9320e64b8a44a9ed9b3997f29d01, type: 3}
+  - {fileID: -2159678934272162731, guid: 63ba9320e64b8a44a9ed9b3997f29d01, type: 3}
+  - {fileID: -4341130794209051578, guid: 63ba9320e64b8a44a9ed9b3997f29d01, type: 3}
+  - {fileID: 8564879109763586956, guid: 63ba9320e64b8a44a9ed9b3997f29d01, type: 3}
+  - {fileID: 8564879109763586956, guid: 63ba9320e64b8a44a9ed9b3997f29d01, type: 3}
+  - {fileID: 8564879109763586956, guid: 63ba9320e64b8a44a9ed9b3997f29d01, type: 3}
+  - {fileID: -4341130794209051578, guid: 63ba9320e64b8a44a9ed9b3997f29d01, type: 3}
+  - {fileID: -2159678934272162731, guid: 63ba9320e64b8a44a9ed9b3997f29d01, type: 3}
+  - {fileID: -8213642910555375008, guid: 63ba9320e64b8a44a9ed9b3997f29d01, type: 3}
+  - {fileID: -8213642910555375008, guid: 63ba9320e64b8a44a9ed9b3997f29d01, type: 3}
+  - {fileID: -8213642910555375008, guid: 63ba9320e64b8a44a9ed9b3997f29d01, type: 3}
+  - {fileID: -8213642910555375008, guid: 63ba9320e64b8a44a9ed9b3997f29d01, type: 3}
+  bounceHeight: 0.1
+  bounceSpeed: 4
 --- !u!1 &1855818133
 GameObject:
   m_ObjectHideFlags: 0
