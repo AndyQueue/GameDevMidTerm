@@ -16,8 +16,8 @@ GameObject:
   - component: {fileID: 4307575606126945643}
   - component: {fileID: 2306143758644699524}
   - component: {fileID: 1647655498114535963}
-  - component: {fileID: 3757576828232736019}
   - component: {fileID: -722765177505092852}
+  - component: {fileID: -3076877271186719772}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -244,22 +244,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4170ab460d4a73d4da0dc7f3d9c59d59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAnimation
---- !u!114 &3757576828232736019
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8844369261425865787}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00ecfdc848a44344f8f520de41621ba9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  interactRadius: 0.5
-  interactableLayers:
-    serializedVersion: 2
-    m_Bits: 0
 --- !u!114 &-722765177505092852
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -273,3 +257,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerDies
   isDead: 0
+--- !u!114 &-3076877271186719772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8844369261425865787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c459eb6ac9d864816b37b95ae972c948, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerInventory
+  hasKey: 0

@@ -14,7 +14,9 @@ public class Door : MonoBehaviour
         }
     }
 
-    private void OpenDoor(){
+    private void OpenDoor()
+    {
+        Debug.Log("Door Opened! Yay you win!");
         Destroy(gameObject);
         //trigger animation of opening door 
     }
