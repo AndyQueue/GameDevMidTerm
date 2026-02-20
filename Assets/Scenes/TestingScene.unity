@@ -588,6 +588,24 @@ Transform:
   - {fileID: 438420040}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &564614399 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8844369261425865787, guid: 1770dc290ae1f604ba94216def34f829, type: 3}
+  m_PrefabInstance: {fileID: 1628587840}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &564614410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 564614399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c459eb6ac9d864816b37b95ae972c948, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerInventory
+  hasKey: 0
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -753,6 +771,7 @@ GameObject:
   - component: {fileID: 1597329201}
   - component: {fileID: 1597329200}
   - component: {fileID: 1597329202}
+  - component: {fileID: 1597329203}
   m_Layer: 0
   m_Name: Laser_Red (1)
   m_TagString: Untagged
@@ -864,7 +883,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -880,6 +899,20 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 3.9446974, y: 0.3731017}
   m_EdgeRadius: 0
+--- !u!114 &1597329203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1597329199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c7acd8d4cf324610a298f59c3f6a2af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RedLaser
+  onTime: 2
+  offTime: 1
 --- !u!1001 &1628587840
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -995,7 +1028,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8844369261425865787, guid: 1770dc290ae1f604ba94216def34f829, type: 3}
+      insertIndex: 2
+      addedObject: {fileID: 564614410}
   m_SourcePrefab: {fileID: 100100000, guid: 1770dc290ae1f604ba94216def34f829, type: 3}
 --- !u!4 &1697302897 stripped
 Transform:
@@ -1418,7 +1454,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
