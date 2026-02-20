@@ -254,7 +254,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -625,6 +625,43 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInventory
   hasKey: 0
+--- !u!70 &564614421
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 564614399}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.78, y: 1.125}
+  m_Direction: 0
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -1014,7 +1051,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4307575606126945643, guid: 1770dc290ae1f604ba94216def34f829, type: 3}
       propertyPath: m_DefaultActionMap
-      value: df70fa95-8a34-4494-b137-73ab6b9c7d37
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 5074006127530197110, guid: 1770dc290ae1f604ba94216def34f829, type: 3}
       propertyPath: m_GravityScale
@@ -1023,6 +1060,10 @@ PrefabInstance:
     - target: {fileID: 7131665236562361911, guid: 1770dc290ae1f604ba94216def34f829, type: 3}
       propertyPath: m_Radius
       value: 0.5625
+      objectReference: {fileID: 0}
+    - target: {fileID: 7131665236562361911, guid: 1770dc290ae1f604ba94216def34f829, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7131665236562361911, guid: 1770dc290ae1f604ba94216def34f829, type: 3}
       propertyPath: m_ExcludeLayers.m_Bits
@@ -1044,10 +1085,14 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7131665236562361911, guid: 1770dc290ae1f604ba94216def34f829, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8844369261425865787, guid: 1770dc290ae1f604ba94216def34f829, type: 3}
+      insertIndex: 1
+      addedObject: {fileID: 564614421}
     - targetCorrespondingSourceObject: {fileID: 8844369261425865787, guid: 1770dc290ae1f604ba94216def34f829, type: 3}
       insertIndex: 2
       addedObject: {fileID: 564614410}
