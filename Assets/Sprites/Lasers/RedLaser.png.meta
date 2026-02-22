@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 9472ea3c7b9c7455698d2dd10886e4d3
+guid: 1d511b9096d804f31855bcbec16dcca1
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8950681845281696607
-    second: blue_laser_0
+      213: 1838512184301000617
+    second: Gemini_Generated_Image_bl4bpnbl4bpnbl4b_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -113,23 +113,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: blue_laser_0
+      name: RedLaser
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 421
-        height: 76
+        y: 490
+        width: 1024
+        height: 11
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: f5bad8d27b5373c70800000000000000
-      internalID: 8950681845281696607
+      spriteID: 60c05b788a9bb48ef87b11fa962c4bde
+      internalID: 1838512184301000617
       vertices: []
       indices: 
       edges: []
@@ -138,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: e2152fdb656a54a418994c1837a2937a
     internalID: 0
     vertices: []
     indices: 
@@ -146,9 +146,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      blue_laser_0: 8950681845281696607
+      RedLaser: 1838512184301000617
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
