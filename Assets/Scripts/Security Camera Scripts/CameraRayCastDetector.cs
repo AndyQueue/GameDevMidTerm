@@ -33,6 +33,20 @@ public class CameraRayCastDetector : MonoBehaviour, IDetector
         }
     }
 
+    void SyncCameraToLight()
+    // Sync the camera's view radius and angle to match the Light2D's properties
+    {
+        if (cameraLight == null)
+        {
+            Debug.LogWarning("CameraLight: Missing child Light2D component.");
+            return;
+        }
+       ;
+
+        cameraViewRadius = cameraLight.pointLightInnerRadius;
+        cameraViewAngle = cameraLight.pointLightInnerAngle;
+    }
+
     public void OnPlayerDetected(PlayerDies player)
     {
         Debug.Log("Player Detected by Camera");
@@ -46,7 +60,7 @@ public class CameraRayCastDetector : MonoBehaviour, IDetector
 
         if (dirToPlayer.magnitude > cameraViewRadius)
         {
-            Debug.Log("Player is too far outside of camera view radius: " + dirToPlayer.magnitude + " units");
+            // Debug.Log("Player is too far outside of camera view radius: " + dirToPlayer.magnitude + " units");
             return false;
         }
 
@@ -54,30 +68,19 @@ public class CameraRayCastDetector : MonoBehaviour, IDetector
 
         if (angle < 180 - (cameraViewAngle / 2f) || angle > 180 + (cameraViewAngle / 2f))
         {
-            Debug.Log("Player is outside of camera view angle: " + angle + " degrees");
+            // Debug.Log("Player is outside of camera view angle: " + angle + " degrees");
             return false;
         }
 
 
         RaycastHit2D hit = Physics2D.Raycast(transform.position, dirToPlayer, cameraViewRadius, obstacleMask);
         Debug.DrawRay(transform.position, dirToPlayer, Color.green);
-        Debug.Log("Raycasting from " + transform.position + " to " + playerPos + ", hit: " + (hit.collider != null ? hit.collider.name : "nothing"));
+        // Debug.Log("Raycasting from " + transform.position + " to " + playerPos + ", hit: " + (hit.collider != null ? hit.collider.name : "nothing"));
 
         // If the ray hits nothing (or hits the player), player is visible
         return hit.collider == null || hit.collider.CompareTag("Player");
     }
 
-    void SyncCameraToLight()
-    {
-        if (cameraLight == null)
-        {
-            Debug.LogWarning("CameraLight: Missing child Light2D component.");
-            return;
-        }
-        ;
 
-        cameraViewRadius = cameraLight.pointLightInnerRadius;
-        cameraViewAngle = cameraLight.pointLightInnerAngle;
-    }
 
 }
