@@ -1,20 +1,27 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
+
 
 public class CameraRayCastDetector : MonoBehaviour, IDetector
 {
     private GameObject player;
     private Vector2 playerPos;
-    [SerializeField] public float cameraViewRadius = 50f;
-    [SerializeField] public float cameraViewAngle = 90f;
+    private float cameraViewRadius;
+    private float cameraViewAngle;
+
+    // [SerializeField] public float cameraViewRadius = 50f;
+    // [SerializeField] public float cameraViewAngle = 90f;
     [SerializeField] public LayerMask obstacleMask;
 
+
+    private Light2D cameraLight;
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-
-
+        cameraLight = GetComponentInChildren<Light2D>();
+        SyncCameraToLight();
     }
 
     void Update()
@@ -58,6 +65,19 @@ public class CameraRayCastDetector : MonoBehaviour, IDetector
 
         // If the ray hits nothing (or hits the player), player is visible
         return hit.collider == null || hit.collider.CompareTag("Player");
+    }
+
+    void SyncCameraToLight()
+    {
+        if (cameraLight == null)
+        {
+            Debug.LogWarning("CameraLight: Missing child Light2D component.");
+            return;
+        }
+        ;
+
+        cameraViewRadius = cameraLight.pointLightInnerRadius;
+        cameraViewAngle = cameraLight.pointLightInnerAngle;
     }
 
 }
