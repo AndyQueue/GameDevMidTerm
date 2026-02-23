@@ -8,7 +8,8 @@ public class LaserButtonVisualsAudio : MonoBehaviour
     [SerializeField] Sprite[] spriteAnimation;
     public Color pressedColor;
     public AudioSource buttonSound;
-
+    
+    private PolygonCollider2D polyCol;
     private SpriteRenderer sr;
 
     private void Awake()
@@ -22,26 +23,20 @@ public class LaserButtonVisualsAudio : MonoBehaviour
         StartCoroutine(AnimateButton());
     }
 
-    //takes in player to make player go down with button
     private IEnumerator AnimateButton()
     {
-        //sets player's parent to button so player goes down w button
-        //player.SetParent(this.transform);
-        //player's posiiton gets calculated relative to the button
-        //we use .transform because that handles position logic
-
         float waitTime = 1f / animationFPS;
+        BoxCollider2D col = GetComponent<BoxCollider2D>();
 
         for (int i = 0; i < spriteAnimation.Length; i++)
         {
             sr.sprite = spriteAnimation[i];
+            col.size = sr.sprite.bounds.size;
+            col.offset = sr.sprite.bounds.center;
             yield return new WaitForSeconds(waitTime);
         }
         
         //change button color to know it's been pressed
         sr.color = pressedColor;
-
-        //released from button parent
-        //player.SetParent(null);
     }
 }
