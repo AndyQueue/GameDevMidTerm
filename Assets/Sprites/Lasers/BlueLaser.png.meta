@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: da321c4f9d7ed429fbde837fea61d855
+guid: 06e99450b4d5f426c9ff7b9da479e04d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4978529621996659842
-    second: green_laser_0
+      213: -1296848378435997806
+    second: "Screenshot 2026-02-22 at 3.41.33\u202FPM_0"
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -113,23 +113,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: green_laser_0
+      name: BlueLaser
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 421
-        height: 77
+        x: 2
+        y: 145
+        width: 985
+        height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e7b1129afa5b8eab0800000000000000
-      internalID: -4978529621996659842
+      spriteID: 29fe7c3554ba00ee0800000000000000
+      internalID: -1296848378435997806
       vertices: []
       indices: 
       edges: []
@@ -138,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: c8bcecd49e1124714a597007600f1361
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      green_laser_0: -4978529621996659842
+      BlueLaser: -1296848378435997806
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
