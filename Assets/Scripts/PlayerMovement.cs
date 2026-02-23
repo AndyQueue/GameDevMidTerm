@@ -58,6 +58,7 @@ public class PlayerMovement : MonoBehaviour
         Debug.Log("Jump pressed");
         if (IsGrounded())
         {
+            Debug.Log("is grounded");
             jumpRequested = false; // consume the jump
             velocity.y = jumpForce;
         }
