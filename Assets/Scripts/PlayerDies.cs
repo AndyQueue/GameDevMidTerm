@@ -15,6 +15,4 @@ public class PlayerDies : MonoBehaviour
         Debug.Log("Player Died");
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
-
-
 }
