@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 450215978447701409}
   - component: {fileID: -184890979293761109}
   m_Layer: 0
-  m_Name: CameraField
+  m_Name: CameraColliderField
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
