@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Key
   - Ground
+  - RedLaser
+  - Laser
   layers:
   - Default
   - TransparentFX
@@ -13,7 +15,7 @@ TagManager:
   - Ground
   - Water
   - UI
-  - 
+  - Obstacle
   - 
   - 
   - 
