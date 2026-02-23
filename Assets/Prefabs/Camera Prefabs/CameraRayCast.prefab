@@ -84,7 +84,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: 0f12e8df2e00444099cccdf24a757931, type: 3}
+  m_Sprite: {fileID: -5208716482709753447, guid: 85127ab2d2c2145af8715e217e977e7c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -106,8 +106,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c5a09857c30948de90a2405a661aadc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraRayCastDetector
-  cameraViewRadius: 8
-  cameraViewAngle: 90
   obstacleMask:
     serializedVersion: 2
     m_Bits: 64
