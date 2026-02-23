@@ -391,7 +391,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2809085131450622547, guid: ecef230b44d0c4c32a6a72afe58da0d5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.8906465
+      value: -5.02
       objectReference: {fileID: 0}
     - target: {fileID: 2809085131450622547, guid: ecef230b44d0c4c32a6a72afe58da0d5, type: 3}
       propertyPath: m_LocalPosition.z
@@ -424,6 +424,38 @@ PrefabInstance:
     - target: {fileID: 2809085131450622547, guid: ecef230b44d0c4c32a6a72afe58da0d5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8520286296293548907, guid: ecef230b44d0c4c32a6a72afe58da0d5, type: 3}
+      propertyPath: m_Color.b
+      value: 0.0047169924
+      objectReference: {fileID: 0}
+    - target: {fileID: 8520286296293548907, guid: ecef230b44d0c4c32a6a72afe58da0d5, type: 3}
+      propertyPath: m_Color.r
+      value: 0.048824243
+      objectReference: {fileID: 0}
+    - target: {fileID: 8520286296293548907, guid: ecef230b44d0c4c32a6a72afe58da0d5, type: 3}
+      propertyPath: m_SortingOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9070862997095940378, guid: ecef230b44d0c4c32a6a72afe58da0d5, type: 3}
+      propertyPath: buttonSound
+      value: 
+      objectReference: {fileID: 831163241}
+    - target: {fileID: 9070862997095940378, guid: ecef230b44d0c4c32a6a72afe58da0d5, type: 3}
+      propertyPath: pressedColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9070862997095940378, guid: ecef230b44d0c4c32a6a72afe58da0d5, type: 3}
+      propertyPath: pressedColor.b
+      value: 0.25943398
+      objectReference: {fileID: 0}
+    - target: {fileID: 9070862997095940378, guid: ecef230b44d0c4c32a6a72afe58da0d5, type: 3}
+      propertyPath: pressedColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9070862997095940378, guid: ecef230b44d0c4c32a6a72afe58da0d5, type: 3}
+      propertyPath: pressedColor.r
+      value: 0.9696223
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1847,6 +1879,10 @@ PrefabInstance:
     - target: {fileID: 3757576828232736019, guid: 1770dc290ae1f604ba94216def34f829, type: 3}
       propertyPath: interactableLayers.m_Bits
       value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 3987388266207322331, guid: 1770dc290ae1f604ba94216def34f829, type: 3}
+      propertyPath: m_SortingOrder
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4307575606126945643, guid: 1770dc290ae1f604ba94216def34f829, type: 3}
       propertyPath: m_DefaultActionMap
