@@ -425,6 +425,34 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8520286296293548907, guid: ecef230b44d0c4c32a6a72afe58da0d5, type: 3}
+      propertyPath: m_Color.b
+      value: 0.0047169924
+      objectReference: {fileID: 0}
+    - target: {fileID: 8520286296293548907, guid: ecef230b44d0c4c32a6a72afe58da0d5, type: 3}
+      propertyPath: m_Color.r
+      value: 0.048824243
+      objectReference: {fileID: 0}
+    - target: {fileID: 9070862997095940378, guid: ecef230b44d0c4c32a6a72afe58da0d5, type: 3}
+      propertyPath: buttonSound
+      value: 
+      objectReference: {fileID: 831163241}
+    - target: {fileID: 9070862997095940378, guid: ecef230b44d0c4c32a6a72afe58da0d5, type: 3}
+      propertyPath: pressedColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9070862997095940378, guid: ecef230b44d0c4c32a6a72afe58da0d5, type: 3}
+      propertyPath: pressedColor.b
+      value: 0.25943398
+      objectReference: {fileID: 0}
+    - target: {fileID: 9070862997095940378, guid: ecef230b44d0c4c32a6a72afe58da0d5, type: 3}
+      propertyPath: pressedColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9070862997095940378, guid: ecef230b44d0c4c32a6a72afe58da0d5, type: 3}
+      propertyPath: pressedColor.r
+      value: 0.9696223
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

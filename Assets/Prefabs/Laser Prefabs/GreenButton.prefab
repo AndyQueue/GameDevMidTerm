@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8520286296293548907}
   - component: {fileID: 3108082728513165059}
   - component: {fileID: 987022558313706753}
+  - component: {fileID: 9070862997095940378}
   m_Layer: 0
   m_Name: GreenButton
   m_TagString: Untagged
@@ -165,10 +166,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LaserButton
   laser: {fileID: 0}
+  landingYOffset: 0.3
+--- !u!114 &9070862997095940378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2647315674578243867}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f26edff449948410b8008c2f47059079, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LaserButtonVisualsAudio
   animationFPS: 15
   spriteAnimation:
   - {fileID: -4834857080170754789, guid: 6e75e8744fd074ad8a6cc079ffbc83a9, type: 3}
   - {fileID: 2121239239172586444, guid: 6e75e8744fd074ad8a6cc079ffbc83a9, type: 3}
   - {fileID: -4683470989060230717, guid: 6e75e8744fd074ad8a6cc079ffbc83a9, type: 3}
-  pressedColor: {r: 1, g: 1, b: 1, a: 1}
-  landingYOffset: 0.3
+  pressedColor: {r: 1, g: 0.995283, b: 0.995283, a: 0}
+  buttonSound: {fileID: 0}
