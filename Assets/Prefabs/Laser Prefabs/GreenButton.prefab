@@ -108,7 +108,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LaserButton
   laser: {fileID: 0}
-  landingYOffset: 0.3
+  landingYOffset: 1.5
 --- !u!114 &9070862997095940378
 MonoBehaviour:
   m_ObjectHideFlags: 0
