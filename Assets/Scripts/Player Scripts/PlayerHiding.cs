@@ -1,27 +1,17 @@
 using UnityEngine;
 
-public class Sneaking : StateMachineBehaviour
+public class PlayerHiding : StateMachineBehaviour
 {
-    private Color originalColor;
-    private bool originalColorCaptured = false;
+    private Color originalColor = Color.white;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         SpriteRenderer spriteRenderer = animator.GetComponent<SpriteRenderer>();
-        if (spriteRenderer != null)
-        {
-            // Preserve the original color
-            if (!originalColorCaptured)
-            {
-                originalColor = spriteRenderer.color;
-                originalColorCaptured = true;
-            }
-            // Gray out player sprite to indicate sneak state
-            spriteRenderer.color = Color.gray;
-        }
+        // Gray out player sprite to indicate hide state
+        if (spriteRenderer != null) { spriteRenderer.color = Color.gray; }
         else
         {
-            Debug.LogWarning("Sneaking: SpriteRenderer not found on the Animator's GameObject.");
+            Debug.LogWarning("Hiding: SpriteRenderer not found on the Animator's GameObject.");
         }
     }
 
@@ -29,10 +19,11 @@ public class Sneaking : StateMachineBehaviour
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         SpriteRenderer spriteRenderer = animator.GetComponent<SpriteRenderer>();
-        if (spriteRenderer != null)
+        // Ensure the sprite remains gray while in the hide state
+        if (spriteRenderer != null) { spriteRenderer.color = Color.gray; }
+        else
         {
-            // Ensure the sprite remains gray while in the sneak state
-            spriteRenderer.color = Color.gray;
+            Debug.LogWarning("Hiding: SpriteRenderer not found on the Animator's GameObject.");
         }
     }
 
@@ -40,9 +31,10 @@ public class Sneaking : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         SpriteRenderer spriteRenderer = animator.GetComponent<SpriteRenderer>();
-        if (spriteRenderer != null && originalColorCaptured)
+        if (spriteRenderer != null) { spriteRenderer.color = originalColor; }
+        else
         {
-            spriteRenderer.color = originalColor;
+            Debug.LogWarning("Hiding: SpriteRenderer not found on the Animator's GameObject.");
         }
     }
 

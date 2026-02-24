@@ -12,25 +12,25 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float jumpForce = 5f;
     [SerializeField] private float groundCheckDistance = 0.1f;
     [SerializeField] private LayerMask groundLayer;
-    // using sneakSpeed for both crouching and sneaking
+    // using hideSpeed for both crouching and hiding
     private float curSpeed;
     private PlayerInput playerInput;
     private InputAction jumpAction;
     private InputAction crouchAction;
     private InputAction uncrouchAction;
-    private InputAction sneakAction;
+    private InputAction hideAction;
     private Rigidbody2D rb;
     private float horizontalInput;
     private bool jumpRequested;
     private bool CrouchRequested;
     private bool UncrouchRequested;
-    private bool SneakRequested;
-    private bool isSneaking;
+    private bool HideRequested;
+    private bool isHiding;
     private bool isCrouching;
     private CapsuleCollider2D playerCol;
-    // public copies of private variables for use in other scripts (e.g. Idlesneaking)
+    // public copies of private variables for use in other scripts (e.g. Idlehiding)
     public float MoveSpeed => moveSpeed;
-    public float SneakSpeed => crouchSpeed;
+    public float HideSpeed => crouchSpeed;
     private float OriginalHeight;
     private float CrouchHeight;
 
@@ -43,18 +43,18 @@ public class PlayerMovement : MonoBehaviour
         curSpeed = moveSpeed;
         OriginalHeight = playerCol.size.y;
         CrouchHeight = OriginalHeight / 2f;
-        
+
         if (playerInput == null)
         { Debug.LogError("PlayerInput component is missing on PlayerMovement GameObject."); return; }
 
         jumpAction = playerInput.actions.FindAction("Jump");
         crouchAction = playerInput.actions.FindAction("Crouch");
         uncrouchAction = playerInput.actions.FindAction("Uncrouch");
-        sneakAction = playerInput.actions.FindAction("Sneak");
+        hideAction = playerInput.actions.FindAction("Hide");
 
         if (jumpAction == null) { Debug.LogError("Input action 'Jump' not found in PlayerInput actions."); }
         if (crouchAction == null) { Debug.LogError("Input action 'Crouch' not found in PlayerInput actions."); }
-        if (sneakAction == null) { Debug.LogError("Input action 'Sneak' not found in PlayerInput actions."); }
+        if (hideAction == null) { Debug.LogError("Input action 'Hide' not found in PlayerInput actions."); }
     }
 
     public void OnMove(InputValue input)
@@ -76,7 +76,7 @@ public class PlayerMovement : MonoBehaviour
         Debug.DrawRay(origin, Vector2.down * groundCheckDistance, hit.collider != null ? Color.green : Color.red);
         return hit.collider != null;
     }
-    public bool IsSneaking() { return isSneaking; }
+    public bool IsHiding() { return isHiding; }
     private void HandleJump(ref Vector2 velocity)
     {
         if (!jumpRequested) { return; }
@@ -86,81 +86,117 @@ public class PlayerMovement : MonoBehaviour
         velocity.y = jumpForce;
 
     }
-
     // Crouching toggle 
-    private void HandleCrouch()
+    private void HandleCrouchToggle()
     {
-        if (!CrouchRequested || isCrouching) { return; }
-
-        Debug.Log("Crouch pressed");
-        CrouchRequested = false; // consume the Crouch
-        isCrouching = true;
-
-        // shrink collider height while crouching so the player appears smaller
-        if (playerCol != null)
-        { playerCol.size = new Vector2(playerCol.size.x, CrouchHeight); }
+        if (!CrouchRequested) { return; }
+        // Uncrouch if already crouching, otherwise crouch
+        if (isCrouching)
+        {
+            Debug.Log("Uncrouch");
+            CrouchRequested = false; // consume the Crouch
+            isCrouching = false;
+            if (playerCol != null) { playerCol.size = new Vector2(playerCol.size.x, OriginalHeight); }
+            else
+            {
+                Debug.LogWarning("PlayerMovement: CapsuleCollider2D component not found on the GameObject.");
+            }
+        }
         else
         {
-            Debug.LogWarning("PlayerMovement: CapsuleCollider2D component not found on the GameObject.");
+            Debug.Log("Crouch");
+            CrouchRequested = false; // consume the Crouch
+            isCrouching = true;
+            // shrink collider height while crouching so the player appears smaller
+            if (playerCol != null)
+            { playerCol.size = new Vector2(playerCol.size.x, CrouchHeight); }
+            else
+            {
+                Debug.LogWarning("PlayerMovement: CapsuleCollider2D component not found on the GameObject.");
+            }
         }
     }
-    private void HandleUncrouch()
+    private bool BehindHidable()
     {
-        if (!UncrouchRequested || !isCrouching) { return; }
+        // Check if player is touching a hidable object (e.g. bush) using an overlap circle
+        Vector2 position = transform.position;
+        float radius = 0.1f; // Adjust as needed for player size
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(position, radius);
+        foreach (Collider2D collider in colliders)
+        {
+            if (collider.CompareTag("Hidable"))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    private void HandleHideToggle()
+    {
+        // Debug.Log(HideRequested);
+        if (!HideRequested) { return; }
+        if (HideRequested && !BehindHidable()) 
+        { 
+            Debug.Log("Not behind hidable"); 
+            HideRequested = false; // consume the hide
+            return;
+        }
+        if (HideRequested && !IsGrounded())
+        {
+            Debug.Log("Not grounded");
+            return;
+        }
+        Debug.Log("Hide pressed");
 
-        Debug.Log("Uncrouch pressed");
-        UncrouchRequested = false; // consume the Crouch
-        isCrouching = false;
-
-        if (playerCol != null) { playerCol.size = new Vector2(playerCol.size.x, OriginalHeight); }
+        // Toggle hide state
+        // Unhide
+        if (IsHiding())
+        {
+            Debug.Log("Unhide");
+            HideRequested = false; // consume the hide
+            isHiding = false;
+            // Unhide logic is in PlayerHiding's OnStateExit 
+        }
+        // Hide
         else
         {
-            Debug.LogWarning("PlayerMovement: CapsuleCollider2D component not found on the GameObject.");
+            Debug.Log("Hide");
+            HideRequested = false; // consume the hide
+            isHiding = true;
+            // Hide logic is in PlayerHiding's OnStateEnter and OnStateUpdate 
         }
-    }
-    public void SetSneak(bool isSneaking)
-    {
-        this.isSneaking = isSneaking;
-    }
-    private void HandleSneak()
-    {
-        if (!SneakRequested) { return; }
-
-        Debug.Log("Sneak pressed");
-        SneakRequested = false;
-        SetSneak(!isSneaking);
     }
 
     // Mainly used for sensing player input (updated every frame)
     private void Update()
     {
         // Read input every rendered frame
-        if (jumpAction != null && jumpAction.WasPressedThisFrame() && !jumpRequested && IsGrounded() && !isCrouching && !isSneaking) { jumpRequested = true; }
+        if (jumpAction != null && jumpAction.WasPressedThisFrame() && !jumpRequested && IsGrounded() && !isCrouching && !isHiding) { jumpRequested = true; }
         if (crouchAction != null && crouchAction.WasPressedThisFrame() && !CrouchRequested && IsGrounded()) { CrouchRequested = true; }
         if (uncrouchAction != null && uncrouchAction.WasPressedThisFrame() && !UncrouchRequested && IsGrounded()) { UncrouchRequested = true; }
-        if (sneakAction != null && sneakAction.WasPressedThisFrame() && !SneakRequested && IsGrounded()) { SneakRequested = true; }
+        if (hideAction != null && hideAction.WasPressedThisFrame() && !HideRequested && IsGrounded()) { HideRequested = true; }
     }
     // Mainly used for applying physics movement (updated at fixed time steps)
     private void FixedUpdate()
     {
         // Apply physics movement at fixed time steps
-        // Determine current speed based on crouch/sneak state
-        curSpeed = (isCrouching || isSneaking) ? crouchSpeed : moveSpeed;
+        // Determine current speed based on crouch/hide state
+        curSpeed = isCrouching ? crouchSpeed : moveSpeed;
 
         Vector2 velocity = rb.linearVelocity;
         velocity.x = horizontalInput * curSpeed;
         if (IsGrounded())
         {
             // jump preserves horizontal velocity
-            // crouch and uncrouch adjust player collider size and curSpeed to either moveSpeed or sneakSpeed
-            HandleCrouch();
-            HandleUncrouch();
-            HandleSneak();
-            if (!isCrouching && !isSneaking) { HandleJump(ref velocity); }
+            // crouch and uncrouch adjust player collider size and curSpeed to either moveSpeed or hideSpeed
+            if (!isCrouching) { HandleCrouchToggle(); } else { HandleCrouchToggle(); }
+            HandleHideToggle();
+            if (!isCrouching && !isHiding) { HandleJump(ref velocity); }
         }
         // Debug.Log($"curSpeed: {curSpeed}, horizontalInput: {horizontalInput}, velocity: {velocity}");
         // Apply the final velocity to the Rigidbody
-        rb.linearVelocity = velocity;
+
+        if (!isHiding) { rb.linearVelocity = velocity; }
     }
     // Logic between Update and FixedUpdate: https://docs.unity3d.com/6000.3/Documentation/ScriptReference/Rigidbody-linearVelocity.html 
     // We should confirm with Benno.

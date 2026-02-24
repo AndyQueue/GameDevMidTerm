@@ -31,11 +31,11 @@ public class PlayerAnimation : MonoBehaviour
     private void Update()
     {
         Vector2 moveDir = movement.GetMovementDirection();
-        bool isMoving = moveDir.sqrMagnitude > 0.01f;
+        bool isMoving = moveDir.sqrMagnitude > 0.05f;
         animator.SetBool("IsMoving", isMoving);
         animator.SetBool("IsGrounded", movement.IsGrounded());
         // animator.SetBool("IsCrouching", movement.IsCrouching());
-        animator.SetBool("IsSneaking", movement.IsSneaking());
+        animator.SetBool("IsSneaking", movement.IsHiding());
 
         if (isMoving)
         {
