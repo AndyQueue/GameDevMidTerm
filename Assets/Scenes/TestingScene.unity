@@ -362,6 +362,51 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1.6666666, y: 1.6666666}
   m_EdgeRadius: 0
+--- !u!1 &353872985
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 353872986}
+  - component: {fileID: 353872987}
+  m_Layer: 0
+  m_Name: LevelChanger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &353872986
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 353872985}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.29992, y: -3.57966, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &353872987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 353872985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adfe556802a52a94792b7d5a9fa6ad50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LevelChanger
+  nextSceneName: Level 1
 --- !u!1001 &388928666
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -463,51 +508,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ecef230b44d0c4c32a6a72afe58da0d5, type: 3}
---- !u!1 &353872985
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 353872986}
-  - component: {fileID: 353872987}
-  m_Layer: 0
-  m_Name: LevelChanger
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &353872986
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 353872985}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.29992, y: -3.57966, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &353872987
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 353872985}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: adfe556802a52a94792b7d5a9fa6ad50, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::LevelChanger
-  nextSceneName: Level 1
 --- !u!1 &398321650
 GameObject:
   m_ObjectHideFlags: 0
@@ -1149,43 +1149,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInventory
   hasKey: 0
---- !u!70 &564614421
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 564614399}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: -0.010475897}
-  m_Size: {x: 0.78, y: 1.8583406}
-  m_Direction: 0
 --- !u!4 &564614430 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2947214246309801366, guid: 1770dc290ae1f604ba94216def34f829, type: 3}
@@ -1927,6 +1890,10 @@ PrefabInstance:
       value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 3987388266207322331, guid: 1770dc290ae1f604ba94216def34f829, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -1257810883777687146, guid: 644fbb152b79813489eca2c90773acd2, type: 3}
+    - target: {fileID: 3987388266207322331, guid: 1770dc290ae1f604ba94216def34f829, type: 3}
       propertyPath: m_SortingOrder
       value: 5
       objectReference: {fileID: 0}
@@ -1937,6 +1904,10 @@ PrefabInstance:
     - target: {fileID: 5074006127530197110, guid: 1770dc290ae1f604ba94216def34f829, type: 3}
       propertyPath: m_GravityScale
       value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6263827598675422765, guid: 1770dc290ae1f604ba94216def34f829, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8844369261425865787, guid: 1770dc290ae1f604ba94216def34f829, type: 3}
       propertyPath: m_Name
@@ -1957,7 +1928,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 8844369261425865787, guid: 1770dc290ae1f604ba94216def34f829, type: 3}
-      insertIndex: 2
+      insertIndex: 3
       addedObject: {fileID: 564614410}
   m_SourcePrefab: {fileID: 100100000, guid: 1770dc290ae1f604ba94216def34f829, type: 3}
 --- !u!4 &1697302897 stripped
@@ -2455,3 +2426,4 @@ SceneRoots:
   - {fileID: 550652181}
   - {fileID: 2134909520}
   - {fileID: 388928666}
+  - {fileID: 353872986}

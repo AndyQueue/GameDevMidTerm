@@ -31,6 +31,8 @@ public class PlayerMovement : MonoBehaviour
     // public copies of private variables for use in other scripts (e.g. Idlesneaking)
     public float MoveSpeed => moveSpeed;
     public float SneakSpeed => crouchSpeed;
+    private float OriginalHeight;
+    private float CrouchHeight;
 
     private void Awake()
     {
@@ -39,7 +41,9 @@ public class PlayerMovement : MonoBehaviour
         playerCol = GetComponent<CapsuleCollider2D>();
         crouchSpeed = moveSpeed / 2f;
         curSpeed = moveSpeed;
-
+        OriginalHeight = playerCol.size.y;
+        CrouchHeight = OriginalHeight / 2f;
+        
         if (playerInput == null)
         { Debug.LogError("PlayerInput component is missing on PlayerMovement GameObject."); return; }
 
@@ -86,7 +90,7 @@ public class PlayerMovement : MonoBehaviour
     // Crouching toggle 
     private void HandleCrouch()
     {
-        if (!CrouchRequested) { return; }
+        if (!CrouchRequested || isCrouching) { return; }
 
         Debug.Log("Crouch pressed");
         CrouchRequested = false; // consume the Crouch
@@ -94,7 +98,7 @@ public class PlayerMovement : MonoBehaviour
 
         // shrink collider height while crouching so the player appears smaller
         if (playerCol != null)
-        { playerCol.size = new Vector2(playerCol.size.x, 0.5f); }
+        { playerCol.size = new Vector2(playerCol.size.x, CrouchHeight); }
         else
         {
             Debug.LogWarning("PlayerMovement: CapsuleCollider2D component not found on the GameObject.");
@@ -102,13 +106,13 @@ public class PlayerMovement : MonoBehaviour
     }
     private void HandleUncrouch()
     {
-        if (!UncrouchRequested) { return; }
+        if (!UncrouchRequested || !isCrouching) { return; }
 
         Debug.Log("Uncrouch pressed");
         UncrouchRequested = false; // consume the Crouch
         isCrouching = false;
 
-        if (playerCol != null) { playerCol.size = new Vector2(playerCol.size.x, 1f); }
+        if (playerCol != null) { playerCol.size = new Vector2(playerCol.size.x, OriginalHeight); }
         else
         {
             Debug.LogWarning("PlayerMovement: CapsuleCollider2D component not found on the GameObject.");
