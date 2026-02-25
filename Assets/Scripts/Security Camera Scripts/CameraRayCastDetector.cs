@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
@@ -9,9 +8,10 @@ public class CameraRayCastDetector : MonoBehaviour, IDetector
     private Vector2 playerPos;
     private float cameraViewRadius;
     private float cameraViewAngle;
+    private float playerWidth;
+    private float playerHeight;
+    private Vector2 rayOrigin;
 
-    // [SerializeField] public float cameraViewRadius = 50f;
-    // [SerializeField] public float cameraViewAngle = 90f;
     [SerializeField] public LayerMask obstacleMask;
 
 
@@ -20,10 +20,12 @@ public class CameraRayCastDetector : MonoBehaviour, IDetector
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        rayOrigin = (Vector2)transform.position;
+        playerWidth = player.GetComponent<Collider2D>().bounds.extents.x;
+        playerHeight = player.GetComponent<Collider2D>().bounds.extents.y;
+
         cameraLight = GetComponentInChildren<Light2D>();
         SyncCameraToLight();
-        // isHiding
-        //  public bool IsHiding() { return isHiding; }
     }
 
     void Update()
@@ -60,31 +62,71 @@ public class CameraRayCastDetector : MonoBehaviour, IDetector
     {
         if (player.GetComponent<PlayerMovement>().IsHiding()) { return false; }
 
-        Vector2 dirToPlayer = playerPos - (Vector2)transform.position;
-
-        if (dirToPlayer.magnitude > cameraViewRadius)
+        // Define ray targets at the center and edges of the player's collider
+        Vector2[] rayTargets = new Vector2[]
         {
-            // Debug.Log("Player is too far outside of camera view radius: " + dirToPlayer.magnitude + " units");
+            playerPos, // Center
+            playerPos + new Vector2(playerWidth, 0), // Right edge
+            playerPos - new Vector2(playerWidth, 0), // Left edge
+            playerPos + new Vector2(0, playerHeight), // Top edge
+            playerPos - new Vector2(0, playerHeight)  // Bottom edge
+        };
+
+
+        if (!IsPlayerInCameraRadius(rayTargets))
+        {
+            Debug.Log("Player is outside of camera view radius");
             return false;
         }
 
-        float angle = Vector2.Angle(transform.up, dirToPlayer);
-
-        if (angle < 180 - (cameraViewAngle / 2f) || angle > 180 + (cameraViewAngle / 2f))
+        if (!IsPlayerInCameraAngle(rayTargets))
         {
-            // Debug.Log("Player is outside of camera view angle: " + angle + " degrees");
+            Debug.Log("Player is outside of camera view angle");
             return false;
         }
 
+        // raycast to each target point to check for line of sight
+        foreach (Vector2 target in rayTargets)
+        {
+            Vector2 dir = target - (Vector2)transform.position;
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, dir.normalized, cameraViewRadius, obstacleMask);
+            Debug.DrawRay(transform.position, dir, Color.green);
+            // Debug.Log("Raycasting from " + transform.position + " to " + target + ", hit: " + (hit.collider != null ? hit.collider.name : "nothing"));
 
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, dirToPlayer, cameraViewRadius, obstacleMask);
-        Debug.DrawRay(transform.position, dirToPlayer, Color.green);
-        // Debug.Log("Raycasting from " + transform.position + " to " + playerPos + ", hit: " + (hit.collider != null ? hit.collider.name : "nothing"));
-
-        // If the ray hits nothing (or hits the player), player is visible
-        return hit.collider == null || hit.collider.CompareTag("Player");
+            if (hit.collider == null || hit.collider.CompareTag("Player"))
+            {
+                return true; // Player is visible through this ray
+            }
+        }
+        return false; // Player is not visible through any ray
     }
 
+    private bool IsPlayerInCameraRadius(Vector2[] rayTargets)
+    {
+        foreach (Vector2 target in rayTargets)
+        {
+            Vector2 dirToPlayer = target - rayOrigin;
+            if (dirToPlayer.magnitude < cameraViewRadius)
+            {
+                return true; // At least one target is within the camera view radius
+            }
+        }
+        return false; // No targets are within the camera view radius
 
+    }
+
+    private bool IsPlayerInCameraAngle(Vector2[] rayTargets)
+    {
+        foreach (Vector2 target in rayTargets)
+        {
+            Vector2 dirToPlayer = target - rayOrigin;
+            float angle = Vector2.Angle(transform.up, dirToPlayer);
+            if (angle > 180 - (cameraViewAngle / 2f) && angle < 180 + (cameraViewAngle / 2f))
+            {
+                return true; // At least one target is within the camera view angle
+            }
+        }
+        return false; // No targets are within the camera view angle
+    }
 
 }

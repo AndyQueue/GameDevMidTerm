@@ -63,7 +63,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CameraRayCastDetector
   obstacleMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
 --- !u!1 &3940077516838229601
 GameObject:
   m_ObjectHideFlags: 0
@@ -74,7 +74,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1935381313468644919}
   - component: {fileID: 4031782314433677926}
-  - component: {fileID: 1387733352466245624}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -157,21 +156,6 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!114 &1387733352466245624
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3940077516838229601}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c5a09857c30948de90a2405a661aadc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CameraRayCastDetector
-  obstacleMask:
-    serializedVersion: 2
-    m_Bits: 64
 --- !u!1 &8963720776347007326
 GameObject:
   m_ObjectHideFlags: 0
