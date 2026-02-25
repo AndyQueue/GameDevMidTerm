@@ -22,6 +22,8 @@ public class CameraRayCastDetector : MonoBehaviour, IDetector
         player = GameObject.FindGameObjectWithTag("Player");
         cameraLight = GetComponentInChildren<Light2D>();
         SyncCameraToLight();
+        // isHiding
+        //  public bool IsHiding() { return isHiding; }
     }
 
     void Update()
@@ -56,6 +58,8 @@ public class CameraRayCastDetector : MonoBehaviour, IDetector
 
     bool CanSeePlayer(Vector2 playerPos)
     {
+        if (player.GetComponent<PlayerMovement>().IsHiding()) { return false; }
+
         Vector2 dirToPlayer = playerPos - (Vector2)transform.position;
 
         if (dirToPlayer.magnitude > cameraViewRadius)

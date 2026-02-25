@@ -15,17 +15,17 @@ public abstract class Laser : MonoBehaviour, IDetector
     protected virtual void SetLaserState(bool active)
     {
         isLaserActive = active;
-        if (spriteRenderer != null) 
+        if (spriteRenderer != null)
         {
             spriteRenderer.enabled = active;
         }
-        if (laserCollider != null) 
+        if (laserCollider != null)
         {
             laserCollider.enabled = active;
         }
     }
 
-   public void OnPlayerDetected(PlayerDies player)
+    public void OnPlayerDetected(PlayerDies player)
     {
         if (isLaserActive)
         {
@@ -37,8 +37,9 @@ public abstract class Laser : MonoBehaviour, IDetector
     {
         if (other.CompareTag("Player"))
         {
+            if (other.GetComponent<PlayerMovement>().IsHiding()) { return; }
             PlayerDies player = other.GetComponent<PlayerDies>();
             OnPlayerDetected(player);
         }
-    } 
+    }
 }

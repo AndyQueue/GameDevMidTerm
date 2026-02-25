@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class PlayerHiding : StateMachineBehaviour
 {
+    public bool isFindable = true;
+
     private Color originalColor = Color.white;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
