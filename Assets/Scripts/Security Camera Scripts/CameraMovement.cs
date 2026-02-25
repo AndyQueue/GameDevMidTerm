@@ -19,7 +19,7 @@ public class CameraMovement : MonoBehaviour
         timer += Time.deltaTime;
 
         float lerp = 0.5F * (1.0F + Mathf.Sin(Mathf.PI * timer * this.m_frequency));
-        this.transform.localRotation = Quaternion.Lerp(from, to, lerp);
+        this.transform.localRotation = Quaternion.Slerp(from, to, lerp);
     }
 
 }
