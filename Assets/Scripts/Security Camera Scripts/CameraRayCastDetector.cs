@@ -75,13 +75,13 @@ public class CameraRayCastDetector : MonoBehaviour, IDetector
 
         if (!IsPlayerInCameraRadius(rayTargets))
         {
-            Debug.Log("Player is outside of camera view radius");
+            // Debug.Log("Player is outside of camera view radius");
             return false;
         }
 
         if (!IsPlayerInCameraAngle(rayTargets))
         {
-            Debug.Log("Player is outside of camera view angle");
+            // Debug.Log("Player is outside of camera view angle");
             return false;
         }
 
