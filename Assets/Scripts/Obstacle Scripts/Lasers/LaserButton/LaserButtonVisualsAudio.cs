@@ -9,7 +9,6 @@ public class LaserButtonVisualsAudio : MonoBehaviour
     public Color pressedColor;
     public AudioSource buttonSound;
     
-    private PolygonCollider2D polyCol;
     private SpriteRenderer sr;
 
     private void Awake()

@@ -25,7 +25,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Uncrouch",
+                    "name": "Hide",
                     "type": "Button",
                     "id": "020e61d7-f263-44f8-9baa-65a2d8f497b9",
                     "expectedControlType": "",
@@ -37,15 +37,6 @@
                     "name": "Crouch",
                     "type": "Button",
                     "id": "27c5f898-bc57-4ee1-8800-db469aca5fe3",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Sneak",
-                    "type": "Button",
-                    "id": "a4e83a22-a227-486b-b9d4-dece4128b954",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -433,7 +424,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse;Gamepad",
-                    "action": "Uncrouch",
+                    "action": "Hide",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -444,18 +435,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad;Keyboard&Mouse",
-                    "action": "Uncrouch",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "b32a847b-c944-4b7a-9fe4-d607440d39d6",
-                    "path": "<Keyboard>/shift",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Sneak",
+                    "action": "Hide",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

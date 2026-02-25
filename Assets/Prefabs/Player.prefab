@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2947214246309801366}
-  - component: {fileID: 6263827598675422765}
+  - component: {fileID: 957833203959119263}
   - component: {fileID: 5074006127530197110}
   - component: {fileID: 3987388266207322331}
   - component: {fileID: 1246171144763128866}
@@ -20,7 +20,7 @@ GameObject:
   - component: {fileID: -3076877271186719772}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -40,7 +40,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!70 &6263827598675422765
+--- !u!70 &957833203959119263
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -74,8 +74,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.78, y: 1.125}
+  m_Offset: {x: 0, y: -0.010475897}
+  m_Size: {x: 0.78, y: 1.8583406}
   m_Direction: 0
 --- !u!50 &5074006127530197110
 Rigidbody2D:
