@@ -109,7 +109,7 @@ MonoBehaviour:
   - {fileID: 3218185913507435869, guid: 63ba9320e64b8a44a9ed9b3997f29d01, type: 3}
   - {fileID: 2098213573043009316, guid: 63ba9320e64b8a44a9ed9b3997f29d01, type: 3}
   - {fileID: -2516045267097707079, guid: 63ba9320e64b8a44a9ed9b3997f29d01, type: 3}
-  frameDuration: 0.5
+  frameDuration: 0.35
   doorOpenSound: {fileID: 0}
   levelChanger: {fileID: 0}
 --- !u!61 &3918148990593260589
