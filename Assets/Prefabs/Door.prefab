@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 6.76, y: -3.57, z: 0}
-  m_LocalScale: {x: 1.587855, y: 1.587855, z: 1.587855}
+  m_LocalScale: {x: 1.47, y: 1.67, z: 1.587855}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -105,6 +105,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2479b4ad6551c4dda99a1c90f67778de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Door
+  frames:
+  - {fileID: 3218185913507435869, guid: 63ba9320e64b8a44a9ed9b3997f29d01, type: 3}
+  - {fileID: 2098213573043009316, guid: 63ba9320e64b8a44a9ed9b3997f29d01, type: 3}
+  - {fileID: -2516045267097707079, guid: 63ba9320e64b8a44a9ed9b3997f29d01, type: 3}
+  frameDuration: 0.5
+  doorOpenSound: {fileID: 0}
   levelChanger: {fileID: 0}
 --- !u!61 &3918148990593260589
 BoxCollider2D:
@@ -144,7 +150,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.6666666, y: 1.6666666}
+    oldSize: {x: 1.6, y: 1.6}
     newSize: {x: 1.6666666, y: 1.6666666}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
