@@ -8,7 +8,7 @@ public class KeyPressTutorialTrigger : TutorialSignTrigger
     {
         foreach (KeyCode key in targetKeys)
         {
-            //do i need to make this better based on out input system??
+            //do I need to change this
             if (Input.GetKeyDown(key))
             {
                 return true;
