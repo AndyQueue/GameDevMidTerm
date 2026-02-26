@@ -4,10 +4,10 @@ using TMPro;
 
 public abstract class TutorialSignTrigger : MonoBehaviour
 {
-    [Header("UI Settings")]
-    protected CanvasGroup canvasGroup;
+    [Header("UI")]
+    public CanvasGroup canvasGroup;
     //use a canvas group here to fade all ui rather than just text
-    protected float fadeSpeed;
+    public float fadeSpeed;
     
     protected bool playerInTriggerArea = false;
     protected bool actionCompleted = false;
