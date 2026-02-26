@@ -7,20 +7,38 @@ public class Guard : MonoBehaviour
     [SerializeField] private BoxCollider2D boxCollider;
     [SerializeField] private LayerMask playerLayer;
 
+    private bool hasCaughtPlayer = false;
+
     private Animator animator;
+
+    private GuardPatrol guardPatrol;
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
+        guardPatrol = GetComponentInParent<GuardPatrol>();
     }
     void Update()
     {
-        if (PlayerInSight())
+        bool playerDetected = PlayerInSight();
+        if (playerDetected && !hasCaughtPlayer)
         {
+            hasCaughtPlayer = true;
             Debug.Log("Player Spotted!");
             animator.SetTrigger("CatchPlayer");
             CatchPlayer();
+            //stop patrolling when player is in sight
+            if (guardPatrol != null)
+            {
+                guardPatrol.StopPatrol();
+            }
         }
+
+
+        // if (guardPatrol != null)
+        // {
+        //     guardPatrol.enabled = !PlayerInSight();
+        // }
         
     }
 
