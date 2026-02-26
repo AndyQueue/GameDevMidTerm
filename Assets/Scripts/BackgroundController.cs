@@ -12,7 +12,6 @@ public class BackgroundController : MonoBehaviour
         length = GetComponent<SpriteRenderer>().bounds.size.x;
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
         float distanceMoved = cam.transform.position.x * (1 - 0.5f);

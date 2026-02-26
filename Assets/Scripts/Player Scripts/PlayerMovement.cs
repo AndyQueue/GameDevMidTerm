@@ -76,7 +76,10 @@ public class PlayerMovement : MonoBehaviour
         Debug.DrawRay(origin, Vector2.down * groundCheckDistance, hit.collider != null ? Color.green : Color.red);
         return hit.collider != null;
     }
-    public bool IsHiding() { return isHiding; }
+    public bool IsHiding() 
+    { 
+        return isHiding; 
+    }
     private void HandleJump(ref Vector2 velocity)
     {
         if (!jumpRequested) { return; }

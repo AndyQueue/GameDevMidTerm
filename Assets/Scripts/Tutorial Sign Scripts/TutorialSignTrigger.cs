@@ -31,7 +31,6 @@ public abstract class TutorialSignTrigger : MonoBehaviour
         }
     }
 
-
     private void Update()
     {
         if (playerInTriggerArea && !actionCompleted)
@@ -39,6 +38,8 @@ public abstract class TutorialSignTrigger : MonoBehaviour
             if (CheckActionStatus())
             {
                 actionCompleted = true;
+                playerInTriggerArea = false;
+                StopAllCoroutines();
                 StartCoroutine(FadeUI(0f));
             }
         }
