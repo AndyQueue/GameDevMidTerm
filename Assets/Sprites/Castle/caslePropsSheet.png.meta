@@ -937,13 +937,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: caslePropsSheet_29
+      name: door_closed
       rect:
         serializedVersion: 2
-        x: 175
-        y: 207
-        width: 50
-        height: 50
+        x: 176
+        y: 208
+        width: 48
+        height: 48
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1025,13 +1025,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: caslePropsSheet_33
+      name: door_half_open
       rect:
         serializedVersion: 2
-        x: 559
-        y: 207
-        width: 50
-        height: 50
+        x: 560
+        y: 208
+        width: 48
+        height: 48
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1091,13 +1091,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: caslePropsSheet_36
+      name: door_open
       rect:
         serializedVersion: 2
-        x: 943
-        y: 207
-        width: 50
-        height: 50
+        x: 944
+        y: 208
+        width: 48
+        height: 48
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1152,28 +1152,6 @@ TextureImporter:
       bones: []
       spriteID: 222ec00a8a814e3b0800000000000000
       internalID: -5484231333711650270
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: caslePropsSheet_39
-      rect:
-        serializedVersion: 2
-        x: 1391
-        y: 207
-        width: 50
-        height: 50
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 68ac07bb98d099640800000000000000
-      internalID: 5087112139298097798
       vertices: []
       indices: 
       edges: []
@@ -1720,15 +1698,12 @@ TextureImporter:
       caslePropsSheet_26: -5828695577360154358
       caslePropsSheet_27: 5463206617953648545
       caslePropsSheet_28: -8408237547546357113
-      caslePropsSheet_29: 3218185913507435869
       caslePropsSheet_3: -4814672530718263623
       caslePropsSheet_30: 5249920250409019090
       caslePropsSheet_31: 4977522639313740335
       caslePropsSheet_32: -354799203517203916
-      caslePropsSheet_33: 2098213573043009316
       caslePropsSheet_34: 6216328593364748961
       caslePropsSheet_35: -7538581738968925128
-      caslePropsSheet_36: -2516045267097707079
       caslePropsSheet_37: 5008196778269216272
       caslePropsSheet_38: -5484231333711650270
       caslePropsSheet_39: 5087112139298097798
@@ -1761,6 +1736,9 @@ TextureImporter:
       caslePropsSheet_7: 8271630918013259244
       caslePropsSheet_8: -2159678934272162731
       caslePropsSheet_9: 2825782472543635160
+      door_closed: 3218185913507435869
+      door_half_open: 2098213573043009316
+      door_open: -2516045267097707079
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

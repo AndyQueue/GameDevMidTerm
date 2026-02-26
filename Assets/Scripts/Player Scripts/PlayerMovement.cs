@@ -28,12 +28,16 @@ public class PlayerMovement : MonoBehaviour
     private bool HideRequested;
     private bool isHiding;
     private bool isCrouching;
+    private Vector2 autoMoveTarget;
+    private bool isAutoMoving = false;
+
     private CapsuleCollider2D playerCol;
     // public copies of private variables for use in other scripts (e.g. Idlehiding)
     public float MoveSpeed => moveSpeed;
     public float HideSpeed => crouchSpeed;
     private float OriginalHeight;
     private float CrouchHeight;
+
 
     private void Awake()
     {
@@ -77,10 +81,16 @@ public class PlayerMovement : MonoBehaviour
         Debug.DrawRay(origin, Vector2.down * groundCheckDistance, hit.collider != null ? Color.green : Color.red);
         return hit.collider != null;
     }
-    public bool IsHiding() 
-    { 
-        return isHiding; 
+    public bool IsHiding()
+    {
+        return isHiding;
     }
+
+    public bool IsAutoMoving()
+    {
+        return isAutoMoving;
+    }
+
     private void HandleJump(ref Vector2 velocity)
     {
         if (!jumpRequested) { return; }
@@ -139,9 +149,9 @@ public class PlayerMovement : MonoBehaviour
     {
         // Debug.Log(HideRequested);
         if (!HideRequested) { return; }
-        if (HideRequested && !BehindHidable()) 
-        { 
-            Debug.Log("Not behind hidable"); 
+        if (HideRequested && !BehindHidable())
+        {
+            Debug.Log("Not behind hidable");
             HideRequested = false; // consume the hide
             return;
         }
@@ -171,6 +181,14 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    public void MoveToPosition(Vector2 target)
+    // allows external scripts to set a target position for the player to auto-move towards (used in door script to walk into the door)
+    {
+        autoMoveTarget = target;
+        isAutoMoving = true;
+    }
+
+
     // Mainly used for sensing player input (updated every frame)
     private void Update()
     {
@@ -188,7 +206,27 @@ public class PlayerMovement : MonoBehaviour
         curSpeed = isCrouching ? crouchSpeed : moveSpeed;
 
         Vector2 velocity = rb.linearVelocity;
-        velocity.x = horizontalInput * curSpeed;
+
+        if (isAutoMoving)
+        {
+            // Debug.Log($"Auto-moving towards {autoMoveTarget} from {transform.position}");
+            // Debug.Log($"Current velocity: {velocity}");
+            Vector2 dir = autoMoveTarget - (Vector2)transform.position;
+            if (Mathf.Abs(dir.x) < 0.05f)
+            {
+                isAutoMoving = false;
+                velocity.x = 0f;
+            }
+            else
+            {
+                velocity.x = Mathf.Sign(dir.x) * curSpeed;
+            }
+        }
+        else
+        {
+            velocity.x = horizontalInput * curSpeed;
+        }
+
         if (IsGrounded())
         {
             // jump preserves horizontal velocity
@@ -201,6 +239,8 @@ public class PlayerMovement : MonoBehaviour
         // Apply the final velocity to the Rigidbody
 
         if (!isHiding) { rb.linearVelocity = velocity; }
+
+
     }
     // Logic between Update and FixedUpdate: https://docs.unity3d.com/6000.3/Documentation/ScriptReference/Rigidbody-linearVelocity.html 
     // We should confirm with Benno.
