@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float crouchSpeed = 2.5f;
 
     [SerializeField] private float jumpForce = 5f;
-    [SerializeField] private float groundCheckDistance = 0.1f;
+    [SerializeField] private float groundCheckDistance = 1.5f;
     [SerializeField] private LayerMask groundLayer;
     // using hideSpeed for both crouching and hiding
     private float curSpeed;
