@@ -21,7 +21,7 @@ public class GuardPatrol : MonoBehaviour
     [Header("Guard Animator")]
     [SerializeField] private Animator anim;
 
-    private bool canPatrol = true;
+    // private bool canPatrol = true;
 
 
     private void Awake()
@@ -30,14 +30,15 @@ public class GuardPatrol : MonoBehaviour
         initScale = guard.localScale;
     }
 
-    // private void OnDisable()
-    // {
-    //     anim.SetBool("IsMoving", false);
-    // }
+    private void OnDisable()
+    {
+        if (anim!=null)
+            anim.SetBool("IsMoving", false);
+    }
 
     private void Update()
     {
-        if (!canPatrol) { return; }
+        //if (!canPatrol) { return; }
 
         if (movingLeft)
         {
@@ -81,10 +82,10 @@ public class GuardPatrol : MonoBehaviour
         }
     }
 
-    public void StopPatrol()
+    public void StopGuard()
     {
-        canPatrol = false;
         anim.SetBool("IsMoving", false);
+        guard.position = guard.position;
     }
 
     // public void ResumePatrol()

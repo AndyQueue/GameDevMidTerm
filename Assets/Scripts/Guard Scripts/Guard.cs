@@ -17,27 +17,34 @@ public class Guard : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         guardPatrol = GetComponentInParent<GuardPatrol>();
+        Debug.Log("GuardPatrol found: " + (guardPatrol != null));
     }
     void Update()
     {
+        if (hasCaughtPlayer) { return; }
         bool playerDetected = PlayerInSight();
-        if (playerDetected && !hasCaughtPlayer)
+        if (playerDetected)
         {
             hasCaughtPlayer = true;
-            Debug.Log("Player Spotted!");
-            animator.SetTrigger("CatchPlayer");
-            CatchPlayer();
-            //stop patrolling when player is in sight
+
             if (guardPatrol != null)
             {
-                guardPatrol.StopPatrol();
+                guardPatrol.enabled = false;
+                guardPatrol.StopGuard();
             }
-        }
 
+            Debug.Log("Player Spotted!");
+            animator.SetBool("IsMoving", false);
+            animator.SetTrigger("CatchPlayer");
+            CatchPlayer();
 
-        // if (guardPatrol != null)
+        } 
+        // else
         // {
-        //     guardPatrol.enabled = !PlayerInSight();
+        //     if (guardPatrol != null)
+        //     {
+        //         guardPatrol.enabled = true;
+        //     }
         // }
         
     }
