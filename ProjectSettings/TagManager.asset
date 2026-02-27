@@ -9,6 +9,7 @@ TagManager:
   - RedLaser
   - Laser
   - Hidable
+  - LevelManager
   layers:
   - Default
   - TransparentFX
