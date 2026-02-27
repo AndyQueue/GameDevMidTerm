@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Key : MonoBehaviour
 {
-    // public AudioSource collectKeySound;
+    public AudioSource collectKeySound;
     public float startOffset;
     
     private void OnTriggerEnter2D(Collider2D other)
@@ -12,8 +12,8 @@ public class Key : MonoBehaviour
             PlayerInventory inventory = other.GetComponent<PlayerInventory>();
             if (inventory != null)
             {
-                // collectKeySound.time = startOffset;
-                // collectKeySound.Play();
+                collectKeySound.time = startOffset;
+                collectKeySound.Play();
                 inventory.hasKey = true;
                 Destroy(gameObject);
             }
