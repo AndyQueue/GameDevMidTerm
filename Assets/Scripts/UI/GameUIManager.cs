@@ -41,35 +41,36 @@ public class GameUIManager : MonoBehaviour
         }
     }
 
-    // These are meant to be hooked to Input System actions.
-    // Configure a "Pause" action to call OnPause, and a "Reset" (or similar)
-    // action to call OnReset in your PlayerInput / input actions setup.
-
-    public void OnPause(InputAction.CallbackContext context)
+    private void Update()
     {
-        if (!context.performed || isCaught)
+        // Use the new Input System's Keyboard API directly.
+        // This does NOT depend on PlayerInput or Unity Events,
+        // so it won't interfere with PlayerMovement.
+
+        var keyboard = Keyboard.current;
+        if (keyboard == null)
         {
-            return;
+            return; // no keyboard connected
         }
 
-        if (isPaused)
+        // Pause / resume with Escape, only when not in the caught state.
+        if (!isCaught && keyboard.escapeKey.wasPressedThisFrame)
         {
-            ResumeGame();
-        }
-        else
-        {
-            PauseGame();
-        }
-    }
-
-    public void OnReset(InputAction.CallbackContext context)
-    {
-        if (!context.performed || !isCaught)
-        {
-            return;
+            if (isPaused)
+            {
+                ResumeGame();
+            }
+            else
+            {
+                PauseGame();
+            }
         }
 
-        ReloadCurrentScene();
+        // When caught, Space reloads the current scene (retry).
+        if (isCaught && keyboard.spaceKey.wasPressedThisFrame)
+        {
+            ReloadCurrentScene();
+        }
     }
 
     public void PauseGame()
@@ -127,27 +128,39 @@ public class GameUIManager : MonoBehaviour
 
     private IEnumerator PlayCaughtFlash()
     {
-        // Use unscaled time so it still runs when timeScale = 0
-        float elapsed = 0f;
-        while (elapsed < flashDuration)
+        // Repeated blink while the player is caught.
+        // Use unscaled time so it still runs when timeScale = 0.
+        while (isCaught)
         {
-            elapsed += Time.unscaledDeltaTime;
-            float t = Mathf.Clamp01(elapsed / flashDuration);
-            SetFlashAlpha(t);
-            yield return null;
+            // Fade in
+            float elapsed = 0f;
+            while (elapsed < flashDuration)
+            {
+                elapsed += Time.unscaledDeltaTime;
+                float t = Mathf.Clamp01(elapsed / flashDuration);
+                SetFlashAlpha(t);
+                yield return null;
+            }
+
+            // Hold at full opacity
+            yield return new WaitForSecondsRealtime(flashHoldDuration);
+
+            // Fade out
+            elapsed = 0f;
+            while (elapsed < flashDuration)
+            {
+                elapsed += Time.unscaledDeltaTime;
+                float t = 1f - Mathf.Clamp01(elapsed / flashDuration);
+                SetFlashAlpha(t);
+                yield return null;
+            }
+
+            // Small pause with no red
+            SetFlashAlpha(0f);
+            yield return new WaitForSecondsRealtime(flashHoldDuration);
         }
 
-        yield return new WaitForSecondsRealtime(flashHoldDuration);
-
-        elapsed = 0f;
-        while (elapsed < flashDuration)
-        {
-            elapsed += Time.unscaledDeltaTime;
-            float t = 1f - Mathf.Clamp01(elapsed / flashDuration);
-            SetFlashAlpha(t);
-            yield return null;
-        }
-
+        // Ensure we end with no flash if isCaught became false.
         SetFlashAlpha(0f);
     }
 
@@ -177,5 +190,10 @@ public class GameUIManager : MonoBehaviour
     public void OnBackButton(string mainMenuSceneName)
     {
         BackToMainMenu(mainMenuSceneName);
+    }
+
+    public void OnRestartButton()
+    {
+        ReloadCurrentScene();
     }
 }
