@@ -1,19 +1,14 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class KeyPressTutorialTrigger : TutorialSignTrigger
 {
-    public KeyCode[] targetKeys;
+    public string actionName;
+    public PlayerInput player;
+
 
     protected override bool CheckActionStatus()
     {
-        foreach (KeyCode key in targetKeys)
-        {
-            //do I need to change this
-            if (Input.GetKeyDown(key))
-            {
-                return true;
-            }
-        }
-        return false;
+        return player.actions[actionName].triggered;
     }
 }
