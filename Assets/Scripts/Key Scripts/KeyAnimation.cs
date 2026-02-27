@@ -20,6 +20,7 @@ public class KeyAnimation : MonoBehaviour
         startPos = transform.position;
         StartCoroutine(AnimationRoutine());
     }
+
     private IEnumerator AnimationRoutine()
     {
         float animationTimer = 1f / animationFPS;
@@ -34,7 +35,7 @@ public class KeyAnimation : MonoBehaviour
 
     void Update()
     {
-        //uses sin wave to program a light idle bouncing
+        //uses sin wave to program a light idle bouncing 
         float newY = startPos.y + Mathf.Sin(Time.time * bounceSpeed) * bounceHeight;
         transform.position = new Vector3(startPos.x, newY, 0);
     }
