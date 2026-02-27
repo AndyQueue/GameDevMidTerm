@@ -163,6 +163,28 @@
                 },
                 {
                     "name": "",
+                    "id": "a2997fea-ddc8-4351-85c0-515c1b97f7fb",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse;Gamepad",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e744b143-e305-4017-b4f0-eaa79f78a3d0",
+                    "path": "<Keyboard>/upArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad;Keyboard&Mouse",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "4f4649ac-64a8-4a73-af11-b3faef356a4d",
                     "path": "<Keyboard>/s",
                     "interactions": "",
@@ -186,7 +208,7 @@
                 {
                     "name": "",
                     "id": "550557e1-efe2-4f59-9970-e017f8ae8420",
-                    "path": "<Keyboard>/w",
+                    "path": "<Keyboard>/rightShift",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse;Gamepad",
@@ -197,7 +219,7 @@
                 {
                     "name": "",
                     "id": "a331e8b9-4e93-48b0-a111-c77d847e158f",
-                    "path": "<Keyboard>/upArrow",
+                    "path": "<Keyboard>/leftShift",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad;Keyboard&Mouse",
