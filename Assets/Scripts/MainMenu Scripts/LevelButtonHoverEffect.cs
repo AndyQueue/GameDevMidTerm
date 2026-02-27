@@ -21,7 +21,7 @@ public class LevelButtonHoverEffect : MonoBehaviour, IPointerEnterHandler, IPoin
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        Debug.Log("Hover start");
+        // Debug.Log("Hover start");
         spotLight.enableSpotLight();
         spotLight.moveSpotLight(levelNumber);
 
@@ -29,7 +29,7 @@ public class LevelButtonHoverEffect : MonoBehaviour, IPointerEnterHandler, IPoin
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        Debug.Log("Hover end");
+        // Debug.Log("Hover end");
         spotLight.disableSpotLight();
 
     }
