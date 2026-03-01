@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: -722765177505092852}
   - component: {fileID: -3076877271186719772}
   - component: {fileID: -7933955959771223328}
+  - component: {fileID: 1297785375357356917}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -328,8 +329,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87f3ad967abe14431b43889daecf89ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerDies
-  isDead: 0
-  gameUIManager: {fileID: 0}
+  isCaught: 0
+  gameUIManager: {fileID: 1297785375357356917}
 --- !u!114 &-3076877271186719772
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -396,3 +397,21 @@ MonoBehaviour:
     - rid: 219759941001936983
       type: {class: ShadowShape2DProvider_Collider2D, ns: UnityEngine.Rendering.Universal, asm: Unity.RenderPipelines.Universal.2D.Runtime}
       data: 
+--- !u!114 &1297785375357356917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8844369261425865787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74cfcdde8aa7a3b4e8951f408ee8380b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameUIManager
+  pausePanel: {fileID: 0}
+  caughtPanel: {fileID: 0}
+  caughtFlashImage: {fileID: 0}
+  flashDuration: 0.2
+  flashHoldDuration: 0.1
+  isPaused: 0
