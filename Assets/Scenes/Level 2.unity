@@ -6245,6 +6245,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 987022558313706753, guid: ecef230b44d0c4c32a6a72afe58da0d5, type: 3}
+      propertyPath: laser
+      value: 
+      objectReference: {fileID: 1217162985}
     - target: {fileID: 2647315674578243867, guid: ecef230b44d0c4c32a6a72afe58da0d5, type: 3}
       propertyPath: m_Name
       value: GreenButton
@@ -7874,6 +7878,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 66773568ebac84b0d81a70a6a2cf2bb4, type: 3}
+--- !u!114 &1217162985 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7632460201484292846, guid: 3bf61f1e9bfef4560887caa951348021, type: 3}
+  m_PrefabInstance: {fileID: 3778227339797283619}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9a23be2c644b408ca69d0d88e50858a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GreenLaser
 --- !u!43 &1221186687
 Mesh:
   m_ObjectHideFlags: 0
@@ -11548,7 +11563,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraController
   playerTarget: {fileID: 398952980}
-  followOffsetX: 0
   leftWall: {fileID: 690743907}
   rightWall: {fileID: 1504868144}
 --- !u!114 &1897756725
