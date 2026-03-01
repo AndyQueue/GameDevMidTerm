@@ -5,7 +5,7 @@ public class MusicManager : MonoBehaviour
 
     public static MusicManager alreadyPlaying;
     //avoids playing double audio when we reload same level
-    //makes the music manager global, if it already exists we stop and play again
+    //static makes the music manager global, if it already exists we stop and play again
 
     void Awake()
     {
