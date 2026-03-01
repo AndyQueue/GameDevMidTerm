@@ -30,10 +30,12 @@ public class Door : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
-    {
+    { 
         PlayerInventory inventory = collision.gameObject.GetComponent<PlayerInventory>();
+        //ensures we are colliding with player by checking that inventory exists
         if (inventory != null)
         {
+            //checks inventory for key to unlock door
             if (inventory.hasKey)
             {
                 OpenDoor();
