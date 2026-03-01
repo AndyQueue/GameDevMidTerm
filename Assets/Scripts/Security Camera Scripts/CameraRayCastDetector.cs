@@ -33,7 +33,7 @@ public class CameraRayCastDetector : MonoBehaviour, IDetector
         playerPos = player.transform.position;
         if (CanSeePlayer(playerPos))
         {
-            OnPlayerDetected(player.GetComponent<PlayerDies>());
+            OnPlayerDetected(player.GetComponent<PlayerCaught>());
         }
     }
 
@@ -51,10 +51,10 @@ public class CameraRayCastDetector : MonoBehaviour, IDetector
         cameraViewAngle = cameraLight.pointLightInnerAngle;
     }
 
-    public void OnPlayerDetected(PlayerDies player)
+    public void OnPlayerDetected(PlayerCaught player)
     {
         Debug.Log("Player Detected by Camera");
-        player?.Dies();
+        player?.Caught();
 
     }
 

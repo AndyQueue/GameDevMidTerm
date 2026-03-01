@@ -52,7 +52,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Reset",
+                    "name": "Retry",
                     "type": "Button",
                     "id": "660be6ac-2942-4069-a5f8-db2ca3ae39ed",
                     "expectedControlType": "",
@@ -163,6 +163,28 @@
                 },
                 {
                     "name": "",
+                    "id": "a331e8b9-4e93-48b0-a111-c77d847e158f",
+                    "path": "<Keyboard>/upArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad;Keyboard&Mouse",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "550557e1-efe2-4f59-9970-e017f8ae8420",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse;Gamepad",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "4f4649ac-64a8-4a73-af11-b3faef356a4d",
                     "path": "<Keyboard>/s",
                     "interactions": "",
@@ -180,28 +202,6 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "Crouch",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "550557e1-efe2-4f59-9970-e017f8ae8420",
-                    "path": "<Keyboard>/w",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse;Gamepad",
-                    "action": "Hide",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "a331e8b9-4e93-48b0-a111-c77d847e158f",
-                    "path": "<Keyboard>/upArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad;Keyboard&Mouse",
-                    "action": "Hide",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -234,7 +234,18 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Reset",
+                    "action": "Retry",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "be44001d-acc4-42b2-8fc0-8941a224b527",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Hide",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

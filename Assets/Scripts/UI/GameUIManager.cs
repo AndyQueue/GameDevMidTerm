@@ -15,8 +15,13 @@ public class GameUIManager : MonoBehaviour
     [SerializeField] private float flashDuration = 0.2f;
     [SerializeField] private float flashHoldDuration = 0.1f;
 
-    private bool isPaused;
+    public bool isPaused;
     private bool isCaught;
+    private PlayerInput playerInput;
+    private InputAction pauseAction;
+    private InputAction jumpAction;
+    private InputAction retryAction;
+
 
     private void Awake()
     {
@@ -48,27 +53,51 @@ public class GameUIManager : MonoBehaviour
         // so it won't interfere with PlayerMovement.
 
         var keyboard = Keyboard.current;
-        if (keyboard == null)
-        {
-            return; // no keyboard connected
-        }
+        if (keyboard == null) { return; } // No keyboard connected
 
-        // Pause / resume with Escape, only when not in the caught state.
-        if (!isCaught && keyboard.escapeKey.wasPressedThisFrame)
+        playerInput = GetComponent<PlayerInput>();
+        if (playerInput == null) { return; } // No PlayerInput component
+        
+        pauseAction = playerInput.actions.FindAction("Pause");
+        if (pauseAction == null) { Debug.LogError("Input action 'Pause' not found in PlayerInput actions."); }
+        
+        jumpAction = playerInput.actions.FindAction("Jump");
+        if (jumpAction == null) { Debug.LogError("Input action 'Jump' not found in PlayerInput actions."); }
+
+        retryAction = playerInput.actions.FindAction("Retry");
+        if (retryAction == null) { Debug.LogError("Input action 'Retry' not found in PlayerInput actions."); }
+
+        // Pause toggle with Escape
+        // Using raw input
+        // if (!isCaught && keyboard.escapeKey.wasPressedThisFrame)
+        // {
+        //     Debug.Log("Escape pressed - toggling pause");
+        //     if (isPaused) { ResumeGame(); }
+        //     else { PauseGame(); }
+        // }
+
+        if (!isCaught && pauseAction.WasPressedThisFrame())
         {
-            if (isPaused)
-            {
-                ResumeGame();
-            }
-            else
-            {
-                PauseGame();
-            }
+            Debug.Log("Pause action pressed");
+            if (isPaused) { ResumeGame(); }
+            else { PauseGame(); }
+        }
+        if (isPaused && jumpAction.WasPressedThisFrame())
+        {
+            Debug.Log("Jump action pressed while paused - resuming game");
+            ResumeGame();
         }
 
         // When caught, Space reloads the current scene (retry).
-        if (isCaught && keyboard.spaceKey.wasPressedThisFrame)
+        // Using raw input
+        // if (isCaught && keyboard.spaceKey.wasPressedThisFrame)
+        // {
+        //     ReloadCurrentScene();
+        // }
+        // Using input action
+        if (isCaught && retryAction.WasPressedThisFrame())
         {
+            Debug.Log("Retry action pressed");
             ReloadCurrentScene();
         }
     }

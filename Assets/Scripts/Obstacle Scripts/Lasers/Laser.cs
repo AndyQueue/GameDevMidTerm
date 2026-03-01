@@ -25,11 +25,11 @@ public abstract class Laser : MonoBehaviour, IDetector
         }
     }
 
-    public void OnPlayerDetected(PlayerDies player)
+    public void OnPlayerDetected(PlayerCaught player)
     {
         if (isLaserActive)
         {
-            player?.Dies();
+            player?.Caught();
         }
     }
 
@@ -38,7 +38,7 @@ public abstract class Laser : MonoBehaviour, IDetector
         if (other.CompareTag("Player"))
         {
             if (other.GetComponent<PlayerMovement>().IsHiding()) { return; }
-            PlayerDies player = other.GetComponent<PlayerDies>();
+            PlayerCaught player = other.GetComponent<PlayerCaught>();
             OnPlayerDetected(player);
         }
     }

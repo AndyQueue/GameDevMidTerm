@@ -2,21 +2,20 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PlayerDies : MonoBehaviour
+public class PlayerCaught : MonoBehaviour
 {
-    public bool isDead = false;
+    public bool isCaught = false;
 
     // Drag the GameUIManager from the scene into this field in the Inspector.
     [SerializeField] private GameUIManager gameUIManager;
 
-    public void Dies()
+    public void Caught()
     {
-        if (isDead) return;
+        if (isCaught) return;
 
-        isDead = true;
+        isCaught = true;
 
-        Debug.Log("Player Died");
-
+        Debug.Log("Player Caught");
         // Use the UI manager reference set in the Inspector.
         if (gameUIManager != null)
         {

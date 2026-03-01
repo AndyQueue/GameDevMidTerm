@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(PlayerInput))]
 [RequireComponent(typeof(CapsuleCollider2D))]
+[RequireComponent(typeof(GameUIManager))]
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 5f;
@@ -30,6 +31,7 @@ public class PlayerMovement : MonoBehaviour
     private bool isCrouching;
     private Vector2 autoMoveTarget;
     private bool isAutoMoving = false;
+    private GameUIManager gameUIManagerScript;
 
     private CapsuleCollider2D playerCol;
     // public copies of private variables for use in other scripts (e.g. Idlehiding)
@@ -44,6 +46,7 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         playerInput = GetComponent<PlayerInput>();
         playerCol = GetComponent<CapsuleCollider2D>();
+        gameUIManagerScript = GetComponent<GameUIManager>();
         crouchSpeed = moveSpeed / 2f;
         curSpeed = moveSpeed;
         OriginalHeight = playerCol.size.y;
@@ -77,7 +80,7 @@ public class PlayerMovement : MonoBehaviour
     public bool IsGrounded()
     {
         Vector2 origin = transform.position;
-        RaycastHit2D hit = Physics2D.Raycast(origin, Vector2.down, groundCheckDistance, groundLayer |   obstacleLayer);
+        RaycastHit2D hit = Physics2D.Raycast(origin, Vector2.down, groundCheckDistance, groundLayer | obstacleLayer);
         Debug.DrawRay(origin, Vector2.down * groundCheckDistance, hit.collider != null ? Color.green : Color.red);
         return hit.collider != null;
     }
@@ -86,6 +89,7 @@ public class PlayerMovement : MonoBehaviour
         return isHiding;
     }
 
+    // for the door animation
     public bool IsAutoMoving()
     {
         return isAutoMoving;
@@ -100,6 +104,7 @@ public class PlayerMovement : MonoBehaviour
         velocity.y = jumpForce;
 
     }
+
     // Crouching toggle 
     private void HandleCrouchToggle()
     {
@@ -130,18 +135,16 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
+
     private bool BehindHidable()
     {
-        // Check if player is touching a hidable object (e.g. bush) using an overlap circle
+        // Check if player is touching a hidable object 
         Vector2 position = transform.position;
         float radius = 0.1f; // Adjust as needed for player size
         Collider2D[] colliders = Physics2D.OverlapCircleAll(position, radius);
         foreach (Collider2D collider in colliders)
         {
-            if (collider.CompareTag("Hidable"))
-            {
-                return true;
-            }
+            if (collider.CompareTag("Hidable")) { return true; }
         }
         return false;
     }
@@ -193,10 +196,10 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         // Read input every rendered frame
-        if (jumpAction != null && jumpAction.WasPressedThisFrame() && !jumpRequested && IsGrounded() && !isCrouching && !isHiding) { jumpRequested = true; }
-        if (crouchAction != null && crouchAction.WasPressedThisFrame() && !CrouchRequested && IsGrounded()) { CrouchRequested = true; }
-        if (uncrouchAction != null && uncrouchAction.WasPressedThisFrame() && !UncrouchRequested && IsGrounded()) { UncrouchRequested = true; }
-        if (hideAction != null && hideAction.WasPressedThisFrame() && !HideRequested && IsGrounded()) { HideRequested = true; }
+        if (jumpAction != null && jumpAction.WasPressedThisFrame() && !jumpRequested && IsGrounded() && !isCrouching && !isHiding && !gameUIManagerScript.isPaused) { jumpRequested = true; }
+        if (crouchAction != null && crouchAction.WasPressedThisFrame() && !CrouchRequested && IsGrounded() && !gameUIManagerScript.isPaused) { CrouchRequested = true; }
+        if (uncrouchAction != null && uncrouchAction.WasPressedThisFrame() && !UncrouchRequested && IsGrounded() && !gameUIManagerScript.isPaused) { UncrouchRequested = true; }
+        if (hideAction != null && hideAction.WasPressedThisFrame() && !HideRequested && IsGrounded() && !gameUIManagerScript.isPaused) { HideRequested = true; }
     }
     // Mainly used for applying physics movement (updated at fixed time steps)
     private void FixedUpdate()
@@ -226,7 +229,10 @@ public class PlayerMovement : MonoBehaviour
         {
             velocity.x = horizontalInput * curSpeed;
         }
-
+        if (gameUIManagerScript.isPaused)
+        {
+            return;
+        }
         if (IsGrounded())
         {
             // jump preserves horizontal velocity
@@ -238,7 +244,7 @@ public class PlayerMovement : MonoBehaviour
         // Debug.Log($"curSpeed: {curSpeed}, horizontalInput: {horizontalInput}, velocity: {velocity}");
         // Apply the final velocity to the Rigidbody
 
-        if (!isHiding) { rb.linearVelocity = velocity; }
+        if (!isHiding ) { rb.linearVelocity = velocity; }
 
 
     }
