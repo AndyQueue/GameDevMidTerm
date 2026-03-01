@@ -178,7 +178,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   moveSpeed: 6
   crouchSpeed: 2.5
-  jumpForce: 16
+  jumpForce: 12
   groundCheckDistance: 1.5
   groundLayer:
     serializedVersion: 2
@@ -329,6 +329,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerDies
   isDead: 0
+  gameUIManager: {fileID: 0}
 --- !u!114 &-3076877271186719772
 MonoBehaviour:
   m_ObjectHideFlags: 0

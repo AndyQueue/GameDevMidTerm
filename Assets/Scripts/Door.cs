@@ -9,24 +9,33 @@ public class Door : MonoBehaviour
     [SerializeField] private AudioSource doorCreakSound;
     [SerializeField] private AudioSource doorEnterSound;
 
-    [SerializeField] private LevelChanger levelChanger;
+    private LevelManager levelManager;
 
     private SpriteRenderer spriteRenderer;
     private GameObject player;
 
     private bool isOpening = false;
 
+
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         player = GameObject.FindGameObjectWithTag("Player");
+
+        levelManager = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>();
+        if (levelManager == null)
+        {
+            Debug.LogWarning("Door: No LevelManager found in the scene.");
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
-    {
+    { 
         PlayerInventory inventory = collision.gameObject.GetComponent<PlayerInventory>();
+        //ensures we are colliding with player by checking that inventory exists
         if (inventory != null)
         {
+            //checks inventory for key to unlock door
             if (inventory.hasKey)
             {
                 OpenDoor();
@@ -38,6 +47,8 @@ public class Door : MonoBehaviour
     {
         if (isOpening) return;
         isOpening = true;
+        int currentLevel = levelManager.GetCurrentLevelNumber();
+        levelManager.completeLevel(currentLevel); // mark the level as completed
         Debug.Log("Door Opened! Yay you win!");
 
         StartCoroutine(OpenDoorSequence());
@@ -80,18 +91,13 @@ public class Door : MonoBehaviour
 
         input.ActivateInput(); // re-enable player input after the door sequence
 
-        if (levelChanger != null)
-        {
-            levelChanger.LoadNextLevel();
-        }
-        else
-        {
-            Debug.LogWarning("Door: LevelChanger reference not set.");
-        }
+        levelManager.LoadNextLevel(); // load the next level after the door sequence is complete
     }
 
     private IEnumerator PlayerJumpAnimation(float jumpHeight, float jumpEndHeight, float jumpDuration)
     {
+        // This animation was written using AI (Claude)
+
         Vector3 startPos = player.transform.position;
         Vector3 peakPos = startPos + new Vector3(0, jumpHeight, 0);
         Vector3 bottomPos = startPos + new Vector3(0, jumpEndHeight, 0); // end height so player can dissapear "under" the door

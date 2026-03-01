@@ -3,14 +3,14 @@ using UnityEngine;
 public class LaserButtonLogic : MonoBehaviour
 {
     public GreenLaser laser;
-    public float landingYOffset;
+    public float landingYOffset; //to ensure the player lands on the button instead of running into it
 
     private bool isPressed = false;
     private LaserButtonVisualsAudio visualsAndSound;
 
     private void Awake()
     {
-        visualsAndSound = GetComponent<LaserButtonVisualsAudio>();
+        visualsAndSound = GetComponent<LaserButtonVisualsAudio>(); 
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -20,15 +20,10 @@ public class LaserButtonLogic : MonoBehaviour
         {
             isPressed = true;
             
-            //checks for safety
-            if (laser != null)
-            {
-                laser.TurnOffLaser();
-            }
-            if (visualsAndSound != null) 
-            {
-                visualsAndSound.PlayPress();
-            }
+            //calls green laser's turn off laser function
+            laser.TurnOffLaser();
+            //plays button animation
+            visualsAndSound.PlayPress();
         }
     }
 }

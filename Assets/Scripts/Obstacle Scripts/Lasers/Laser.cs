@@ -12,17 +12,13 @@ public abstract class Laser : MonoBehaviour, IDetector
         laserCollider = GetComponent<Collider2D>();
     }
 
+    // sets the laser state to active or inactive based on boolean, used to intitialize on 
+    // state of all lasers and to turn blue laser on and off, and green laser off after hitting button
     protected virtual void SetLaserState(bool active)
     {
         isLaserActive = active;
-        if (spriteRenderer != null)
-        {
-            spriteRenderer.enabled = active;
-        }
-        if (laserCollider != null)
-        {
-            laserCollider.enabled = active;
-        }
+        spriteRenderer.enabled = active;
+        laserCollider.enabled = active;
     }
 
     public void OnPlayerDetected(PlayerCaught player)
@@ -33,6 +29,7 @@ public abstract class Laser : MonoBehaviour, IDetector
         }
     }
 
+    
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))

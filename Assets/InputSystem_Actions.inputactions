@@ -163,22 +163,22 @@
                 },
                 {
                     "name": "",
-                    "id": "a331e8b9-4e93-48b0-a111-c77d847e158f",
-                    "path": "<Keyboard>/upArrow",
+                    "id": "a2997fea-ddc8-4351-85c0-515c1b97f7fb",
+                    "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Gamepad;Keyboard&Mouse",
+                    "groups": ";Keyboard&Mouse;Gamepad",
                     "action": "Jump",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "550557e1-efe2-4f59-9970-e017f8ae8420",
-                    "path": "<Keyboard>/w",
+                    "id": "e744b143-e305-4017-b4f0-eaa79f78a3d0",
+                    "path": "<Keyboard>/upArrow",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard&Mouse;Gamepad",
+                    "groups": ";Gamepad;Keyboard&Mouse",
                     "action": "Jump",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -202,6 +202,28 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "Crouch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "550557e1-efe2-4f59-9970-e017f8ae8420",
+                    "path": "<Keyboard>/rightShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse;Gamepad",
+                    "action": "Hide",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a331e8b9-4e93-48b0-a111-c77d847e158f",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad;Keyboard&Mouse",
+                    "action": "Hide",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
