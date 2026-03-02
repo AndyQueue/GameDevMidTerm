@@ -9,10 +9,9 @@ public class Guard : MonoBehaviour
     [SerializeField] private LayerMask playerLayer;
 
     private bool hasCaughtPlayer = false;
-
-    private Animator animator;
-
+    private PlayerCaught cachedPlayer; 
     private GuardPatrol guardPatrol;
+    private Animator animator;
 
     private void Awake()
     {
@@ -20,71 +19,97 @@ public class Guard : MonoBehaviour
         guardPatrol = GetComponentInParent<GuardPatrol>();
         Debug.Log("GuardPatrol found: " + (guardPatrol != null));
     }
+
     void Update()
     {
         if (hasCaughtPlayer) { return; }
-        bool playerDetected = PlayerInSight();
-        if (playerDetected)
+
+        bool byCollision;
+        PlayerCaught detected = GetDetectedPlayer(out byCollision);
+        if (detected != null)
         {
-            hasCaughtPlayer = true;
-
-            if (guardPatrol != null)
-            {
-                guardPatrol.enabled = false;
-                guardPatrol.StopGuard();
-            }
-
-            animator.SetBool("IsMoving", false);
-            animator.SetTrigger("CatchPlayer");
-            //CatchPlayer();
-            StartCoroutine(CatchAfterDelay(0.8f));
-
-        } 
-        
+            cachedPlayer = detected;
+            if (byCollision)
+                transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+            PlayerCaught();
+        }
     }
 
-    private bool PlayerInSight()
+    // Returns the PlayerCaught component if player is detected by either method
+    private PlayerCaught GetDetectedPlayer( out bool byCollision)
     {
-        // using player layer mask
-        // RaycastHit2D hit = Physics2D.BoxCast(boxCollider.bounds.center + transform.right * range, boxCollider.bounds.size, 0, Vector2.left, 0, playerLayer);
-        // return hit.collider != null;
+        byCollision = false;
+        // Check collision first (direct contact)
+        RaycastHit2D collisionHit = Physics2D.BoxCast(
+            boxCollider.bounds.center,
+            boxCollider.bounds.size, 0, Vector2.left, 0, playerLayer);
 
-        RaycastHit2D hit = Physics2D.BoxCast(boxCollider.bounds.center + transform.right * range * transform.localScale.x * colliderDistance, 
-        new Vector3(boxCollider.bounds.size.x * range, boxCollider.bounds.size.y, boxCollider.bounds.size.z), 0, Vector2.left, 0);
-        if (hit.collider != null && hit.collider.CompareTag("Player"))
+        if (collisionHit.collider != null && collisionHit.collider.CompareTag("Player"))
         {
-            if (hit.collider.GetComponent<PlayerMovement>().IsHiding()) { return false; }
-            return true;
+            PlayerMovement pm = collisionHit.collider.GetComponent<PlayerMovement>();
+            if (!pm.IsHiding())
+               { 
+                    byCollision = true;
+                    return collisionHit.collider.GetComponent<PlayerCaught>();
+               }
         }
 
-        return false;
+        // Check line of sight
+        RaycastHit2D sightHit = Physics2D.BoxCast(
+            boxCollider.bounds.center + transform.right * range * transform.localScale.x * colliderDistance,
+            new Vector3(boxCollider.bounds.size.x * range, boxCollider.bounds.size.y, boxCollider.bounds.size.z),
+            0, Vector2.left, 0);
+
+        if (sightHit.collider != null && sightHit.collider.CompareTag("Player"))
+        {
+            PlayerMovement pm = sightHit.collider.GetComponent<PlayerMovement>();
+            if (!pm.IsHiding())
+                {
+                    byCollision = false;
+                    return sightHit.collider.GetComponent<PlayerCaught>();
+                }
+        }
+
+        return null;
+    }
+
+    private void PlayerCaught()
+    {
+        hasCaughtPlayer = true;
+
+        if (guardPatrol != null)
+        {
+            guardPatrol.enabled = false;
+            guardPatrol.StopGuard();
+        }
+
+        animator.SetBool("IsMoving", false);
+        animator.SetTrigger("CatchPlayer");
+        StartCoroutine(CatchAfterDelay(0.8f));
     }
 
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(boxCollider.bounds.center + transform.right * range * transform.localScale.x * colliderDistance, new Vector3(boxCollider.bounds.size.x * range, boxCollider.bounds.size.y, boxCollider.bounds.size.z));
+        Gizmos.DrawWireCube(
+            boxCollider.bounds.center + transform.right * range * transform.localScale.x * colliderDistance,
+            new Vector3(boxCollider.bounds.size.x * range, boxCollider.bounds.size.y, boxCollider.bounds.size.z));
     }
 
     private void CatchPlayer()
-    {        RaycastHit2D hit = Physics2D.BoxCast(boxCollider.bounds.center + transform.right * range * transform.localScale.x * colliderDistance, 
-        new Vector3(boxCollider.bounds.size.x * range, boxCollider.bounds.size.y, boxCollider.bounds.size.z), 0, Vector2.left, 0);
-
-            if (hit.collider.CompareTag("Player"))
-            {
-                if (hit.collider.GetComponent<PlayerMovement>().IsHiding()) { return; }
-                PlayerCaught player = hit.collider.GetComponent<PlayerCaught>();
-                OnPlayerDetected(player);
-            }
-    
+    {
+        if (cachedPlayer != null)
+        {
+            OnPlayerDetected(cachedPlayer);
+        }
     }
 
     public void OnPlayerDetected(PlayerCaught player)
     {
-            player?.Caught();
+        player?.Caught();
     }
 
-        private IEnumerator CatchAfterDelay(float delay)
+    private IEnumerator CatchAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
         CatchPlayer();
