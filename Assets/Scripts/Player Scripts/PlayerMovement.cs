@@ -81,8 +81,10 @@ public class PlayerMovement : MonoBehaviour
     {
         Vector2 origin = transform.position;
         RaycastHit2D hit = Physics2D.Raycast(origin, Vector2.down, groundCheckDistance, groundLayer | obstacleLayer);
-        Debug.DrawRay(origin, Vector2.down * groundCheckDistance, hit.collider != null ? Color.green : Color.red);
-        return hit.collider != null;
+        RaycastHit2D hitLeft = Physics2D.Raycast(origin + (Vector2.left * playerCol.bounds.extents.x), Vector2.down, groundCheckDistance, groundLayer | obstacleLayer);
+        RaycastHit2D hitRight = Physics2D.Raycast(origin + (Vector2.right * playerCol.bounds.extents.x), Vector2.down, groundCheckDistance, groundLayer | obstacleLayer);
+        bool grounded = hit.collider != null || hitLeft.collider != null || hitRight.collider != null;
+        return grounded;
     }
     public bool IsHiding()
     {

@@ -35,7 +35,6 @@ public class PlayerAnimation : MonoBehaviour
         Vector2 moveDir = movement.GetMovementDirection();
         bool isMoving = moveDir.sqrMagnitude > 0.05f;
         animator.SetBool("IsMoving", isMoving);
-        animator.SetBool("IsGrounded", movement.IsGrounded());
         animator.SetBool("IsCrouching", movement.IsCrouching());
 
         if (isMoving)
