@@ -409,8 +409,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74cfcdde8aa7a3b4e8951f408ee8380b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameUIManager
-  pausePanel: {fileID: 0}
-  caughtPanel: {fileID: 0}
+  pausePanel: {fileID: 5548090203592536223, guid: 2d653ebfafbfe4842b70b68e6326d46f, type: 3}
+  caughtPanel: {fileID: 5548090203592536223, guid: 2d653ebfafbfe4842b70b68e6326d46f, type: 3}
   caughtFlashImage: {fileID: 0}
   flashDuration: 0.2
   flashHoldDuration: 0.1

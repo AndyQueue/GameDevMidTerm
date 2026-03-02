@@ -89,6 +89,11 @@ public class PlayerMovement : MonoBehaviour
         return isHiding;
     }
 
+    public bool IsCrouching()
+    {
+        return isCrouching;
+    }
+
     // for the door animation
     public bool IsAutoMoving()
     {
