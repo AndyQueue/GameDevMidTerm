@@ -2,7 +2,7 @@ using UnityEngine;
 
 public interface IDetector
 {
-    void OnPlayerDetected(PlayerDies player); 
+    void OnPlayerDetected(PlayerCaught player); 
     //when player is detected by a dectector the player is caught
 }
 

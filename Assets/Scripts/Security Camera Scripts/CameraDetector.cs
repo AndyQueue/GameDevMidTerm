@@ -9,10 +9,10 @@ public class CameraDetector : MonoBehaviour, IDetector
     {
     }
 
-    public void OnPlayerDetected(PlayerDies player)
+    public void OnPlayerDetected(PlayerCaught player)
     {
         Debug.Log("Player Detected by Camera");
-        player?.Dies();
+        player?.Caught();
 
     }
 
@@ -20,7 +20,7 @@ public class CameraDetector : MonoBehaviour, IDetector
     {
         if (other.CompareTag("Player"))
         {
-            PlayerDies player = other.GetComponent<PlayerDies>();
+            PlayerCaught player = other.GetComponent<PlayerCaught>();
             OnPlayerDetected(player);
 
         }
