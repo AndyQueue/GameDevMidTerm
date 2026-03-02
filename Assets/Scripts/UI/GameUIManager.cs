@@ -14,12 +14,10 @@ public class GameUIManager : MonoBehaviour
     [SerializeField] private Image caughtFlashImage; // full-screen red image
     [SerializeField] private float flashDuration = 0.2f;
     [SerializeField] private float flashHoldDuration = 0.1f;
-
     public bool isPaused;
     private bool isCaught;
     private PlayerInput playerInput;
     private InputAction pauseAction;
-    private InputAction jumpAction;
     private InputAction retryAction;
 
 
@@ -44,44 +42,37 @@ public class GameUIManager : MonoBehaviour
             c.a = 0f;
             caughtFlashImage.color = c;
         }
+
+        playerInput = GetComponent<PlayerInput>();
+        if (playerInput != null)
+        {
+            pauseAction = playerInput.actions.FindAction("Pause");
+            retryAction = playerInput.actions.FindAction("Retry");
+        }
     }
 
     private void Update()
     {
-        // Use the new Input System's Keyboard API directly.
-        // This does NOT depend on PlayerInput or Unity Events,
-        // so it won't interfere with PlayerMovement.
-
-        var keyboard = Keyboard.current;
-        if (keyboard == null) { return; } // No keyboard connected
-
-        playerInput = GetComponent<PlayerInput>();
-        if (playerInput == null) { return; } // No PlayerInput component
-        
-        pauseAction = playerInput.actions.FindAction("Pause");
-        if (pauseAction == null) { Debug.LogError("Input action 'Pause' not found in PlayerInput actions."); }
-        
-        jumpAction = playerInput.actions.FindAction("Jump");
-        if (jumpAction == null) { Debug.LogError("Input action 'Jump' not found in PlayerInput actions."); }
-
-        retryAction = playerInput.actions.FindAction("Retry");
-        if (retryAction == null) { Debug.LogError("Input action 'Retry' not found in PlayerInput actions."); }
+        if (playerInput == null)
+        {
+            return;
+        }
 
         // Pause toggle with Escape
-        if (!isCaught && pauseAction.WasPressedThisFrame())
+        if (!isCaught && pauseAction != null && pauseAction.WasPressedThisFrame())
         {
             Debug.Log("Pause action pressed");
             if (isPaused) { ResumeGame(); }
             else { PauseGame(); }
         }
         // Resume with Jump when paused
-        if (isPaused && retryAction.WasPressedThisFrame())
+        if (isPaused && retryAction != null && retryAction.WasPressedThisFrame())
         {
             Debug.Log("Retry action pressed while paused - resuming game");
             ResumeGame();
         }
         // Retry with Space when caught
-        if (isCaught && retryAction.WasPressedThisFrame())
+        if (isCaught && retryAction != null && retryAction.WasPressedThisFrame())
         {
             Debug.Log("Retry action pressed");
             ReloadCurrentScene();
@@ -108,14 +99,18 @@ public class GameUIManager : MonoBehaviour
         {
             pausePanel.SetActive(false);
         }
+        else
+        {
+            Debug.LogWarning("GameUIManager: Pause panel reference is missing.");
+        }
     }
 
-    public void BackToMainMenu(string mainMenuSceneName)
+    public void BackToMainMenu()
     {
         Time.timeScale = 1f;
         isPaused = false;
         isCaught = false;
-        SceneManager.LoadScene(mainMenuSceneName);
+        SceneManager.LoadScene("MainMenu");
     }
 
     public void HandlePlayerCaught()
@@ -198,12 +193,14 @@ public class GameUIManager : MonoBehaviour
     // UI button hooks
     public void OnResumeButton()
     {
+        Debug.Log("Resume button clicked");
         ResumeGame();
     }
 
-    public void OnBackButton(string mainMenuSceneName)
+    public void OnBackButton()
     {
-        BackToMainMenu(mainMenuSceneName);
+        Debug.Log("Back button clicked");
+        BackToMainMenu();
     }
 
     public void OnRestartButton()

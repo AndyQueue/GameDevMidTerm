@@ -54,6 +54,9 @@ public class LevelManager : MonoBehaviour
         Debug.Log("Loading level: " + sceneName);
         SceneManager.LoadScene(sceneName);
     }
-
-
+    public void LoadMainMenu()
+    {
+        Debug.Log("Loading Main Menu");
+        SceneManager.LoadScene("MainMenu");
+    }
 }
