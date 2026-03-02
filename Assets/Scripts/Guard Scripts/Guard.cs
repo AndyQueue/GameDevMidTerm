@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class Guard : MonoBehaviour
 {
@@ -33,19 +34,12 @@ public class Guard : MonoBehaviour
                 guardPatrol.StopGuard();
             }
 
-            Debug.Log("Player Spotted!");
             animator.SetBool("IsMoving", false);
             animator.SetTrigger("CatchPlayer");
-            CatchPlayer();
+            //CatchPlayer();
+            StartCoroutine(CatchAfterDelay(0.8f));
 
         } 
-        // else
-        // {
-        //     if (guardPatrol != null)
-        //     {
-        //         guardPatrol.enabled = true;
-        //     }
-        // }
         
     }
 
@@ -59,6 +53,7 @@ public class Guard : MonoBehaviour
         new Vector3(boxCollider.bounds.size.x * range, boxCollider.bounds.size.y, boxCollider.bounds.size.z), 0, Vector2.left, 0);
         if (hit.collider != null && hit.collider.CompareTag("Player"))
         {
+            if (hit.collider.GetComponent<PlayerMovement>().IsHiding()) { return false; }
             return true;
         }
 
@@ -72,7 +67,26 @@ public class Guard : MonoBehaviour
     }
 
     private void CatchPlayer()
+    {        RaycastHit2D hit = Physics2D.BoxCast(boxCollider.bounds.center + transform.right * range * transform.localScale.x * colliderDistance, 
+        new Vector3(boxCollider.bounds.size.x * range, boxCollider.bounds.size.y, boxCollider.bounds.size.z), 0, Vector2.left, 0);
+
+            if (hit.collider.CompareTag("Player"))
+            {
+                if (hit.collider.GetComponent<PlayerMovement>().IsHiding()) { return; }
+                PlayerDies player = hit.collider.GetComponent<PlayerDies>();
+                OnPlayerDetected(player);
+            }
+    
+    }
+
+    public void OnPlayerDetected(PlayerDies player)
     {
-        //implement catch player
+            player?.Dies();
+    }
+
+        private IEnumerator CatchAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        CatchPlayer();
     }
 }
