@@ -73,15 +73,15 @@ public class Guard : MonoBehaviour
             if (hit.collider.CompareTag("Player"))
             {
                 if (hit.collider.GetComponent<PlayerMovement>().IsHiding()) { return; }
-                PlayerDies player = hit.collider.GetComponent<PlayerDies>();
+                PlayerCaught player = hit.collider.GetComponent<PlayerCaught>();
                 OnPlayerDetected(player);
             }
     
     }
 
-    public void OnPlayerDetected(PlayerDies player)
+    public void OnPlayerDetected(PlayerCaught player)
     {
-            player?.Dies();
+            player?.Caught();
     }
 
         private IEnumerator CatchAfterDelay(float delay)

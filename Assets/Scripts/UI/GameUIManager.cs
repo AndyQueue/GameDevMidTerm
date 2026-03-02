@@ -68,33 +68,19 @@ public class GameUIManager : MonoBehaviour
         if (retryAction == null) { Debug.LogError("Input action 'Retry' not found in PlayerInput actions."); }
 
         // Pause toggle with Escape
-        // Using raw input
-        // if (!isCaught && keyboard.escapeKey.wasPressedThisFrame)
-        // {
-        //     Debug.Log("Escape pressed - toggling pause");
-        //     if (isPaused) { ResumeGame(); }
-        //     else { PauseGame(); }
-        // }
-
         if (!isCaught && pauseAction.WasPressedThisFrame())
         {
             Debug.Log("Pause action pressed");
             if (isPaused) { ResumeGame(); }
             else { PauseGame(); }
         }
-        if (isPaused && jumpAction.WasPressedThisFrame())
+        // Resume with Jump when paused
+        if (isPaused && retryAction.WasPressedThisFrame())
         {
-            Debug.Log("Jump action pressed while paused - resuming game");
+            Debug.Log("Retry action pressed while paused - resuming game");
             ResumeGame();
         }
-
-        // When caught, Space reloads the current scene (retry).
-        // Using raw input
-        // if (isCaught && keyboard.spaceKey.wasPressedThisFrame)
-        // {
-        //     ReloadCurrentScene();
-        // }
-        // Using input action
+        // Retry with Space when caught
         if (isCaught && retryAction.WasPressedThisFrame())
         {
             Debug.Log("Retry action pressed");
@@ -158,7 +144,7 @@ public class GameUIManager : MonoBehaviour
     private IEnumerator PlayCaughtFlash()
     {
         // Repeated blink while the player is caught.
-        // Use unscaled time so it still runs when timeScale = 0.
+        // Uses unscaled time so it still runs when timeScale = 0.
         while (isCaught)
         {
             // Fade in
@@ -166,6 +152,7 @@ public class GameUIManager : MonoBehaviour
             while (elapsed < flashDuration)
             {
                 elapsed += Time.unscaledDeltaTime;
+                // t goes from 0 to 1 over the duration of the flash
                 float t = Mathf.Clamp01(elapsed / flashDuration);
                 SetFlashAlpha(t);
                 yield return null;
@@ -184,21 +171,19 @@ public class GameUIManager : MonoBehaviour
                 yield return null;
             }
 
-            // Small pause with no red
+            // Hold at no opacity
             SetFlashAlpha(0f);
             yield return new WaitForSecondsRealtime(flashHoldDuration);
         }
-
-        // Ensure we end with no flash if isCaught became false.
         SetFlashAlpha(0f);
     }
 
     private void SetFlashAlpha(float alpha)
     {
         if (caughtFlashImage == null) return;
-        Color c = caughtFlashImage.color;
-        c.a = alpha;
-        caughtFlashImage.color = c;
+        Color caughtColor = caughtFlashImage.color;
+        caughtColor.a = alpha;
+        caughtFlashImage.color = caughtColor;
     }
 
     private void ReloadCurrentScene()
