@@ -332,7 +332,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerDies
   isCaught: 0
-  gameUIManager: {fileID: 1297785375357356917}
 --- !u!114 &-3076877271186719772
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -416,6 +415,7 @@ MonoBehaviour:
   caughtFlashImage: {fileID: 0}
   flashDuration: 0.2
   flashHoldDuration: 0.1
+  caughtSFX: {fileID: 0}
   isPaused: 0
 --- !u!82 &1303434528512080466
 AudioSource:
@@ -429,7 +429,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 28d97fc3b18056e43be0e58fcc582c0a, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
