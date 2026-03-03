@@ -36,10 +36,9 @@ public class PlayerAnimation : MonoBehaviour
         bool isMoving = moveDir.sqrMagnitude > 0.05f;
         animator.SetBool("IsMoving", isMoving);
         animator.SetBool("IsCrouching", movement.IsCrouching());
-        animator.SetBool("IsHiding", movement.IsHiding());
 
         if (isMoving)
-        {
+        { 
             lastMoveDir = moveDir;
             animator.SetFloat("MoveX", moveDir.x);
             animator.SetFloat("MoveY", moveDir.y);
