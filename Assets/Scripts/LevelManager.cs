@@ -5,7 +5,6 @@ public class LevelManager : MonoBehaviour
 {
     [SerializeField] private int currentLevelNumber; //1-based index for current level number
 
-
     public void InitializeLevelData()
     {
         for (int i = 0; i < LevelData.levelData.Length; i++)
