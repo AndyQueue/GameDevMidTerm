@@ -14,27 +14,26 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float groundCheckDistance = 1.5f;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask obstacleLayer;
-    // using hideSpeed for both crouching and hiding
+    // using hideSpeed for crouching 
     private float curSpeed;
     private PlayerInput playerInput;
     private InputAction jumpAction;
     private InputAction crouchAction;
-    private InputAction uncrouchAction;
+    // private InputAction uncrouchAction;
     private InputAction hideAction;
-    private Rigidbody2D rb;
     private float horizontalInput;
     private bool jumpRequested;
     private bool CrouchRequested;
-    private bool UncrouchRequested;
+    // private bool UncrouchRequested;
     private bool HideRequested;
     private bool isHiding;
     private bool isCrouching;
     private Vector2 autoMoveTarget;
     private bool isAutoMoving = false;
     private GameUIManager gameUIManagerScript;
-
     private CapsuleCollider2D playerCol;
-    // public copies of private variables for use in other scripts (e.g. Idlehiding)
+    private Rigidbody2D rb;
+    // public copies of private variables 
     public float MoveSpeed => moveSpeed;
     public float HideSpeed => crouchSpeed;
     private float OriginalHeight;
@@ -57,7 +56,7 @@ public class PlayerMovement : MonoBehaviour
 
         jumpAction = playerInput.actions.FindAction("Jump");
         crouchAction = playerInput.actions.FindAction("Crouch");
-        uncrouchAction = playerInput.actions.FindAction("Uncrouch");
+        // uncrouchAction = playerInput.actions.FindAction("Uncrouch");
         hideAction = playerInput.actions.FindAction("Hide");
 
         if (jumpAction == null) { Debug.LogError("Input action 'Jump' not found in PlayerInput actions."); }
@@ -147,13 +146,14 @@ public class PlayerMovement : MonoBehaviour
     {
         // Check if player is touching a hidable object 
         Vector2 position = transform.position;
-        float radius = 0.1f; // Adjust as needed for player size
+        float radius = 0.1f;                            // ! Adjust this as needed for player size
         Collider2D[] colliders = Physics2D.OverlapCircleAll(position, radius);
         foreach (Collider2D collider in colliders)
         {
             if (collider.CompareTag("Hidable")) { return true; }
+            else { return false; }
         }
-        return false;
+        return false; // gives an error without this
     }
     private void HandleHideToggle()
     {
@@ -205,7 +205,6 @@ public class PlayerMovement : MonoBehaviour
         // Read input every rendered frame
         if (jumpAction != null && jumpAction.WasPressedThisFrame() && !jumpRequested && IsGrounded() && !isCrouching && !isHiding && !gameUIManagerScript.isPaused) { jumpRequested = true; }
         if (crouchAction != null && crouchAction.WasPressedThisFrame() && !CrouchRequested && IsGrounded() && !gameUIManagerScript.isPaused) { CrouchRequested = true; }
-        if (uncrouchAction != null && uncrouchAction.WasPressedThisFrame() && !UncrouchRequested && IsGrounded() && !gameUIManagerScript.isPaused) { UncrouchRequested = true; }
         if (hideAction != null && hideAction.WasPressedThisFrame() && !HideRequested && IsGrounded() && !gameUIManagerScript.isPaused) { HideRequested = true; }
     }
     // Mainly used for applying physics movement (updated at fixed time steps)
@@ -242,10 +241,11 @@ public class PlayerMovement : MonoBehaviour
         }
         if (IsGrounded())
         {
-            // jump preserves horizontal velocity
-            // crouch and uncrouch adjust player collider size and curSpeed to either moveSpeed or hideSpeed
-            if (!isCrouching) { HandleCrouchToggle(); } else { HandleCrouchToggle(); }
+            // crouch and uncrouch adjust player collider size and curSpeed to either moveSpeed or crouchSpeed
+            HandleCrouchToggle();
+            // grays out the character but should turn off the sprite and collider 
             HandleHideToggle();
+            // jump preserves horizontal velocity
             if (!isCrouching && !isHiding) { HandleJump(ref velocity); }
         }
         // Debug.Log($"curSpeed: {curSpeed}, horizontalInput: {horizontalInput}, velocity: {velocity}");
@@ -257,4 +257,5 @@ public class PlayerMovement : MonoBehaviour
     }
     // Logic between Update and FixedUpdate: https://docs.unity3d.com/6000.3/Documentation/ScriptReference/Rigidbody-linearVelocity.html 
     // We should confirm with Benno.
+    
 }

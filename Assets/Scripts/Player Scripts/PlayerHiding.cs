@@ -3,13 +3,12 @@ using UnityEngine;
 public class PlayerHiding : StateMachineBehaviour
 {
     public bool isFindable = true;
-
     private Color originalColor = Color.white;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         SpriteRenderer spriteRenderer = animator.GetComponent<SpriteRenderer>();
-        // Gray out player sprite to indicate hide state
+        // Gray out player sprite to show hiding
         if (spriteRenderer != null) { spriteRenderer.color = Color.gray; }
         else
         {
