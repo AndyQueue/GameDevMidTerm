@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 public class LevelButtonHoverEffect : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private int levelNumber; //1-based index for level number
+    [SerializeField] private AudioSource UI_Highlighted;
 
     private SpotLightManager spotLight;
 
@@ -21,6 +22,7 @@ public class LevelButtonHoverEffect : MonoBehaviour, IPointerEnterHandler, IPoin
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        UI_Highlighted.Play();
         // Debug.Log("Hover start");
         spotLight.enableSpotLight();
         spotLight.moveSpotLight(levelNumber);
