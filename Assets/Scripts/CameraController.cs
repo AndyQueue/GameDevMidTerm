@@ -15,7 +15,7 @@ public class CameraController : MonoBehaviour
         mainCam = GetComponent<Camera>();
     }
 
-    //we use late update since our player uses update, runs after update for smooth following of player
+    //we use late update since our player uses update, runs after update for smooth following of player movement
     void LateUpdate()
     {
         FollowCameraWithBoundaries();
@@ -29,6 +29,7 @@ public class CameraController : MonoBehaviour
         
         float minX = leftWall.bounds.max.x + halfWidth; //max x for left wall to get right edge
         //add halfWidth to get stopping point on the left since we change the camera's center position
+        
         float maxX = rightWall.bounds.min.x - halfWidth; //min x for right wall to get left edge
         //subtract halfWidth to get stopping point on the right since we change the camera's center position
         
