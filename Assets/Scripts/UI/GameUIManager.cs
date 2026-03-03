@@ -14,12 +14,9 @@ public class GameUIManager : MonoBehaviour
     [SerializeField] private Image caughtFlashImage; // full-screen red image
     [SerializeField] private float flashDuration = 0.2f;
     [SerializeField] private float flashHoldDuration = 0.1f;
+    [SerializeField] private AudioSource caughtSFX;
     public bool isPaused;
     private bool isCaught;
-    private PlayerInput playerInput;
-    private InputAction pauseAction;
-    private InputAction retryAction;
-
 
     private void Awake()
     {
@@ -43,68 +40,43 @@ public class GameUIManager : MonoBehaviour
             caughtFlashImage.color = c;
         }
 
-        playerInput = GetComponent<PlayerInput>();
-        if (playerInput != null)
-        {
-            pauseAction = playerInput.actions.FindAction("Pause");
-            retryAction = playerInput.actions.FindAction("Retry");
-        }
+        Debug.Log("Name of audio source for caught SFX: " + (caughtSFX != null ? caughtSFX.clip.name : "None"));
     }
 
-    private void Update()
+    public void OnPause()
     {
-        if (playerInput == null)
-        {
-            return;
-        }
+        if (isCaught) { return; }
 
-        // Pause toggle with Escape
-        if (!isCaught && pauseAction != null && pauseAction.WasPressedThisFrame())
-        {
-            Debug.Log("Pause action pressed");
-            if (isPaused) { ResumeGame(); }
-            else { PauseGame(); }
-        }
-        // Resume with Jump when paused
-        if (isPaused && retryAction != null && retryAction.WasPressedThisFrame())
-        {
-            Debug.Log("Retry action pressed while paused - resuming game");
-            ResumeGame();
-        }
-        // Retry with Space when caught
-        if (isCaught && retryAction != null && retryAction.WasPressedThisFrame())
-        {
-            Debug.Log("Retry action pressed");
-            ReloadCurrentScene();
-        }
+        if (!isPaused) { PauseGame(); }
+        else if (isPaused) { ResumeGame(); }
+        else { Debug.LogWarning("Pause Failed"); }
+    }
+    public void OnRetry()
+    {
+        // Only works if player is caught, otherwise space should only register as jump
+        if (isCaught) { ReloadCurrentScene(); }
+        if (isPaused) { ResumeGame(); }
     }
 
+    // Linked with back button's "On Click" since no keyboard key linked
+    public void OnBackButton()
+    {
+        Debug.Log("Back button clicked");
+        BackToMainMenu();
+    }
     public void PauseGame()
     {
-        if (isPaused) return;
         isPaused = true;
         Time.timeScale = 0f;
-        if (pausePanel != null)
-        {
-            pausePanel.SetActive(true);
-        }
+        if (pausePanel != null) { pausePanel.SetActive(true); }
     }
 
     public void ResumeGame()
     {
-        if (!isPaused) return;
         isPaused = false;
         Time.timeScale = 1f;
-        if (pausePanel != null)
-        {
-            pausePanel.SetActive(false);
-        }
-        else
-        {
-            Debug.LogWarning("GameUIManager: Pause panel reference is missing.");
-        }
+        if (pausePanel != null) { pausePanel.SetActive(false); }
     }
-
     public void BackToMainMenu()
     {
         Time.timeScale = 1f;
@@ -112,40 +84,41 @@ public class GameUIManager : MonoBehaviour
         isCaught = false;
         SceneManager.LoadScene("MainMenu");
     }
-
     public void HandlePlayerCaught()
     {
         if (isCaught) return;
         isCaught = true;
-        // Make sure gameplay is effectively frozen
         Time.timeScale = 0f;
 
         if (pausePanel != null)
         {
             pausePanel.SetActive(false);
         }
-
         if (caughtPanel != null)
         {
             caughtPanel.SetActive(true);
         }
-
         if (caughtFlashImage != null)
         {
             StartCoroutine(PlayCaughtFlash());
         }
+        if (caughtSFX != null)
+        {
+            Debug.Log("Playing caught sound effect");
+            caughtSFX.Play();
+        }
     }
 
+    // Repeated blink while the player is caught.
     private IEnumerator PlayCaughtFlash()
     {
-        // Repeated blink while the player is caught.
-        // Uses unscaled time so it still runs when timeScale = 0.
         while (isCaught)
         {
             // Fade in
             float elapsed = 0f;
             while (elapsed < flashDuration)
             {
+                // Since timeScale = 0, use unscaled time.
                 elapsed += Time.unscaledDeltaTime;
                 // t goes from 0 to 1 over the duration of the flash
                 float t = Mathf.Clamp01(elapsed / flashDuration);
@@ -188,23 +161,5 @@ public class GameUIManager : MonoBehaviour
         isCaught = false;
         Scene current = SceneManager.GetActiveScene();
         SceneManager.LoadScene(current.name);
-    }
-
-    // UI button hooks
-    public void OnResumeButton()
-    {
-        Debug.Log("Resume button clicked");
-        ResumeGame();
-    }
-
-    public void OnBackButton()
-    {
-        Debug.Log("Back button clicked");
-        BackToMainMenu();
-    }
-
-    public void OnRestartButton()
-    {
-        ReloadCurrentScene();
     }
 }

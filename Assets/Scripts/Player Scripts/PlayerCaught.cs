@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,8 +6,11 @@ public class PlayerCaught : MonoBehaviour
     public bool isCaught = false;
 
     // Drag the GameUIManager from the scene into this field in the Inspector.
-    [SerializeField] private GameUIManager gameUIManager;
-
+    private GameUIManager gameUIManager;
+    public void Awake()
+    {
+        gameUIManager = GetComponent<GameUIManager>();
+    }
     public void Caught()
     {
         if (isCaught) return;
