@@ -48,7 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CameraMovement
   rotateFrom: {x: 0, y: 0, z: -45}
   rotateTo: {x: 0, y: 0, z: 45}
-  m_frequency: 0.25
+  m_frequency: 0.1
 --- !u!114 &8394990112331912421
 MonoBehaviour:
   m_ObjectHideFlags: 0
