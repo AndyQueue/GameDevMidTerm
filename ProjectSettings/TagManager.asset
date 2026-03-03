@@ -10,7 +10,6 @@ TagManager:
   - Laser
   - Hidable
   - LevelManager
-  - LevelCompletionManager
   - SpotLight
   layers:
   - Default
