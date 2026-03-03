@@ -3,12 +3,14 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class PlayerAnimation : MonoBehaviour
 {
+    [SerializeField] private AudioSource jumpSFX;
     private Animator animator;
     private PlayerMovement movement;
     private SpriteRenderer spriteRenderer;
     private Vector2 lastMoveDir = Vector2.down;
     public Color originalColor;
     public bool originalColorCaptured;
+
     public void GetOriginalColor()
     {
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
@@ -24,11 +26,24 @@ public class PlayerAnimation : MonoBehaviour
         }
     }
 
+    public void PlayJumpSound()
+    {
+        if (jumpSFX != null)
+        {
+            jumpSFX.Play();
+        }
+        else
+        {
+            Debug.LogWarning("PlayerAnimation: Jump sound effect not assigned.");
+        }
+    }
+
     private void Awake()
     {
         animator = GetComponent<Animator>();
         movement = GetComponent<PlayerMovement>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        jumpSFX = GetComponent<AudioSource>();
     }
     private void Update()
     {
@@ -38,7 +53,7 @@ public class PlayerAnimation : MonoBehaviour
         animator.SetBool("IsCrouching", movement.IsCrouching());
 
         if (isMoving)
-        { 
+        {
             lastMoveDir = moveDir;
             animator.SetFloat("MoveX", moveDir.x);
             animator.SetFloat("MoveY", moveDir.y);
