@@ -3,6 +3,9 @@ using System.Collections;
 
 public class Guard : MonoBehaviour
 {
+    public AudioSource guardSound;
+    public float startOffset; 
+    
     [SerializeField] private float range;
     [SerializeField] private float colliderDistance;
     [SerializeField] private BoxCollider2D boxCollider;
@@ -82,6 +85,8 @@ public class Guard : MonoBehaviour
             guardPatrol.enabled = false;
             guardPatrol.StopGuard();
         }
+        guardSound.time = startOffset;
+        guardSound.Play();
 
         animator.SetBool("IsMoving", false);
         animator.SetTrigger("CatchPlayer");
