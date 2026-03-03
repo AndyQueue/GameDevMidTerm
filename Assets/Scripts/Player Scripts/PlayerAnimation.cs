@@ -38,7 +38,7 @@ public class PlayerAnimation : MonoBehaviour
         animator.SetBool("IsCrouching", movement.IsCrouching());
 
         if (isMoving)
-        {
+        { 
             lastMoveDir = moveDir;
             animator.SetFloat("MoveX", moveDir.x);
             animator.SetFloat("MoveY", moveDir.y);

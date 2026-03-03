@@ -4,12 +4,17 @@ using UnityEngine.UI;
 public class LevelButton : MonoBehaviour
 {
     [SerializeField] private int levelNumber; //1-based index for level number
+    [SerializeField] private AudioSource UI_Selected;
+
+
     private LevelManager levelManager;
+
 
 
     void Start()
     {
         levelManager = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>();
+
         if (levelManager == null)
         {
             Debug.LogWarning("LevelButton: No LevelManager found in the scene.");
@@ -30,6 +35,7 @@ public class LevelButton : MonoBehaviour
 
     public void OnClick()
     {
+        UI_Selected.Play();
         Debug.Log("Level Button for level " + levelNumber + " was Pressed!");
         levelManager.LoadLevel(levelNumber);
     }
