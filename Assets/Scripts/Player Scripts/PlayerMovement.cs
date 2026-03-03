@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(PlayerInput))]
 [RequireComponent(typeof(CapsuleCollider2D))]
 [RequireComponent(typeof(GameUIManager))]
+[RequireComponent(typeof(SpriteRenderer))]
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 5f;
@@ -25,31 +26,36 @@ public class PlayerMovement : MonoBehaviour
     private bool jumpRequested;
     private bool CrouchRequested;
     // private bool UncrouchRequested;
-    private bool HideRequested;
+    private bool hideRequested;
     private bool isHiding;
     private bool isCrouching;
     private Vector2 autoMoveTarget;
     private bool isAutoMoving = false;
+    private SpriteRenderer spriteRenderer;
+    private Color originalColor = Color.white;
+    Color hidingColor = new Color(1f, 1f, 1f, 0.5f);
     private GameUIManager gameUIManagerScript;
     private CapsuleCollider2D playerCol;
     private Rigidbody2D rb;
     // public copies of private variables 
     public float MoveSpeed => moveSpeed;
     public float HideSpeed => crouchSpeed;
-    private float OriginalHeight;
-    private float CrouchHeight;
-
+    private float originalHeight;
+    private float crouchHeight;
+    private float gravityScale;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         playerInput = GetComponent<PlayerInput>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         playerCol = GetComponent<CapsuleCollider2D>();
         gameUIManagerScript = GetComponent<GameUIManager>();
         crouchSpeed = moveSpeed / 2f;
         curSpeed = moveSpeed;
-        OriginalHeight = playerCol.size.y;
-        CrouchHeight = OriginalHeight / 2f;
+        originalHeight = playerCol.size.y;
+        crouchHeight = originalHeight / 2f;
+        gravityScale = rb.gravityScale;
 
         if (playerInput == null)
         { Debug.LogError("PlayerInput component is missing on PlayerMovement GameObject."); return; }
@@ -121,7 +127,7 @@ public class PlayerMovement : MonoBehaviour
             Debug.Log("Uncrouch");
             CrouchRequested = false; // consume the Crouch
             isCrouching = false;
-            if (playerCol != null) { playerCol.size = new Vector2(playerCol.size.x, OriginalHeight); }
+            if (playerCol != null) { playerCol.size = new Vector2(playerCol.size.x, originalHeight); }
             else
             {
                 Debug.LogWarning("PlayerMovement: CapsuleCollider2D component not found on the GameObject.");
@@ -134,7 +140,7 @@ public class PlayerMovement : MonoBehaviour
             isCrouching = true;
             // shrink collider height while crouching so the player appears smaller
             if (playerCol != null)
-            { playerCol.size = new Vector2(playerCol.size.x, CrouchHeight); }
+            { playerCol.size = new Vector2(playerCol.size.x, crouchHeight); }
             else
             {
                 Debug.LogWarning("PlayerMovement: CapsuleCollider2D component not found on the GameObject.");
@@ -146,48 +152,55 @@ public class PlayerMovement : MonoBehaviour
     {
         // Check if player is touching a hidable object 
         Vector2 position = transform.position;
-        float radius = 0.1f;                            // ! Adjust this as needed for player size
+        float radius = 0.3f;                            // ! Adjust this as needed for player size
         Collider2D[] colliders = Physics2D.OverlapCircleAll(position, radius);
         foreach (Collider2D collider in colliders)
         {
-            if (collider.CompareTag("Hidable")) { return true; }
-            else { return false; }
+            if (collider.CompareTag("Hidable"))
+            {
+                Debug.Log("Player is behind a hidable object: " + collider.name);
+                return true;
+            }
         }
         return false; // gives an error without this
     }
     private void HandleHideToggle()
     {
-        // Debug.Log(HideRequested);
-        if (!HideRequested) { return; }
-        if (HideRequested && !BehindHidable())
+        // Debug.Log(hideRequested);
+        if (!hideRequested) { return; }
+        if (hideRequested && !BehindHidable())
         {
             Debug.Log("Not behind hidable");
-            HideRequested = false; // consume the hide
+            hideRequested = false; // consume the hide
             return;
         }
-        if (HideRequested && !IsGrounded())
+        if (hideRequested && !IsGrounded())
         {
             Debug.Log("Not grounded");
             return;
         }
-        Debug.Log("Hide pressed");
+        // Debug.Log("Hide pressed");
 
         // Toggle hide state
         // Unhide
         if (IsHiding())
         {
             Debug.Log("Unhide");
-            HideRequested = false; // consume the hide
+            hideRequested = false;                      // consume the hide
             isHiding = false;
-            // Unhide logic is in PlayerHiding's OnStateExit 
+            spriteRenderer.color = originalColor;       // Restore original color to unhide
+            playerCol.enabled = true;                   // Re-enable collider to unhide
+            rb.gravityScale = gravityScale;             // Restore gravity when unhiding
         }
         // Hide
         else
         {
             Debug.Log("Hide");
-            HideRequested = false; // consume the hide
+            hideRequested = false;                      // consume the hide
             isHiding = true;
-            // Hide logic is in PlayerHiding's OnStateEnter and OnStateUpdate 
+            spriteRenderer.color = hidingColor;         // Set alpha to 0 to hide
+            playerCol.enabled = false;                  // Disable collider to hide
+            rb.gravityScale = 0f;                       // Disable gravity when hiding
         }
     }
 
@@ -205,7 +218,7 @@ public class PlayerMovement : MonoBehaviour
         // Read input every rendered frame
         if (jumpAction != null && jumpAction.WasPressedThisFrame() && !jumpRequested && IsGrounded() && !isCrouching && !isHiding && !gameUIManagerScript.isPaused) { jumpRequested = true; }
         if (crouchAction != null && crouchAction.WasPressedThisFrame() && !CrouchRequested && IsGrounded() && !gameUIManagerScript.isPaused) { CrouchRequested = true; }
-        if (hideAction != null && hideAction.WasPressedThisFrame() && !HideRequested && IsGrounded() && !gameUIManagerScript.isPaused) { HideRequested = true; }
+        if (hideAction != null && hideAction.WasPressedThisFrame() && !hideRequested && IsGrounded() && !gameUIManagerScript.isPaused) { hideRequested = true; }
     }
     // Mainly used for applying physics movement (updated at fixed time steps)
     private void FixedUpdate()
@@ -251,11 +264,11 @@ public class PlayerMovement : MonoBehaviour
         // Debug.Log($"curSpeed: {curSpeed}, horizontalInput: {horizontalInput}, velocity: {velocity}");
         // Apply the final velocity to the Rigidbody
 
-        if (!isHiding ) { rb.linearVelocity = velocity; }
+        if (!isHiding) { rb.linearVelocity = velocity; }
 
 
     }
     // Logic between Update and FixedUpdate: https://docs.unity3d.com/6000.3/Documentation/ScriptReference/Rigidbody-linearVelocity.html 
     // We should confirm with Benno.
-    
+
 }
