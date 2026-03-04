@@ -13,6 +13,7 @@ public class LevelButton : MonoBehaviour
 
     void Start()
     {
+        UI_Selected.Play();
         levelManager = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>();
 
         if (levelManager == null)
