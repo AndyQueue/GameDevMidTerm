@@ -3,7 +3,14 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class PlayerAnimation : MonoBehaviour
 {
-    [SerializeField] private AudioSource jumpSFX;
+    [Header("Player SFX")]
+    [SerializeField] private AudioSource sfxSource;
+    [SerializeField] private AudioClip jumpSFX;
+    [SerializeField] private AudioClip crouchSFX;
+    [SerializeField] private AudioClip uncrouchSFX;
+    [SerializeField] private AudioClip hideSFX;
+    [SerializeField] private AudioClip unhideSFX;
+
     private Animator animator;
     private PlayerMovement movement;
     private SpriteRenderer spriteRenderer;
@@ -11,40 +18,53 @@ public class PlayerAnimation : MonoBehaviour
     public Color originalColor;
     public bool originalColorCaptured;
 
-    public void GetOriginalColor()
-    {
-        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
-        if (spriteRenderer != null)
-        {
-            originalColor = spriteRenderer.color;
-            originalColorCaptured = true;
-            Debug.Log("Original color: " + originalColor);
-        }
-        else
-        {
-            Debug.LogWarning("PlayerAnimation: SpriteRenderer not found on the GameObject.");
-        }
-    }
-
-    public void PlayJumpSound()
-    {
-        if (jumpSFX != null)
-        {
-            jumpSFX.Play();
-        }
-        else
-        {
-            Debug.LogWarning("PlayerAnimation: Jump sound effect not assigned.");
-        }
-    }
-
     private void Awake()
     {
         animator = GetComponent<Animator>();
         movement = GetComponent<PlayerMovement>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        jumpSFX = GetComponent<AudioSource>();
+        Debug.Log("Name of audio source for jump SFX: " + (jumpSFX != null ? jumpSFX.name : "None"));
+        Debug.Log("Name of audio source for crouch SFX: " + (crouchSFX != null ? crouchSFX.name : "None"));
+        Debug.Log("Name of audio source for uncrouch SFX: " + (uncrouchSFX != null ? uncrouchSFX.name : "None"));
+        Debug.Log("Name of audio source for hide SFX: " + (hideSFX != null ? hideSFX.name : "None"));
+        Debug.Log("Name of audio source for unhide SFX: " + (unhideSFX != null ? unhideSFX.name : "None"));
     }
+
+    public void PlaySfx(string clip)
+    {
+        if (sfxSource == null)
+        {
+            Debug.LogWarning("AudioSource is missing. Cannot play sound.");
+            return;
+        }
+        string clipName = clip + "SFX";
+        AudioClip audioClip = null;
+        switch (clipName)
+        {
+            case "JumpSFX":
+                audioClip = jumpSFX;
+                break;
+            case "CrouchSFX":
+                audioClip = crouchSFX;
+                break;
+            case "UncrouchSFX":
+                audioClip = uncrouchSFX;
+                break;
+            case "HideSFX":
+                audioClip = hideSFX;
+                break;
+            case "UnhideSFX":
+                audioClip = unhideSFX;
+                break;
+        }
+        if (audioClip == null)
+        {
+            Debug.LogWarning("AudioClip not found for name: " + clipName);
+            return;
+        }
+        sfxSource.PlayOneShot(audioClip);
+    }
+
     private void Update()
     {
         Vector2 moveDir = movement.GetMovementDirection();
