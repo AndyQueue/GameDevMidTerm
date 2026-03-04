@@ -43,6 +43,7 @@ public class LaserButtonVisualsAudio : MonoBehaviour
 
             yield return new WaitForSeconds(waitTime);
         }
+        
     
     }
 }

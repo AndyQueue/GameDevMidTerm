@@ -4,8 +4,10 @@ using UnityEngine;
 public class BlueLaser : Laser
 {
     //blue laser turns on and off
+    [Header("Laser Timing")]
     public float onTime;
     public float offTime;
+
 
     void Start()
     {
@@ -20,6 +22,7 @@ public class BlueLaser : Laser
             //turn laser on
             SetLaserState(true);
             yield return new WaitForSeconds(onTime);
+            
             //turn laser off
             SetLaserState(false);
             yield return new WaitForSeconds(offTime);

@@ -20,10 +20,10 @@ public class LaserButtonLogic : MonoBehaviour
         {
             isPressed = true;
             
-            //calls green laser's turn off laser function
-            laser.TurnOffLaser();
             //plays button animation
             visualsAndSound.PlayPress();
+            //calls green laser's turn off laser function
+            laser.TurnOffLaser();
         }
     }
 }

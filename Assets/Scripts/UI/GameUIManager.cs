@@ -11,7 +11,7 @@ public class GameUIManager : MonoBehaviour
 
     [Header("Caught UI")]
     [SerializeField] private GameObject caughtPanel;
-    [SerializeField] private Image caughtFlashImage; // full-screen red image
+    [SerializeField] private Image caughtFlashImage;        // flashing red image
     [SerializeField] private float flashDuration = 0.2f;
     [SerializeField] private float flashHoldDuration = 0.1f;
     [SerializeField] private AudioSource caughtSFX;
@@ -20,9 +20,6 @@ public class GameUIManager : MonoBehaviour
 
     private void Awake()
     {
-        // Simple setup: assume there is exactly one GameUIManager
-        // in the scene, and it does NOT persist across scenes.
-
         if (pausePanel != null)
         {
             pausePanel.SetActive(false);
@@ -39,8 +36,6 @@ public class GameUIManager : MonoBehaviour
             c.a = 0f;
             caughtFlashImage.color = c;
         }
-
-        Debug.Log("Name of audio source for caught SFX: " + (caughtSFX != null ? caughtSFX.clip.name : "None"));
     }
 
     public void OnPause()
