@@ -5,7 +5,7 @@ public abstract class Laser : MonoBehaviour, IDetector
     protected SpriteRenderer spriteRenderer;
     protected Collider2D laserCollider;
     protected bool isLaserActive = true;
-
+    
     protected virtual void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -28,7 +28,6 @@ public abstract class Laser : MonoBehaviour, IDetector
             player?.Caught();
         }
     }
-
     
     private void OnTriggerEnter2D(Collider2D other)
     {
