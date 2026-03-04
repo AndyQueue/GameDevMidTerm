@@ -41,7 +41,6 @@ public class Guard : MonoBehaviour
     // Returns the PlayerCaught component if player is detected by either method
     private PlayerCaught GetDetectedPlayer( out bool byCollision)
     {
-        Debug.Log("Checking for player detection...");
         byCollision = false;
         // Check collision first (direct contact)
         RaycastHit2D collisionHit = Physics2D.BoxCast(
@@ -50,6 +49,7 @@ public class Guard : MonoBehaviour
 
         if (collisionHit.collider != null && collisionHit.collider.CompareTag("Player"))
         {
+            Debug.Log("Colliding");
             PlayerMovement pm = collisionHit.collider.GetComponent<PlayerMovement>();
             if (!pm.IsHiding())
                { 
