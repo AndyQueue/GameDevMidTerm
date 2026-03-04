@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class MusicManager : MonoBehaviour
 {
-
     public static MusicManager alreadyPlaying;
     //avoids playing double audio when we reload same level
     //static makes the music manager global, if it already exists do not start playing a new audio
@@ -10,7 +9,7 @@ public class MusicManager : MonoBehaviour
     {
         if (alreadyPlaying != null)
         {
-            Destroy(gameObject); 
+            Destroy(gameObject);
             //dont play new music if we already have one playing
             //destroys music we try to spawn at start of scene
         }
