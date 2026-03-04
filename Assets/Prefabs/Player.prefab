@@ -20,7 +20,7 @@ GameObject:
   - component: {fileID: -3076877271186719772}
   - component: {fileID: -7933955959771223328}
   - component: {fileID: 1297785375357356917}
-  - component: {fileID: 1303434528512080466}
+  - component: {fileID: 6752549020592392184}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -316,7 +316,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4170ab460d4a73d4da0dc7f3d9c59d59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAnimation
-  jumpSFX: {fileID: 1303434528512080466}
+  sfxSource: {fileID: 6752549020592392184}
+  jumpSFX: {fileID: 8300000, guid: 1df0dae08e9a6c74a9e01509a12e4b01, type: 3}
+  crouchSFX: {fileID: 8300000, guid: b0e5ea650b0450143aa2b3f7d7edf724, type: 3}
+  uncrouchSFX: {fileID: 8300000, guid: f2a63d069d9c5c14dabbd67fbd190634, type: 3}
+  hideSFX: {fileID: 8300000, guid: a91b336bb69884146addcda4d3d3186a, type: 3}
+  unhideSFX: {fileID: 8300000, guid: 179e6b1a32a0de24da2fda076ade27a2, type: 3}
   originalColor: {r: 0, g: 0, b: 0, a: 0}
   originalColorCaptured: 0
 --- !u!114 &-722765177505092852
@@ -417,7 +422,7 @@ MonoBehaviour:
   flashHoldDuration: 0.1
   caughtSFX: {fileID: 0}
   isPaused: 0
---- !u!82 &1303434528512080466
+--- !u!82 &6752549020592392184
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -428,8 +433,8 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: 28d97fc3b18056e43be0e58fcc582c0a, type: 3}
-  m_PlayOnAwake: 0
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

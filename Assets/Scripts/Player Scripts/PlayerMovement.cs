@@ -23,6 +23,7 @@ public class PlayerMovement : MonoBehaviour
     private GameUIManager gameUIManagerScript;
 
     private float horizontalInput;
+
     private bool isHiding;
     private bool isCrouching;
     private Vector2 autoMoveTarget;
@@ -61,7 +62,8 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnMove(InputValue input)
     {
-        if (IsGameplayPaused() || isHiding)
+        // Debug.Log(input);
+        if (IsGameplayPaused() || isHiding || input == null)
         {
             horizontalInput = 0f;
             return;
@@ -75,9 +77,10 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!input.isPressed || IsGameplayPaused() || isHiding || isCrouching || !IsGrounded()) { return; }
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+
         if (playerAnimation != null)
         {
-            playerAnimation.PlayJumpSound();
+            playerAnimation.PlaySfx("Jump");
         }
     }
 
@@ -86,6 +89,11 @@ public class PlayerMovement : MonoBehaviour
         if (!input.isPressed || IsGameplayPaused() || isHiding || !IsGrounded()) { return; }
         isCrouching = !isCrouching;
         playerCol.size = new Vector2(playerCol.size.x, isCrouching ? crouchHeight : originalHeight);
+
+        if (playerAnimation != null)
+        {
+            playerAnimation.PlaySfx(isCrouching ? "Crouch" : "Uncrouch");
+        }
     }
 
     public void OnHide(InputValue input)
@@ -97,6 +105,7 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
+
         // Toggle hiding state
         // Unhide
         if (isHiding)
@@ -105,6 +114,11 @@ public class PlayerMovement : MonoBehaviour
             spriteRenderer.color = originalColor;
             playerCol.enabled = true;
             rb.gravityScale = originalGravityScale;
+
+            if (playerAnimation != null)
+            {
+                playerAnimation.PlaySfx("Unhide");
+            }
         }
         // Hide
         else
@@ -114,6 +128,11 @@ public class PlayerMovement : MonoBehaviour
             playerCol.enabled = false;
             rb.gravityScale = 0f;
             rb.linearVelocity = Vector2.zero;
+
+            if (playerAnimation != null)
+            {
+                playerAnimation.PlaySfx("Hide");
+            }
         }
     }
 
@@ -164,6 +183,7 @@ public class PlayerMovement : MonoBehaviour
         autoMoveTarget = target;
         isAutoMoving = true;
     }
+
     private void FixedUpdate()
     {
         if (isHiding || IsGameplayPaused())
