@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5574885345928223755}
   - component: {fileID: 5788039803767423678}
   m_Layer: 0
-  m_Name: LaserSensor (10)
+  m_Name: LaserSensor 2.2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -102,7 +102,7 @@ GameObject:
   - component: {fileID: 2415031642037843975}
   - component: {fileID: 5983895597706634584}
   m_Layer: 0
-  m_Name: LaserSensor (11)
+  m_Name: LaserSensor 1.1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -193,7 +193,7 @@ GameObject:
   - component: {fileID: 4737332718206125031}
   - component: {fileID: 5973708402105170411}
   m_Layer: 0
-  m_Name: LaserSensor (8)
+  m_Name: LaserSensor 2.1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -302,18 +302,18 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 7183044269742418015}
   - {fileID: 9092502105378988986}
+  - {fileID: 4433783824931488682}
+  - {fileID: 5515989984913696227}
   - {fileID: 3332755705691457112}
   - {fileID: 7451017487139642985}
-  - {fileID: 4433783824931488682}
-  - {fileID: 7183044269742418015}
-  - {fileID: 5515989984913696227}
   - {fileID: 3142651674387567265}
+  - {fileID: 2415031642037843975}
+  - {fileID: 8635617864567553601}
   - {fileID: 3715748988104543417}
   - {fileID: 4737332718206125031}
-  - {fileID: 8635617864567553601}
   - {fileID: 5574885345928223755}
-  - {fileID: 2415031642037843975}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8190496202074477839
@@ -327,7 +327,7 @@ GameObject:
   - component: {fileID: 8635617864567553601}
   - component: {fileID: 7205732851763784452}
   m_Layer: 0
-  m_Name: LaserSensor (9)
+  m_Name: LaserSensor 1.2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -417,7 +417,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2081709163394074703, guid: 0a0ece1be8d6f4ca793bf5dd188fe0c7, type: 3}
       propertyPath: m_Name
-      value: Platform (5)
+      value: Platform 4
       objectReference: {fileID: 0}
     - target: {fileID: 5913819114635480353, guid: 0a0ece1be8d6f4ca793bf5dd188fe0c7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -612,7 +612,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3315797987885392718, guid: 8534081005fc74211bad29849d5bda6c, type: 3}
       propertyPath: m_Name
-      value: BlueLaser (2)
+      value: BlueLaser 1
       objectReference: {fileID: 0}
     - target: {fileID: 8973157327495992449, guid: 8534081005fc74211bad29849d5bda6c, type: 3}
       propertyPath: m_SortingOrder
@@ -638,7 +638,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2081709163394074703, guid: 0a0ece1be8d6f4ca793bf5dd188fe0c7, type: 3}
       propertyPath: m_Name
-      value: Platform
+      value: Platform 2
       objectReference: {fileID: 0}
     - target: {fileID: 5913819114635480353, guid: 0a0ece1be8d6f4ca793bf5dd188fe0c7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -785,7 +785,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2081709163394074703, guid: 0a0ece1be8d6f4ca793bf5dd188fe0c7, type: 3}
       propertyPath: m_Name
-      value: Platform (4)
+      value: Platform 1
       objectReference: {fileID: 0}
     - target: {fileID: 5913819114635480353, guid: 0a0ece1be8d6f4ca793bf5dd188fe0c7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -932,7 +932,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2081709163394074703, guid: 0a0ece1be8d6f4ca793bf5dd188fe0c7, type: 3}
       propertyPath: m_Name
-      value: Platform (2)
+      value: Platform 6
       objectReference: {fileID: 0}
     - target: {fileID: 5913819114635480353, guid: 0a0ece1be8d6f4ca793bf5dd188fe0c7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1127,7 +1127,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3315797987885392718, guid: 8534081005fc74211bad29849d5bda6c, type: 3}
       propertyPath: m_Name
-      value: BlueLaser (3)
+      value: BlueLaser 2
       objectReference: {fileID: 0}
     - target: {fileID: 8973157327495992449, guid: 8534081005fc74211bad29849d5bda6c, type: 3}
       propertyPath: m_SortingOrder
@@ -1153,7 +1153,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2081709163394074703, guid: 0a0ece1be8d6f4ca793bf5dd188fe0c7, type: 3}
       propertyPath: m_Name
-      value: Platform (3)
+      value: Platform 3
       objectReference: {fileID: 0}
     - target: {fileID: 5913819114635480353, guid: 0a0ece1be8d6f4ca793bf5dd188fe0c7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1300,7 +1300,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2081709163394074703, guid: 0a0ece1be8d6f4ca793bf5dd188fe0c7, type: 3}
       propertyPath: m_Name
-      value: Platform (1)
+      value: Platform 5
       objectReference: {fileID: 0}
     - target: {fileID: 5913819114635480353, guid: 0a0ece1be8d6f4ca793bf5dd188fe0c7, type: 3}
       propertyPath: m_LocalPosition.x

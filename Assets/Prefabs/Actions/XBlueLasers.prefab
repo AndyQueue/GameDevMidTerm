@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6796948737375604034}
   - component: {fileID: 952895532951627066}
   m_Layer: 0
-  m_Name: LaserSensor (23)
+  m_Name: LaserSensor 1.2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -139,7 +139,7 @@ GameObject:
   - component: {fileID: 1854118803713696786}
   - component: {fileID: 8508080312146565349}
   m_Layer: 0
-  m_Name: LaserSensor (24)
+  m_Name: LaserSensor 1.1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -230,7 +230,7 @@ GameObject:
   - component: {fileID: 2990233882193454208}
   - component: {fileID: 4797574327521438787}
   m_Layer: 0
-  m_Name: LaserSensor (20)
+  m_Name: LaserSensor 0.2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -321,7 +321,7 @@ GameObject:
   - component: {fileID: 215953789226042967}
   - component: {fileID: 2177061925160327917}
   m_Layer: 0
-  m_Name: LaserSensor (21)
+  m_Name: LaserSensor 0.1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -463,7 +463,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3315797987885392718, guid: 8534081005fc74211bad29849d5bda6c, type: 3}
       propertyPath: m_Name
-      value: BlueLaser (4)
+      value: BlueLaser 1
       objectReference: {fileID: 0}
     - target: {fileID: 8973157327495992449, guid: 8534081005fc74211bad29849d5bda6c, type: 3}
       propertyPath: m_SortingOrder
@@ -541,7 +541,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3315797987885392718, guid: 8534081005fc74211bad29849d5bda6c, type: 3}
       propertyPath: m_Name
-      value: BlueLaser (2)
+      value: BlueLaser 0
       objectReference: {fileID: 0}
     - target: {fileID: 8973157327495992449, guid: 8534081005fc74211bad29849d5bda6c, type: 3}
       propertyPath: m_SortingOrder

@@ -52,7 +52,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3493200583915769290, guid: 6980133fd82ed44f7819e30862ce2d25, type: 3}
       propertyPath: m_Name
-      value: BlueLaserWSensors (2)
+      value: BlueLaserWSensors 2
       objectReference: {fileID: 0}
     - target: {fileID: 7058901475996272077, guid: 6980133fd82ed44f7819e30862ce2d25, type: 3}
       propertyPath: m_LocalPosition.x
@@ -158,7 +158,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3493200583915769290, guid: 6980133fd82ed44f7819e30862ce2d25, type: 3}
       propertyPath: m_Name
-      value: BlueLaserWSensors (1)
+      value: BlueLaserWSensors 1
       objectReference: {fileID: 0}
     - target: {fileID: 7058901475996272077, guid: 6980133fd82ed44f7819e30862ce2d25, type: 3}
       propertyPath: m_LocalPosition.x

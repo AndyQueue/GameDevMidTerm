@@ -30,15 +30,15 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7192283588152159947}
+  - {fileID: 9042010481169507427}
   - {fileID: 8136885963974778009}
   - {fileID: 5210485295420193477}
-  - {fileID: 9042010481169507427}
-  - {fileID: 2063306197233365310}
   - {fileID: 9144714515321934597}
   - {fileID: 29023658063618032}
   - {fileID: 6612876744409665315}
-  - {fileID: 3225035790177905050}
   - {fileID: 3385449148539542265}
+  - {fileID: 3225035790177905050}
+  - {fileID: 2063306197233365310}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &703171157154084158
@@ -52,7 +52,7 @@ GameObject:
   - component: {fileID: 2063306197233365310}
   - component: {fileID: 7853675714702460183}
   m_Layer: 0
-  m_Name: LaserSensor (13)
+  m_Name: LaserSensor 2.2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -143,7 +143,7 @@ GameObject:
   - component: {fileID: 29023658063618032}
   - component: {fileID: 685957928582366546}
   m_Layer: 0
-  m_Name: LaserSensor (15)
+  m_Name: LaserSensor 1.1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -234,7 +234,7 @@ GameObject:
   - component: {fileID: 6612876744409665315}
   - component: {fileID: 2913422996946060729}
   m_Layer: 0
-  m_Name: LaserSensor (14)
+  m_Name: LaserSensor 1.2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -325,7 +325,7 @@ GameObject:
   - component: {fileID: 3225035790177905050}
   - component: {fileID: 6065574006444264646}
   m_Layer: 0
-  m_Name: LaserSensor (12)
+  m_Name: LaserSensor 2.1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -419,7 +419,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1794746593862733026, guid: 66773568ebac84b0d81a70a6a2cf2bb4, type: 3}
       propertyPath: m_Name
-      value: RedLaser (6)
+      value: RedLaser 2
       objectReference: {fileID: 0}
     - target: {fileID: 2760227797759543498, guid: 66773568ebac84b0d81a70a6a2cf2bb4, type: 3}
       propertyPath: m_LocalScale.x
@@ -489,7 +489,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2081709163394074703, guid: 0a0ece1be8d6f4ca793bf5dd188fe0c7, type: 3}
       propertyPath: m_Name
-      value: Platform (45)
+      value: Platform 3
       objectReference: {fileID: 0}
     - target: {fileID: 5913819114635480353, guid: 0a0ece1be8d6f4ca793bf5dd188fe0c7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -640,7 +640,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2081709163394074703, guid: 0a0ece1be8d6f4ca793bf5dd188fe0c7, type: 3}
       propertyPath: m_Name
-      value: Platform (33)
+      value: Platform 2
       objectReference: {fileID: 0}
     - target: {fileID: 5913819114635480353, guid: 0a0ece1be8d6f4ca793bf5dd188fe0c7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -791,7 +791,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2081709163394074703, guid: 0a0ece1be8d6f4ca793bf5dd188fe0c7, type: 3}
       propertyPath: m_Name
-      value: Platform (46)
+      value: Platform 1
       objectReference: {fileID: 0}
     - target: {fileID: 5913819114635480353, guid: 0a0ece1be8d6f4ca793bf5dd188fe0c7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -946,7 +946,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1794746593862733026, guid: 66773568ebac84b0d81a70a6a2cf2bb4, type: 3}
       propertyPath: m_Name
-      value: RedLaser (7)
+      value: RedLaser 1
       objectReference: {fileID: 0}
     - target: {fileID: 2760227797759543498, guid: 66773568ebac84b0d81a70a6a2cf2bb4, type: 3}
       propertyPath: m_LocalScale.x
@@ -1064,7 +1064,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3940077516838229601, guid: d0f003dbffab74ae4ad0fc552e2f5a8b, type: 3}
       propertyPath: m_Name
-      value: CameraRayCast (1)
+      value: CameraRayCast 1
       objectReference: {fileID: 0}
     - target: {fileID: 4031782314433677926, guid: d0f003dbffab74ae4ad0fc552e2f5a8b, type: 3}
       propertyPath: m_SortingOrder

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 655341536990323835}
   - component: {fileID: 5857548563147518066}
   m_Layer: 0
-  m_Name: LaserSensor (26)
+  m_Name: LaserSensor 0.1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -120,9 +120,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 5679521765112742013}
   - {fileID: 655341536990323835}
   - {fileID: 5238287582429628873}
-  - {fileID: 5679521765112742013}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8771893803288349568
@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 5238287582429628873}
   - component: {fileID: 8006496881043911638}
   m_Layer: 0
-  m_Name: LaserSensor (27)
+  m_Name: LaserSensor 0.2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
