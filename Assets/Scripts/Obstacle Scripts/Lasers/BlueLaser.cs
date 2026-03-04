@@ -8,9 +8,6 @@ public class BlueLaser : Laser
     public float onTime;
     public float offTime;
 
-    //[Header("Audio")]
-    //public AudioSource turnOnLaserSound;
-    //public AudioSource turnOffLaserSound;
 
     void Start()
     {
@@ -24,12 +21,10 @@ public class BlueLaser : Laser
         {
             //turn laser on
             SetLaserState(true);
-            //turnOnLaserSound.PlayOneShot();
             yield return new WaitForSeconds(onTime);
             
             //turn laser off
             SetLaserState(false);
-            //turnOffLaserSound.PlayOneShot();
             yield return new WaitForSeconds(offTime);
         }
     }
