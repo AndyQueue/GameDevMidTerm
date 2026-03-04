@@ -1,3 +1,4 @@
+// this script is mainly from a Youtube tutorial, edited to fit our game. https://youtu.be/d002CljR-KU?si=gM51dETCUJaY7Swd
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -17,12 +18,8 @@ public class GuardPatrol : MonoBehaviour
     [SerializeField] private float idleDuration;
     private float idleTimer;
 
-
     [Header("Guard Animator")]
     [SerializeField] private Animator anim;
-
-    // private bool canPatrol = true;
-
 
     private void Awake()
     {
@@ -38,8 +35,7 @@ public class GuardPatrol : MonoBehaviour
 
     private void Update()
     {
-        //if (!canPatrol) { return; }
-
+        // animation for patrolling
         if (movingLeft)
         {
             if (guard.position.x >= leftEdge.position.x)
@@ -64,6 +60,7 @@ public class GuardPatrol : MonoBehaviour
         }
     }
 
+    //moving and animating guard in the right direction
     private void MoveInDirection(int _direction)
     {
         idleTimer = 0;
@@ -72,6 +69,7 @@ public class GuardPatrol : MonoBehaviour
         guard.position = new Vector3(guard.position.x + Time.deltaTime * _direction * speed, guard.position.y, guard.position.z);
     }
 
+    // change direction guard is moving
     private void DirectionChange()
     {
         anim.SetBool("IsMoving", false);
@@ -88,9 +86,4 @@ public class GuardPatrol : MonoBehaviour
         guard.position = guard.position;
     }
 
-    // public void ResumePatrol()
-    // {
-    //     canPatrol = true;
-    //     anim.SetBool("IsMoving", true);
-    // }
 }
