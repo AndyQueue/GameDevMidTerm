@@ -46,6 +46,7 @@ public class Dialogue : MonoBehaviour
         if (isTyping)
         {
             StopCoroutine(typingCoroutine);
+            dialogueTypingSound.Stop();
             textComponent.text = string.Empty;
             textComponent.text = lines[index];
             isTyping = false;
@@ -80,8 +81,7 @@ public class Dialogue : MonoBehaviour
         else
         {
             Debug.Log("End of dialogue reached, loading next scene");
-            doorEnterSound.Play();
-            levelManager.LoadLevel(1);
+            levelManager.LoadMainMenu();
         }
     }
 }
