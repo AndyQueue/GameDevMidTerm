@@ -13,12 +13,13 @@ public abstract class Laser : MonoBehaviour, IDetector
     }
 
     // sets the laser state to active or inactive based on boolean, used to intitialize on 
-    // state of all lasers and to turn blue laser on and off, and green laser off after hitting button
+    // state of all lasers - also to turn blue laser on and off and green laser off after pressing button
     protected virtual void SetLaserState(bool active)
     {
-        isLaserActive = active;
-        spriteRenderer.enabled = active;
+        isLaserActive = active; 
+        spriteRenderer.enabled = active; 
         laserCollider.enabled = active;
+        //.enabled toggles on/off only specific components 
     }
 
     public void OnPlayerDetected(PlayerCaught player)
