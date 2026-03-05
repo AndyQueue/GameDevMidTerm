@@ -931,7 +931,7 @@ MonoBehaviour:
   textComponent: {fileID: 989620674}
   lines:
   - "Good evening Agent Benno, we\u2019ve received top secret intelligence that a
-    mole within our agency is planning on stealing the royal crown tonight."
+    mole within DIS is planning on stealing the royal crown tonight."
   - We have been unable to diffuse the situation so we are now in a crisis and we
     need you, our most trustworthy agent, to save the day.
   - Your mission is to sneak through Rosenborg Castle and secure the royal crown
@@ -1156,7 +1156,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -157, y: -169.76}
+  m_AnchoredPosition: {x: -178.8, y: -169.76}
   m_SizeDelta: {x: 644.1312, y: 173.27}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2123344090
