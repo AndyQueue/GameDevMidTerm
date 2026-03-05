@@ -1,4 +1,6 @@
 using UnityEngine;
+// Dust Particle Effect for player jumping 
+// https://www.youtube.com/watch?v=ERXFU4JRPNI
 
 [RequireComponent(typeof(Animator))]
 public class PlayerAnimation : MonoBehaviour
@@ -10,6 +12,7 @@ public class PlayerAnimation : MonoBehaviour
     [SerializeField] private AudioClip uncrouchSFX;
     [SerializeField] private AudioClip hideSFX;
     [SerializeField] private AudioClip unhideSFX;
+    // Jump Dust VFX is in PlayerMovement.cs
 
     private Animator animator;
     private PlayerMovement movement;
@@ -23,11 +26,6 @@ public class PlayerAnimation : MonoBehaviour
         animator = GetComponent<Animator>();
         movement = GetComponent<PlayerMovement>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        Debug.Log("Name of audio source for jump SFX: " + (jumpSFX != null ? jumpSFX.name : "None"));
-        Debug.Log("Name of audio source for crouch SFX: " + (crouchSFX != null ? crouchSFX.name : "None"));
-        Debug.Log("Name of audio source for uncrouch SFX: " + (uncrouchSFX != null ? uncrouchSFX.name : "None"));
-        Debug.Log("Name of audio source for hide SFX: " + (hideSFX != null ? hideSFX.name : "None"));
-        Debug.Log("Name of audio source for unhide SFX: " + (unhideSFX != null ? unhideSFX.name : "None"));
     }
 
     public void PlaySfx(string clip)
