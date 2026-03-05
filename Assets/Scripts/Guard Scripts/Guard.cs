@@ -49,7 +49,7 @@ public class Guard : MonoBehaviour
         // Check collision first (direct contact)
         RaycastHit2D collisionHit = Physics2D.BoxCast(
             boxCollider.bounds.center,
-            boxCollider.bounds.size, 0, Vector2.left, 0, playerLayer);
+            boxCollider.bounds.size, 0, Vector2.left, 0);
 
         if (collisionHit.collider != null && collisionHit.collider.CompareTag("Player"))
         {
