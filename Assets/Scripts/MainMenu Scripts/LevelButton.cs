@@ -45,7 +45,7 @@ public class LevelButton : MonoBehaviour
 
     private IEnumerator LoadAfterSound()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.28f);
         levelManager.LoadLevel(levelNumber);
     }
 
