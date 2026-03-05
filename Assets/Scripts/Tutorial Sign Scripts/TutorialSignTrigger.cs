@@ -17,13 +17,10 @@ public abstract class TutorialSignTrigger : MonoBehaviour
 
     private void Start()
     {
-        if (canvasGroup != null) 
-        {
-            canvasGroup.alpha = 0; //makes canvas group invisible at the start
-        }
+       canvasGroup.alpha = 0; //makes canvas group invisible at the start
     }
 
-    //tutorial signs initiated by "is trigger" box collider 
+    //tutorial signs initiated by trigger with a box collider over area for player to enter
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player") && !actionCompleted)
@@ -63,12 +60,20 @@ public abstract class TutorialSignTrigger : MonoBehaviour
     // gemini generated fadeUI function and suggested use of canvasGroup to make the process cleaner 
     // and smoother, also instructed the use of StopAllCoroutines to ensure we are not calling conflicting fading
     // functions at the same time 
+    //logic and implementation is understood - explained by own comments to cement understanding 
     private IEnumerator FadeUI(float fadeInOrOut)
     {
+        //runs until opacity of canvas group is similar to 1 or 0 (based on parameter) 
         while (!Mathf.Approximately(canvasGroup.alpha, fadeInOrOut))
         {
+            // adjusts opacity of the canvas group, MoveTowards uses adds our current opacity to the amount we want 
+            // it to change by (fadeSpeed * Time.deltaTime - ensures same fade rate regarless of frame rate) and  
+            // ensures that it does not put the return value past the target (fadeInOrOut)
             canvasGroup.alpha = Mathf.MoveTowards(canvasGroup.alpha, fadeInOrOut, fadeSpeed * Time.deltaTime);
+            
             yield return null;
+            //instructs unity to stop running the opacity adjustment in this frame so that the fade can be 
+            // gradual unity will then return in another frame to slightly adjust the opacity again
         }
     }
 }

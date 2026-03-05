@@ -20,10 +20,10 @@ public class LaserButtonVisualsAudio : MonoBehaviour
     public void PlayPress()
     {
         buttonSound.Play();
-        StartCoroutine(AnimateButton());
+        StartCoroutine(AnimationRoutine());
     }
 
-    private IEnumerator AnimateButton()
+    private IEnumerator AnimationRoutine()
     {
         float waitTime = 1f / animationFPS; //get seconds per frame - with 1/frames per second
         BoxCollider2D col = GetComponent<BoxCollider2D>(); 
