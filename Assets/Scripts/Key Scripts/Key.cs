@@ -13,7 +13,7 @@ public class Key : MonoBehaviour
             PlayerInventory inventory = other.GetComponent<PlayerInventory>();
             
             //skips slightly into audio and plays key collection sound
-            collectKeySound.time = startOffset; //sets the time to play from to the start offset
+            collectKeySound.time = startOffset; 
             collectKeySound.Play();
 
             //marks that player has key for door logic

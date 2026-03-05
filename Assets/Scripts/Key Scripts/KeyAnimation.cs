@@ -1,5 +1,6 @@
 using System.Collections;
 using Unity.VisualScripting;
+using UnityEditor.Search;
 using UnityEngine;
 
 public class KeyAnimation : MonoBehaviour
@@ -40,11 +41,10 @@ public class KeyAnimation : MonoBehaviour
     void Update()
     {
         //uses sin wave to program a light idle bouncing 
-        //time * speed gives us distance -> s * units/second -> units that uses how fast we want the key to move
-        //multiplying speed here controls how fast we go through the sin wave and get through the full up down cycle
-        // the units from above oscilates between 0 and 1 continuously by using sin function
-        // we mulitply this value by how high we want the bounce to vary by
-        // then add to the starting y position to get the actual position and set it
+        // time * speed gives us how fast we want the key to move through the oscilation
+        // oscilates between 0 and 1 continuously using sin function
+        // we mulitply this value by bounceHeight (how high we want the key from the starting position when 
+        // its at its max height)
         float newY = startPos.y + Mathf.Sin(Time.time * bounceSpeed) * bounceHeight;
         transform.position = new Vector3(startPos.x, newY, 0);
     }

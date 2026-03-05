@@ -17,7 +17,8 @@ public class GreenLaser : Laser
         StartCoroutine(WaitForButtonSound());
     }
     
-    //stalls so that laser turn off sound plays after button to alert 
+    //stalls so that laser turn off sound and turn off action plays after button 
+    // - shows better feedback of what button did  
     private IEnumerator WaitForButtonSound()
     {
         yield return new WaitForSeconds(0.5f);
