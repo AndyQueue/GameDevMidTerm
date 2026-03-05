@@ -5,7 +5,7 @@ using UnityEngine;
 public class GuardPatrol : MonoBehaviour
 {
     [Header ("Patrol Points")]
-    [SerializeField]private Transform leftEdge;
+    [SerializeField] private Transform leftEdge;
     [SerializeField] private Transform rightEdge;
 
     [Header ("Guard")]

@@ -95,6 +95,7 @@ public class Guard : MonoBehaviour
         }
         // guard sfx "hey!"
         guardSound.time = startOffset;
+        // skips ahead to correct start point in audio
         guardSound.Play();
         // guard animation catching player
         animator.SetBool("IsMoving", false);
