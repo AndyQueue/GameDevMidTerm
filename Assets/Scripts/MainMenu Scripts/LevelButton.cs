@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
 public class LevelButton : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class LevelButton : MonoBehaviour
 
     void Start()
     {
+        UI_Selected.Play();
         levelManager = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>();
 
         if (levelManager == null)
@@ -37,6 +39,13 @@ public class LevelButton : MonoBehaviour
     {
         UI_Selected.Play();
         Debug.Log("Level Button for level " + levelNumber + " was Pressed!");
+        StartCoroutine(LoadAfterSound());
+        // levelManager.LoadLevel(levelNumber);
+    }
+
+    private IEnumerator LoadAfterSound()
+    {
+        yield return new WaitForSeconds(0.5f);
         levelManager.LoadLevel(levelNumber);
     }
 

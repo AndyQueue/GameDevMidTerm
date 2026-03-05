@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 4818affddcbb7ba4899b14ffd1eb2853
+guid: 954fa1ba54fdc452f85edfcd0f046818
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6861862622194850731
-    second: UI_Flat_Button01a_1_0
+      213: 1246302724956798961
+    second: IntroSequenceBackground1_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -113,23 +113,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: DialogueBox
+      name: IntroSequenceBackground1_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 32
-        height: 28
+        width: 2880
+        height: 1620
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 5d7303346aa724345bde9a5bab15617f
-      internalID: 1700362268
+      spriteID: 1ffb6a3a9b1cb4110800000000000000
+      internalID: 1246302724956798961
       vertices: []
       indices: 
       edges: []
@@ -138,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: a8d928b47cf204a3ba66f3b4a288d0f0
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -146,13 +146,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries:
-      - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":32.0,"y":32.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
-      - key: SpriteEditor.SliceOnImport
-        value: False
+      entries: []
     nameFileIdTable:
-      DialogueBox: 1700362268
+      IntroSequenceBackground1_0: 1246302724956798961
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
