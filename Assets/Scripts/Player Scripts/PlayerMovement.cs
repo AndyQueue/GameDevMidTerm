@@ -20,7 +20,9 @@ public class PlayerMovement : MonoBehaviour
     private CapsuleCollider2D playerCol;
     private SpriteRenderer spriteRenderer;
     private PlayerAnimation playerAnimation;
+    public ParticleSystem jumpParticles;
     private GameUIManager gameUIManagerScript;
+    [SerializeField] private float idleInputThreshold = 1f; // Threshold for idle input (prevents sliding on frictionless surfaces)
 
     private float horizontalInput;
 
@@ -53,6 +55,8 @@ public class PlayerMovement : MonoBehaviour
         crouchHeight = originalHeight / 2f;
         originalGravityScale = rb.gravityScale;
         originalColor = spriteRenderer.color;
+        jumpParticles = GetComponentInChildren<ParticleSystem>();
+        Debug.Log("jumpParticles assigned: " + (jumpParticles != null));
     }
 
     public Vector2 GetMovementDirection()
@@ -71,6 +75,8 @@ public class PlayerMovement : MonoBehaviour
 
         Vector2 move = input.Get<Vector2>();
         horizontalInput = move.x;
+        // jumpParticles.Play();
+
     }
 
     public void OnJump(InputValue input)
@@ -81,6 +87,7 @@ public class PlayerMovement : MonoBehaviour
         if (playerAnimation != null)
         {
             playerAnimation.PlaySfx("Jump");
+            jumpParticles.Play();
         }
     }
 
@@ -216,6 +223,7 @@ public class PlayerMovement : MonoBehaviour
             velocity.x = horizontalInput * currentSpeed;
         }
         rb.linearVelocity = velocity;
+
     }
     private bool IsGameplayPaused()
     {
