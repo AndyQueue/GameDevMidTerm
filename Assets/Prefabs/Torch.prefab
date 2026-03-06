@@ -97,11 +97,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c06687175128f4edfa269e2abb053562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TorchLight
-  flickerSpeed: 1
-  baseIntensity: 0.4
-  intensityAmplitude: 0.15
+  flickerSpeed: 1.8
+  baseIntensity: 0.3
+  intensityAmplitude: 0.2
   baseRadius: 1.75
-  radiusAmplitude: 0.15
+  radiusAmplitude: 0.2
 --- !u!1 &5200255869944717583
 GameObject:
   m_ObjectHideFlags: 0
