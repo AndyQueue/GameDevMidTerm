@@ -193,7 +193,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (isHiding || IsGameplayPaused())
+        if (isHiding || IsGameplayPaused()) //GameState.IsPaused
         {
             rb.linearVelocity = Vector2.zero;
             return;
