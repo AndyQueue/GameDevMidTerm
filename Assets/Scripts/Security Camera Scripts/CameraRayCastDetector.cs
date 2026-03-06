@@ -47,8 +47,8 @@ public class CameraRayCastDetector : MonoBehaviour, IDetector
         }
        ;
 
-        cameraViewRadius = cameraLight.pointLightInnerRadius;
-        cameraViewAngle = cameraLight.pointLightInnerAngle;
+        cameraViewRadius = cameraLight.pointLightOuterRadius;
+        cameraViewAngle = cameraLight.pointLightOuterAngle;
     }
 
     public void OnPlayerDetected(PlayerCaught player)
