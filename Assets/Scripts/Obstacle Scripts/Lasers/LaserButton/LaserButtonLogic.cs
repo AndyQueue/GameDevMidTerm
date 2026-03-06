@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class LaserButtonLogic : MonoBehaviour
 {
-    public GreenLaser laser; //takes in specific laser to turn off 
+    public GreenLaser laser; 
     public float landingYOffset; //to ensure the player lands on the button instead of running into it
 
-    private bool isPressed = false; //initialize button is not pressed
+    private bool isPressed = false; 
     private LaserButtonVisualsAudio visualsAndSound; 
 
     private void Awake()

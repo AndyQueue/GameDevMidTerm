@@ -16,7 +16,7 @@ public class LaserButtonVisualsAudio : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
     }
 
-    //function called by other button script to animate button press
+    //called by other button script to animate button press
     public void PlayPress()
     {
         buttonSound.Play();
@@ -25,7 +25,7 @@ public class LaserButtonVisualsAudio : MonoBehaviour
 
     private IEnumerator AnimationRoutine()
     {
-        float waitTime = 1f / animationFPS; //get seconds per frame - with 1/frames per second
+        float waitTime = 1f / animationFPS; //get seconds per frame - with 1/(frames/second)
         BoxCollider2D col = GetComponent<BoxCollider2D>(); 
         //get collider of button to adjust based on new sprite renderer
 

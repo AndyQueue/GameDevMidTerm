@@ -34,7 +34,6 @@ public abstract class Laser : MonoBehaviour, IDetector
     {
         if (other.CompareTag("Player"))
         {
-            if (other.GetComponent<PlayerMovement>().IsHiding()) { return; }
             PlayerCaught player = other.GetComponent<PlayerCaught>();
             OnPlayerDetected(player);
         }
