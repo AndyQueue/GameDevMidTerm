@@ -9,17 +9,16 @@ public class Key : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            //updates player's inventory to mark that the player has a key
+            //get player's inventory to update hasKey
             PlayerInventory inventory = other.GetComponent<PlayerInventory>();
             
             //skips slightly into audio and plays key collection sound
             collectKeySound.time = startOffset; 
             collectKeySound.Play();
 
-            //marks that player has key for door logic
+            //marks that player has key
             inventory.hasKey = true;
             Destroy(gameObject);
-            //destroys key when player collects key
         }
     }
 
