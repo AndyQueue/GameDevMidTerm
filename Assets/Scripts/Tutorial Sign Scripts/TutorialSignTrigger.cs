@@ -12,12 +12,14 @@ public abstract class TutorialSignTrigger : MonoBehaviour
     protected bool playerInTriggerArea = false;
     protected bool actionCompleted = false;
 
-    //children define how the tutorial action is completed
     protected abstract bool CheckActionStatus();
 
     private void Start()
     {
-       canvasGroup.alpha = 0; //makes canvas group invisible at the start
+        if (canvasGroup != null)
+        {
+            canvasGroup.alpha = 0; //invisible at start
+        }
     }
 
     //tutorial signs initiated by trigger with a box collider over area for player to enter
