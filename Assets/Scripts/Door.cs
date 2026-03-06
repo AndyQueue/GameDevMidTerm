@@ -30,7 +30,7 @@ public class Door : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
-    { 
+    {
         PlayerInventory inventory = collision.gameObject.GetComponent<PlayerInventory>();
         //ensures we are colliding with player by checking that inventory exists
         if (inventory != null)
@@ -87,9 +87,12 @@ public class Door : MonoBehaviour
 
         doorEnterSound.Play();
 
-        yield return StartCoroutine(PlayerJumpAnimation(0.8f, -5f, 0.3f));
+        // yield return StartCoroutine(PlayerJumpAnimation(0.8f, -5f, 0.3f));
 
         input.ActivateInput(); // re-enable player input after the door sequence
+
+        Destroy(player); // destroy player after the door animation is done to simulate player going "through" the door and disappearing
+        yield return new WaitForSeconds(1f); // wait a moment for the player to disappear before loading the next level
 
         levelManager.LoadNextLevel(); // load the next level after the door sequence is complete
     }
