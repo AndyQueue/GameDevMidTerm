@@ -22,11 +22,12 @@ public abstract class Laser : MonoBehaviour, IDetector
         //.enabled toggles on/off only specific components 
     }
 
+    //using interface - logically consistent 
     public void OnPlayerDetected(PlayerCaught player)
     {
         if (isLaserActive)
         {
-            player?.Caught();
+            player.Caught();
         }
     }
     
