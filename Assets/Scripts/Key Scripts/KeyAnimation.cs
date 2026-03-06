@@ -19,10 +19,11 @@ public class KeyAnimation : MonoBehaviour
     void Start()
     {
         sr = GetComponent<SpriteRenderer>();
-        startPos = transform.position; //gets current position of key to program idle bouncing animation
+        startPos = transform.position; 
         StartCoroutine(AnimationRoutine());
     }
 
+    // from lecture slides - expalined with comments to cement understanding
     private IEnumerator AnimationRoutine()
     {
         float animationTimer = 1f / animationFPS; //calculates time each animation stays on the screen
@@ -40,11 +41,6 @@ public class KeyAnimation : MonoBehaviour
 
     void Update()
     {
-        //uses sin wave to program a light idle bouncing 
-        // time * speed gives us how fast we want the key to move through the oscilation
-        // oscilates between 0 and 1 continuously using sin function
-        // we mulitply this value by bounceHeight (how high we want the key from the starting position when 
-        // its at its max height)
         float newY = startPos.y + Mathf.Sin(Time.time * bounceSpeed) * bounceHeight;
         transform.position = new Vector3(startPos.x, newY, 0);
     }

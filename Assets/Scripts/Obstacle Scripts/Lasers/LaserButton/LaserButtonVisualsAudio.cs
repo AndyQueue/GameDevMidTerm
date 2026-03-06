@@ -32,13 +32,9 @@ public class LaserButtonVisualsAudio : MonoBehaviour
         for (int i = 0; i < spriteAnimation.Length; i++) //loop only runs until the button is down
         {
             sr.sprite = spriteAnimation[i]; 
-            
-            // resets the box collider size of the button to adjust for the new sprite renderer so the player 
-            // goes down with the button as it is being pressed
+        
+            //adjust collider size and pivot point
             col.size = sr.sprite.bounds.size;
-            
-            // sets the box collider's center so that the collider is in the right position 
-            // it was the right size but will just be shifted upwards until we adjust the pivot point 
             col.offset = sr.sprite.bounds.center;
 
             yield return new WaitForSeconds(waitTime);

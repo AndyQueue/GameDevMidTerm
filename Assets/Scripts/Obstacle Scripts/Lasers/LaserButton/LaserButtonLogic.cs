@@ -21,9 +21,8 @@ public class LaserButtonLogic : MonoBehaviour
         {
             isPressed = true;
             
-            //plays button animation
             visualsAndSound.PlayPress(); 
-            //calls green laser's turn off laser function
+            
             laser.TurnOffLaser();
         }
     }
