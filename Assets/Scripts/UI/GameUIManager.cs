@@ -2,7 +2,6 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using UnityEngine.InputSystem;
 
 public class GameUIManager : MonoBehaviour
 {
@@ -18,8 +17,16 @@ public class GameUIManager : MonoBehaviour
     public bool isPaused;
     private bool isCaught;
 
+    private void SetPausedState(bool paused)
+    {
+        isPaused = paused;
+        GameState.IsPaused = paused;
+    }
+
     private void Awake()
     {
+        SetPausedState(false);
+
         if (pausePanel != null)
         {
             pausePanel.SetActive(false);
@@ -42,15 +49,15 @@ public class GameUIManager : MonoBehaviour
     {
         if (isCaught) { return; }
 
-        if (!isPaused) { PauseGame(); }
-        else if (isPaused) { ResumeGame(); }
+        if (!GameState.IsGamePaused()) { PauseGame(); }
+        else if (GameState.IsGamePaused()) { ResumeGame(); }
         else { Debug.LogWarning("Pause Failed"); }
     }
     public void OnRetry()
     {
         // Only works if player is caught, otherwise space should only register as jump
         if (isCaught) { ReloadCurrentScene(); }
-        if (isPaused) { ResumeGame(); }
+        if (GameState.IsGamePaused()) { ResumeGame(); }
     }
 
     // Linked with back button's "On Click" since no keyboard key linked
@@ -61,21 +68,21 @@ public class GameUIManager : MonoBehaviour
     }
     public void PauseGame()
     {
-        isPaused = true;
+        SetPausedState(true);
         Time.timeScale = 0f;
         if (pausePanel != null) { pausePanel.SetActive(true); }
     }
 
     public void ResumeGame()
     {
-        isPaused = false;
+        SetPausedState(false);
         Time.timeScale = 1f;
         if (pausePanel != null) { pausePanel.SetActive(false); }
     }
     public void BackToMainMenu()
     {
         Time.timeScale = 1f;
-        isPaused = false;
+        SetPausedState(false);
         isCaught = false;
         SceneManager.LoadScene("MainMenu");
     }
@@ -83,6 +90,7 @@ public class GameUIManager : MonoBehaviour
     {
         if (isCaught) return;
         isCaught = true;
+        SetPausedState(false);
         Time.timeScale = 0f;
 
         if (pausePanel != null)
@@ -152,7 +160,7 @@ public class GameUIManager : MonoBehaviour
     private void ReloadCurrentScene()
     {
         Time.timeScale = 1f;
-        isPaused = false;
+        SetPausedState(false);
         isCaught = false;
         Scene current = SceneManager.GetActiveScene();
         SceneManager.LoadScene(current.name);

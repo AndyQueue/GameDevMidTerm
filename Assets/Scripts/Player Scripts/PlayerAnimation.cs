@@ -12,8 +12,7 @@ public class PlayerAnimation : MonoBehaviour
     [SerializeField] private AudioClip uncrouchSFX;
     [SerializeField] private AudioClip hideSFX;
     [SerializeField] private AudioClip unhideSFX;
-    // Jump Dust VFX is in PlayerMovement.cs
-
+    // Jump Dust VFX should be its own class/file
     private Animator animator;
     private PlayerMovement movement;
     private SpriteRenderer spriteRenderer;

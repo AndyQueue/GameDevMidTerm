@@ -4,7 +4,6 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(PlayerInput))]
 [RequireComponent(typeof(CapsuleCollider2D))]
-[RequireComponent(typeof(GameUIManager))]
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(PlayerAnimation))]
 public class PlayerMovement : MonoBehaviour
@@ -21,9 +20,6 @@ public class PlayerMovement : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private PlayerAnimation playerAnimation;
     public ParticleSystem jumpParticles;
-    private GameUIManager gameUIManagerScript;
-    [SerializeField] private float idleInputThreshold = 1f; // Threshold for idle input (prevents sliding on frictionless surfaces)
-
     private float horizontalInput;
 
     private bool isHiding;
@@ -48,7 +44,6 @@ public class PlayerMovement : MonoBehaviour
         playerCol = GetComponent<CapsuleCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         playerAnimation = GetComponent<PlayerAnimation>();
-        gameUIManagerScript = GetComponent<GameUIManager>();
         crouchSpeed = moveSpeed / 2f;
         currentSpeed = moveSpeed;
         originalHeight = playerCol.size.y;
@@ -56,7 +51,6 @@ public class PlayerMovement : MonoBehaviour
         originalGravityScale = rb.gravityScale;
         originalColor = spriteRenderer.color;
         jumpParticles = GetComponentInChildren<ParticleSystem>();
-        Debug.Log("jumpParticles assigned: " + (jumpParticles != null));
     }
 
     public Vector2 GetMovementDirection()
@@ -67,7 +61,7 @@ public class PlayerMovement : MonoBehaviour
     public void OnMove(InputValue input)
     {
         // Debug.Log(input);
-        if (IsGameplayPaused() || isHiding || input == null)
+        if (GameState.IsGamePaused() || isHiding || input == null)
         {
             horizontalInput = 0f;
             return;
@@ -81,7 +75,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnJump(InputValue input)
     {
-        if (!input.isPressed || IsGameplayPaused() || isHiding || isCrouching || !IsGrounded()) { return; }
+        if (!input.isPressed || GameState.IsGamePaused() || isHiding || isCrouching || !IsGrounded()) { return; }
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
 
         if (playerAnimation != null)
@@ -93,7 +87,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnCrouch(InputValue input)
     {
-        if (!input.isPressed || IsGameplayPaused() || isHiding || !IsGrounded()) { return; }
+        if (!input.isPressed || GameState.IsGamePaused() || isHiding || !IsGrounded()) { return; }
         isCrouching = !isCrouching;
         playerCol.size = new Vector2(playerCol.size.x, isCrouching ? crouchHeight : originalHeight);
 
@@ -105,7 +99,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnHide(InputValue input)
     {
-        if (!input.isPressed || IsGameplayPaused() || IsCrouching()) { return; }
+        if (!input.isPressed || GameState.IsGamePaused()) { return; }
         if (!isHiding && !BehindHidable())
         {
             Debug.Log("Not behind hidable object, cannot hide.");
@@ -156,7 +150,7 @@ public class PlayerMovement : MonoBehaviour
     {
         // Check if player is touching a hidable object 
         Vector2 position = transform.position;
-        float radius = 0.3f;                            // ! Adjust this as needed for player size
+        float radius = 0.3f;                     // ! Adjust this as needed for player size
         Collider2D[] colliders = Physics2D.OverlapCircleAll(position, radius);
         foreach (Collider2D collider in colliders)
         {
@@ -193,7 +187,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (isHiding || IsGameplayPaused()) //GameState.IsPaused
+        if (isHiding || GameState.IsGamePaused()) //GameState.IsPaused
         {
             rb.linearVelocity = Vector2.zero;
             return;
@@ -223,10 +217,5 @@ public class PlayerMovement : MonoBehaviour
             velocity.x = horizontalInput * currentSpeed;
         }
         rb.linearVelocity = velocity;
-
-    }
-    private bool IsGameplayPaused()
-    {
-        return gameUIManagerScript != null && gameUIManagerScript.isPaused;
     }
 }
