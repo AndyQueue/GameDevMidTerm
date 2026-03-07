@@ -6,7 +6,7 @@ public class PlayerJumpEffects : MonoBehaviour
     [SerializeField] private ParticleSystem jumpParticles;
     private void Awake()
     {
-            jumpParticles = GetComponentInChildren<ParticleSystem>();
+        jumpParticles = GetComponentInChildren<ParticleSystem>();
     }
 
     public void PlayJumpEffects()
