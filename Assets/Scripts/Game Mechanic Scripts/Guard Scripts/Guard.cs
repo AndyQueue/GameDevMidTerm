@@ -42,8 +42,8 @@ public class Guard : MonoBehaviour
     }
 
     public float GetSightWidth()
+    // AI helped writing this method
     {
-        // return (colliderDistance + boxCollider.bounds.size.x) * range;
         return (range * transform.localScale.x * colliderDistance) + (boxCollider.bounds.size.x * range) / 2;
     }
 

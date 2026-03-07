@@ -4,7 +4,7 @@ using System.Collections;
 
 public class TorchLight : MonoBehaviour
 {
-    // This script creates a flickering effect for a torch lights in the background for visual atmospheric effect.
+    // Creates a flickering effect for a torch lights in the background for visual atmospheric effect.
 
     public float flickerSpeed = 1.8f;
 

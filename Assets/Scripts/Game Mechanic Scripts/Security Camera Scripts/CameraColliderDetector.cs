@@ -2,12 +2,9 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class CameraDetector : MonoBehaviour, IDetector
+public class CameraColliderDetector : MonoBehaviour, IDetector
 {
-
-    void Start()
-    {
-    }
+    // Old script using a triangle collider to handle detections, now using CameraRayCastDetector
 
     public void OnPlayerDetected(PlayerCaught player)
     {

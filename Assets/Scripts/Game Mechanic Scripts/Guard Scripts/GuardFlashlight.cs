@@ -3,7 +3,7 @@ using UnityEngine.Rendering.Universal;
 
 public class GuardFlashlight : MonoBehaviour
 {
-    // This script renders a flashlight to show the guard's "sight" within which the player will get caught. The light is rendered based on the guard's raycast dimensions.
+    // This script renders a flashlight to show the guard's "sight" within which the player will get caught. The light is rendered based on the guard's box collider dimensions.
     private Guard guard;
 
     private Light2D Flashlight;
@@ -15,22 +15,21 @@ public class GuardFlashlight : MonoBehaviour
     {
         guard = GetComponentInParent<Guard>();
         Flashlight = GetComponent<Light2D>();
+
         if (Flashlight == null)
         {
             Debug.LogError("GuardFlashlight: No Light2D component found on flashlight object.");
         }
 
         viewLength = guard.GetSightWidth();
-
         viewAngle = CalculateLightAngle(guard.GetSightHeight());
-
 
         SyncLightToGuardRange();
 
     }
     float CalculateLightAngle(float guardSightHeight)
     {
-        // written using Copilot
+        // written using AI (Copilot)
         // Calculate the angle based on the height of the guard's collider and the view length
         // Using basic trigonometry: tan(angle) = opposite/adjacent = (guardHeight/2) / viewLength
 
@@ -39,7 +38,7 @@ public class GuardFlashlight : MonoBehaviour
     }
 
     void SyncLightToGuardRange()
-    // Sync the light's radius and angle to match the guard's raycast properties
+    // Sync the light's radius and angle to match the guard's collider properties
     {
         Flashlight.pointLightOuterRadius = viewLength;
         Flashlight.pointLightInnerRadius = 1f;
