@@ -113,7 +113,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: RetryButton
+      name: Unused
       rect:
         serializedVersion: 2
         x: 0
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      RetryButton: -2921777107891239532
+      Unused: -2921777107891239532
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
