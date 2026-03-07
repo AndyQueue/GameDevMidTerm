@@ -5,9 +5,12 @@ using UnityEngine.InputSystem;
 public class Door : MonoBehaviour
 {
     [SerializeField] private Sprite[] frames;
-    [SerializeField] private float frameDuration = 0.35f;
+    [SerializeField] private float frameDuration = 0.5f;
+    [SerializeField] private AudioSource doorOpenSound;
     [SerializeField] private AudioSource doorCreakSound;
     [SerializeField] private AudioSource doorEnterSound;
+    [SerializeField] private AudioSource doorLockedSound;
+
 
     private LevelManager levelManager;
 
@@ -29,7 +32,7 @@ public class Door : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         PlayerInventory inventory = collision.gameObject.GetComponent<PlayerInventory>();
         //ensures we are colliding with player by checking that inventory exists
@@ -38,7 +41,13 @@ public class Door : MonoBehaviour
             //checks inventory for key to unlock door
             if (inventory.hasKey)
             {
+                // Debug.Log("has key, opening door");
                 OpenDoor();
+            }
+            else
+            {
+                doorLockedSound.Play();
+                Debug.Log("You don't have the key, door is locked.");
             }
         }
     }
@@ -47,6 +56,7 @@ public class Door : MonoBehaviour
     {
         if (isOpening) return;
         isOpening = true;
+        GetComponent<BoxCollider2D>().enabled = false; //disable collider to allow player to walk into the door
         int currentLevel = levelManager.GetCurrentLevelNumber();
         levelManager.completeLevel(currentLevel); // mark the level as completed
         Debug.Log("Door Opened! Yay you win!");
@@ -67,34 +77,36 @@ public class Door : MonoBehaviour
             spriteRenderer.sprite = frames[i];
             yield return new WaitForSeconds(frameDuration);
         }
-        yield return new WaitForSeconds(0f); //TODO: fade to black instead of just waiting a few seconds 
+        // yield return new WaitForSeconds(0f); //TODO: fade to black instead of just waiting a few seconds 
 
     }
 
     private IEnumerator OpenDoorSequence()
     {
+        doorOpenSound.Play();
+        yield return new WaitForSeconds(0.2f);
         doorCreakSound.Play();
+
         PlayerMovement movement = player.GetComponent<PlayerMovement>();
         PlayerInput input = player.GetComponent<PlayerInput>();
 
         input.DeactivateInput(); // disable player input during the door opening sequence
         yield return StartCoroutine(PlayerJumpAnimation(0.4f, 0f, 0.1f));
 
-        movement.MoveToPosition(transform.position); // walk to door position
+        movement.MoveToPosition(transform.position); // walk into the door
         yield return StartCoroutine(DoorOpenAnimation());
 
         yield return new WaitUntil(() => !movement.IsAutoMoving());
 
         doorEnterSound.Play();
 
-        // yield return StartCoroutine(PlayerJumpAnimation(0.8f, -5f, 0.3f));
-
         input.ActivateInput(); // re-enable player input after the door sequence
 
-        Destroy(player); // destroy player after the door animation is done to simulate player going "through" the door and disappearing
-        yield return new WaitForSeconds(1f); // wait a moment for the player to disappear before loading the next level
+        player.GetComponent<SpriteRenderer>().enabled = false; // make player dissapear after door opens
 
-        levelManager.LoadNextLevel(); // load the next level after the door sequence is complete
+        yield return new WaitForSeconds(1f); // wait a moment before loading the next level
+
+        levelManager.LoadNextLevel();
     }
 
     private IEnumerator PlayerJumpAnimation(float jumpHeight, float jumpEndHeight, float jumpDuration)
@@ -127,7 +139,4 @@ public class Door : MonoBehaviour
 
 
     }
-
-
-
 }
