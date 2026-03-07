@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
 {
+    // Rotates camera back and forth
+    // Source: https://discussions.unity.com/t/rotate-object-back-and-forth-x-degrees/610207/2
 
     [SerializeField] public Vector3 rotateFrom = new Vector3(0.0F, 0.0F, -45.0F);
     [SerializeField] public Vector3 rotateTo = new Vector3(0.0F, 0.0F, 45.0F);

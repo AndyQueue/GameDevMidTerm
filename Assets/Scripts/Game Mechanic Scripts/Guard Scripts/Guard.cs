@@ -5,15 +5,15 @@ using System.Collections;
 public class Guard : MonoBehaviour
 {
     public AudioSource guardSound;
-    public float startOffset; 
-    
+    public float startOffset;
+
     [SerializeField] private float range;
     [SerializeField] private float colliderDistance;
     [SerializeField] private BoxCollider2D boxCollider;
     [SerializeField] private LayerMask playerLayer;
 
     private bool hasCaughtPlayer = false;
-    private PlayerCaught cachedPlayer; 
+    private PlayerCaught cachedPlayer;
     private GuardPatrol guardPatrol;
     private Animator animator;
 
@@ -24,7 +24,7 @@ public class Guard : MonoBehaviour
     }
 
     void Update()
-    {   
+    {
         // if player is already caught, skip detection logic
         if (hasCaughtPlayer) { return; }
 
@@ -41,9 +41,20 @@ public class Guard : MonoBehaviour
         }
     }
 
+    public float GetSightWidth()
+    // AI helped writing this method
+    {
+        return (range * transform.localScale.x * colliderDistance) + (boxCollider.bounds.size.x * range) / 2;
+    }
+
+    public float GetSightHeight()
+    {
+        return boxCollider.bounds.size.y;
+    }
+
     // AI helped writing this method
     // Returns the PlayerCaught component if player is detected by either method
-    private PlayerCaught GetDetectedPlayer( out bool byCollision)
+    private PlayerCaught GetDetectedPlayer(out bool byCollision)
     {
         byCollision = false;
         // Check collision first (direct contact)
@@ -57,10 +68,10 @@ public class Guard : MonoBehaviour
             PlayerMovement pm = collisionHit.collider.GetComponent<PlayerMovement>();
             //return the player that was caught if not hidden
             if (!pm.IsHiding())
-               { 
-                    byCollision = true;
-                    return collisionHit.collider.GetComponent<PlayerCaught>();
-               }
+            {
+                byCollision = true;
+                return collisionHit.collider.GetComponent<PlayerCaught>();
+            }
         }
 
         // Check line of sight
@@ -74,10 +85,10 @@ public class Guard : MonoBehaviour
             PlayerMovement pm = sightHit.collider.GetComponent<PlayerMovement>();
             //return the player that was caught if not hidden
             if (!pm.IsHiding())
-                {
-                    byCollision = false;
-                    return sightHit.collider.GetComponent<PlayerCaught>();
-                }
+            {
+                byCollision = false;
+                return sightHit.collider.GetComponent<PlayerCaught>();
+            }
         }
 
         return null;

@@ -14,18 +14,11 @@ public class GameUIManager : MonoBehaviour
     [SerializeField] private float flashDuration = 0.2f;
     [SerializeField] private float flashHoldDuration = 0.1f;
     [SerializeField] private AudioSource caughtSFX;
-    public bool isPaused;
     private bool isCaught;
-
-    private void SetPausedState(bool paused)
-    {
-        isPaused = paused;
-        GameState.IsPaused = paused;
-    }
 
     private void Awake()
     {
-        SetPausedState(false);
+        GameState.SetPaused(false);
 
         if (pausePanel != null)
         {
@@ -68,21 +61,21 @@ public class GameUIManager : MonoBehaviour
     }
     public void PauseGame()
     {
-        SetPausedState(true);
+        GameState.SetPaused(true);
         Time.timeScale = 0f;
         if (pausePanel != null) { pausePanel.SetActive(true); }
     }
 
     public void ResumeGame()
     {
-        SetPausedState(false);
+        GameState.SetPaused(false);
         Time.timeScale = 1f;
         if (pausePanel != null) { pausePanel.SetActive(false); }
     }
     public void BackToMainMenu()
     {
         Time.timeScale = 1f;
-        SetPausedState(false);
+        GameState.SetPaused(false);
         isCaught = false;
         SceneManager.LoadScene("MainMenu");
     }
@@ -90,7 +83,7 @@ public class GameUIManager : MonoBehaviour
     {
         if (isCaught) return;
         isCaught = true;
-        SetPausedState(false);
+        GameState.SetPaused(false);
         Time.timeScale = 0f;
 
         if (pausePanel != null)
@@ -107,7 +100,6 @@ public class GameUIManager : MonoBehaviour
         }
         if (caughtSFX != null)
         {
-            Debug.Log("Playing caught sound effect");
             caughtSFX.Play();
         }
     }
@@ -160,7 +152,7 @@ public class GameUIManager : MonoBehaviour
     private void ReloadCurrentScene()
     {
         Time.timeScale = 1f;
-        SetPausedState(false);
+        GameState.SetPaused(false);
         isCaught = false;
         Scene current = SceneManager.GetActiveScene();
         SceneManager.LoadScene(current.name);

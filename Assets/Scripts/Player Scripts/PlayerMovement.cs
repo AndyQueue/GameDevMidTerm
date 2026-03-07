@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(CapsuleCollider2D))]
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(PlayerAnimation))]
+[RequireComponent(typeof(PlayerJumpEffects))]
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 5f;
@@ -19,7 +20,7 @@ public class PlayerMovement : MonoBehaviour
     private CapsuleCollider2D playerCol;
     private SpriteRenderer spriteRenderer;
     private PlayerAnimation playerAnimation;
-    public ParticleSystem jumpParticles;
+    private PlayerJumpEffects playerJumpEffects;
     private float horizontalInput;
 
     private bool isHiding;
@@ -44,13 +45,13 @@ public class PlayerMovement : MonoBehaviour
         playerCol = GetComponent<CapsuleCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         playerAnimation = GetComponent<PlayerAnimation>();
+        playerJumpEffects = GetComponent<PlayerJumpEffects>();
         crouchSpeed = moveSpeed / 2f;
         currentSpeed = moveSpeed;
         originalHeight = playerCol.size.y;
         crouchHeight = originalHeight / 2f;
         originalGravityScale = rb.gravityScale;
         originalColor = spriteRenderer.color;
-        jumpParticles = GetComponentInChildren<ParticleSystem>();
     }
 
     public Vector2 GetMovementDirection()
@@ -69,7 +70,6 @@ public class PlayerMovement : MonoBehaviour
 
         Vector2 move = input.Get<Vector2>();
         horizontalInput = move.x;
-        // jumpParticles.Play();
 
     }
 
@@ -78,11 +78,8 @@ public class PlayerMovement : MonoBehaviour
         if (!input.isPressed || GameState.IsGamePaused() || isHiding || isCrouching || !IsGrounded()) { return; }
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
 
-        if (playerAnimation != null)
-        {
-            playerAnimation.PlaySfx("Jump");
-            jumpParticles.Play();
-        }
+        playerAnimation.PlaySfx("Jump");
+        playerJumpEffects.PlayJumpEffects();
     }
 
     public void OnCrouch(InputValue input)
@@ -91,10 +88,7 @@ public class PlayerMovement : MonoBehaviour
         isCrouching = !isCrouching;
         playerCol.size = new Vector2(playerCol.size.x, isCrouching ? crouchHeight : originalHeight);
 
-        if (playerAnimation != null)
-        {
-            playerAnimation.PlaySfx(isCrouching ? "Crouch" : "Uncrouch");
-        }
+        playerAnimation.PlaySfx(isCrouching ? "Crouch" : "Uncrouch");
     }
 
     public void OnHide(InputValue input)
@@ -116,10 +110,7 @@ public class PlayerMovement : MonoBehaviour
             playerCol.enabled = true;
             rb.gravityScale = originalGravityScale;
 
-            if (playerAnimation != null)
-            {
-                playerAnimation.PlaySfx("Unhide");
-            }
+            playerAnimation.PlaySfx("Unhide");
         }
         // Hide
         else
@@ -130,10 +121,7 @@ public class PlayerMovement : MonoBehaviour
             rb.gravityScale = 0f;
             rb.linearVelocity = Vector2.zero;
 
-            if (playerAnimation != null)
-            {
-                playerAnimation.PlaySfx("Hide");
-            }
+            playerAnimation.PlaySfx("Hide");
         }
     }
 

@@ -5,11 +5,10 @@ public class PlayerCaught : MonoBehaviour
 {
     public bool isCaught = false;
 
-    // Drag the GameUIManager from the scene into this field in the Inspector.
     private GameUIManager gameUIManager;
     public void Awake()
     {
-        gameUIManager = GetComponent<GameUIManager>();
+        gameUIManager = FindFirstObjectByType<GameUIManager>();
     }
     public void Caught()
     {
