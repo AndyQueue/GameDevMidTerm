@@ -32,11 +32,15 @@ public class Dialogue : MonoBehaviour
             Debug.LogWarning("LevelButton: No LevelManager found in the scene.");
         }
         textComponent.text = string.Empty;
-        StartDialogue();
+
+
+
+        StartCoroutine(StartDialogue());
     }
 
-    void StartDialogue()
+    private IEnumerator StartDialogue()
     {
+        yield return new WaitForSeconds(2.5f);
         index = 0;
         typingCoroutine = StartCoroutine(TypeLine());
     }
