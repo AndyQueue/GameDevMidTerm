@@ -17,7 +17,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2204721879558210306
 Transform:
@@ -111,7 +111,9 @@ MonoBehaviour:
   - {fileID: -2516045267097707079, guid: 63ba9320e64b8a44a9ed9b3997f29d01, type: 3}
   frameDuration: 0.35
   doorOpenSound: {fileID: 0}
-  levelChanger: {fileID: 0}
+  doorCreakSound: {fileID: 0}
+  doorEnterSound: {fileID: 0}
+  doorLockedSound: {fileID: 0}
 --- !u!61 &3918148990593260589
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -142,7 +144,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
