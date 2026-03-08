@@ -1,17 +1,15 @@
 using System.Collections;
-using Unity.VisualScripting;
-using UnityEditor.Search;
 using UnityEngine;
 
 public class KeyAnimation : MonoBehaviour
 {
-    
+
     [Header("Sparkle Animation")]
     [SerializeField] float animationFPS;
     [SerializeField] Sprite[] spriteAnimation;
 
     [Header("Bounce Settings")]
-    [SerializeField] float bounceHeight; 
+    [SerializeField] float bounceHeight;
     [SerializeField] float bounceSpeed;
 
     private SpriteRenderer sr;
@@ -19,7 +17,7 @@ public class KeyAnimation : MonoBehaviour
     void Start()
     {
         sr = GetComponent<SpriteRenderer>();
-        startPos = transform.position; 
+        startPos = transform.position;
         StartCoroutine(AnimationRoutine());
     }
 
@@ -28,8 +26,8 @@ public class KeyAnimation : MonoBehaviour
     {
         float animationTimer = 1f / animationFPS; //calculates time each animation stays on the screen
         //time per frame = 1/ frames per second
-        int currentFrame = 0; 
-        while (true) 
+        int currentFrame = 0;
+        while (true)
         {
             sr.sprite = spriteAnimation[currentFrame]; //sets the sprite to the current frame in the animation
             currentFrame = (currentFrame + 1) % spriteAnimation.Length; //gets the new current frame by going 
@@ -44,5 +42,5 @@ public class KeyAnimation : MonoBehaviour
         float newY = startPos.y + Mathf.Sin(Time.time * bounceSpeed) * bounceHeight;
         transform.position = new Vector3(startPos.x, newY, 0);
     }
-    
+
 }
