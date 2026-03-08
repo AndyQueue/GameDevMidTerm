@@ -70,6 +70,15 @@ public class GameUIManager : MonoBehaviour
         Debug.Log("Back button clicked");
         BackToMainMenu();
     }
+
+    //pressing continue after winning
+    public void OnClick()
+    {
+        if (!hasWon) { return; } // only works when player has won
+        Debug.Log("continuing to end scene");
+        LoadEndScene();
+    }
+
     public void PauseGame()
     {
         GameState.SetPaused(true);
@@ -90,6 +99,17 @@ public class GameUIManager : MonoBehaviour
         isCaught = false;
         SceneManager.LoadScene("MainMenu");
     }
+
+    // after winning, press button to load the last scene
+    public void LoadEndScene()
+    {
+        Time.timeScale = 1f;
+        GameState.SetPaused(false);
+        isCaught = false;
+        hasWon = false;
+        SceneManager.LoadScene("EndScene");
+    }
+
     public void HandlePlayerCaught()
     {
         if (isCaught) return;
@@ -160,7 +180,17 @@ public class GameUIManager : MonoBehaviour
         caughtFlashImage.color = caughtColor;
     }
 
-       public void HandlePlayerWin()
+    private void ReloadCurrentScene()
+    {
+        Time.timeScale = 1f;
+        GameState.SetPaused(false);
+        isCaught = false;
+        hasWon = false;
+        Scene current = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(current.name);
+    }
+
+    public void HandlePlayerWin()
     {
         if (hasWon) return;
         hasWon = true;
@@ -181,15 +211,5 @@ public class GameUIManager : MonoBehaviour
                 CrownRoomMusicManager.instance.bgMusic.Pause();
             winSFX.Play();
         }
-    }
-
-    private void ReloadCurrentScene()
-    {
-        Time.timeScale = 1f;
-        GameState.SetPaused(false);
-        isCaught = false;
-        hasWon = false;
-        Scene current = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(current.name);
     }
 }
