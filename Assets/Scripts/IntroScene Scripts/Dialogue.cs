@@ -22,6 +22,11 @@ public class Dialogue : MonoBehaviour
 
     private LevelManager levelManager;
 
+    void Awake()
+    {
+        textComponent.text = string.Empty;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,17 +36,30 @@ public class Dialogue : MonoBehaviour
         {
             Debug.LogWarning("LevelButton: No LevelManager found in the scene.");
         }
+
+        index = 0;
+        isTyping = false;
         textComponent.text = string.Empty;
 
+       if (typingCoroutine != null) 
+       {
+            StopCoroutine(typingCoroutine);
+            typingCoroutine = null;
+       }
 
-
-        StartCoroutine(StartDialogue());
+       StartCoroutine(StartDialogue());
     }
 
     private IEnumerator StartDialogue()
     {
+        bool previousTypingState = isTyping;
+        isTyping= true;
+
         yield return new WaitForSeconds(2.5f);
+
+        isTyping = false;
         index = 0;
+        textComponent.text = string.Empty;
         typingCoroutine = StartCoroutine(TypeLine());
     }
 
@@ -49,11 +67,16 @@ public class Dialogue : MonoBehaviour
     {
         if (isTyping)
         {
-            StopCoroutine(typingCoroutine);
+            if (typingCoroutine != null)
+            {
+                StopCoroutine(typingCoroutine);
+            }
+
             dialogueTypingSound.Stop();
-            textComponent.text = string.Empty;
-            textComponent.text = lines[index];
+
+            //textComponent.text = string.Empty;
             isTyping = false;
+            textComponent.text = lines[index];
         }
         else
         {
@@ -64,6 +87,7 @@ public class Dialogue : MonoBehaviour
     IEnumerator TypeLine()
     {
         isTyping = true;
+        textComponent.text = string.Empty;//
         dialogueTypingSound.Play();
         foreach (char c in lines[index].ToCharArray())
         {
