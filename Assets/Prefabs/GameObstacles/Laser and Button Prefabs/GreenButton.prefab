@@ -19,7 +19,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2809085131450622547
 Transform:
@@ -126,7 +126,6 @@ MonoBehaviour:
   - {fileID: -4834857080170754789, guid: 6e75e8744fd074ad8a6cc079ffbc83a9, type: 3}
   - {fileID: 2121239239172586444, guid: 6e75e8744fd074ad8a6cc079ffbc83a9, type: 3}
   - {fileID: -4683470989060230717, guid: 6e75e8744fd074ad8a6cc079ffbc83a9, type: 3}
-  pressedColor: {r: 1, g: 0.995283, b: 0.995283, a: 0}
   buttonSound: {fileID: 0}
 --- !u!61 &-4800709232889537002
 BoxCollider2D:
