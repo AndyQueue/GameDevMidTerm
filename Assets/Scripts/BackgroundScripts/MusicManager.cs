@@ -20,4 +20,14 @@ public class MusicManager : MonoBehaviour
             //keeps old music manager
         }
     }
+
+    // stopping music when needed
+    public static void Stop()
+    {
+        if (alreadyPlaying != null)
+        {
+            Destroy(alreadyPlaying.gameObject);
+            alreadyPlaying = null;
+        }
+    }
 }
