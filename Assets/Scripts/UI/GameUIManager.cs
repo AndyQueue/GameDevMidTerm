@@ -173,10 +173,11 @@ public class GameUIManager : MonoBehaviour
         }
         if (winPanel != null)
         {
-            caughtPanel.SetActive(true);
+            winPanel.SetActive(true);
         }
         if (winSFX != null)
         {
+            MusicManager.alreadyPlaying.GetComponent<AudioSource>().Pause(); //pause background music
             winSFX.Play();
         }
     }
