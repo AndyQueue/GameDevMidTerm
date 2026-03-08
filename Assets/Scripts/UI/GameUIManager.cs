@@ -173,7 +173,7 @@ public class GameUIManager : MonoBehaviour
         }
         if (winPanel != null)
         {
-            caughtPanel.SetActive(true);
+            winPanel.SetActive(true);
         }
         if (winSFX != null)
         {
