@@ -177,7 +177,8 @@ public class GameUIManager : MonoBehaviour
         }
         if (winSFX != null)
         {
-            MusicManager.alreadyPlaying.GetComponent<AudioSource>().Pause(); //pause background music
+            if (CrownRoomMusicManager.instance != null)
+                CrownRoomMusicManager.instance.bgMusic.Pause();
             winSFX.Play();
         }
     }
