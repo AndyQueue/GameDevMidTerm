@@ -1193,6 +1193,7 @@ MonoBehaviour:
   textSpeed: 0.015
   doorEnterSound: {fileID: 0}
   dialogueTypingSound: {fileID: 462438408}
+  dialogueDelay: 2.5
 --- !u!114 &1694091597
 MonoBehaviour:
   m_ObjectHideFlags: 0

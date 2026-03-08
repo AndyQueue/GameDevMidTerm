@@ -13,6 +13,7 @@ public class Dialogue : MonoBehaviour
     public float textSpeed;
     [SerializeField] private AudioSource doorEnterSound;
     [SerializeField] private AudioSource dialogueTypingSound;
+    [SerializeField] private float dialogueDelay;
 
 
     private int index;
@@ -30,6 +31,7 @@ public class Dialogue : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        textComponent.text = string.Empty;
         levelManager = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>();
 
         if (levelManager == null)
@@ -52,10 +54,9 @@ public class Dialogue : MonoBehaviour
 
     private IEnumerator StartDialogue()
     {
-        bool previousTypingState = isTyping;
         isTyping= true;
 
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(dialogueDelay);
 
         isTyping = false;
         index = 0;
@@ -73,8 +74,6 @@ public class Dialogue : MonoBehaviour
             }
 
             dialogueTypingSound.Stop();
-
-            //textComponent.text = string.Empty;
             isTyping = false;
             textComponent.text = lines[index];
         }
@@ -87,7 +86,7 @@ public class Dialogue : MonoBehaviour
     IEnumerator TypeLine()
     {
         isTyping = true;
-        textComponent.text = string.Empty;//
+        textComponent.text = string.Empty;
         dialogueTypingSound.Play();
         foreach (char c in lines[index].ToCharArray())
         {
