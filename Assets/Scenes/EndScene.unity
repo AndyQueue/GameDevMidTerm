@@ -604,8 +604,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 37.5605, y: -2.4268}
-  m_SizeDelta: {x: 1094.8857, y: 165.1465}
+  m_AnchoredPosition: {x: 18.99, y: -2.427}
+  m_SizeDelta: {x: 1057.746, y: 165.146}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &989620674
 MonoBehaviour:
@@ -970,7 +970,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -636.402, y: -357.4}
+  m_AnchoredPosition: {x: -638.6, y: -357.4}
   m_SizeDelta: {x: 382.804, y: 382.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1488911486
@@ -1075,7 +1075,7 @@ MonoBehaviour:
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
-  m_ScreenMatchMode: 0
+  m_ScreenMatchMode: 2
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
@@ -1190,6 +1190,7 @@ MonoBehaviour:
   textSpeed: 0.015
   doorEnterSound: {fileID: 0}
   dialogueTypingSound: {fileID: 462438408}
+  dialogueDelay: 0
 --- !u!114 &1694091597
 MonoBehaviour:
   m_ObjectHideFlags: 0
