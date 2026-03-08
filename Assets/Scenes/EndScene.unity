@@ -1068,13 +1068,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Dialogue
   textComponent: {fileID: 989620674}
   lines:
-  - "Good evening Agent Benno, we\u2019ve received top secret intelligence that a
-    mole within DIS is planning on stealing the royal crown tonight."
-  - We have been unable to diffuse the situation so we are now in a crisis and we
-    need you, our most trustworthy agent, to save the day.
-  - Your mission is to sneak through Rosenborg Castle and secure the royal crown
-    before the mole gets to it first.
-  - The future of Denmark is in your hands.
+  - Congratulations, Agent Benno! Thanks to your expert work, we have been able to
+    prevent the mole from stealing the crown!
+  - I knew we could trust you to complete this formidable mission.
+  - Denmark thanks you for your service.
   textSpeed: 0.015
   doorEnterSound: {fileID: 0}
   dialogueTypingSound: {fileID: 462438408}
