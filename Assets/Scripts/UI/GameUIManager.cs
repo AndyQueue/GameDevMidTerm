@@ -14,7 +14,13 @@ public class GameUIManager : MonoBehaviour
     [SerializeField] private float flashDuration = 0.2f;
     [SerializeField] private float flashHoldDuration = 0.1f;
     [SerializeField] private AudioSource caughtSFX;
+
+    [Header("Win UI")]
+    [SerializeField] private GameObject winPanel;
+    [SerializeField] private AudioSource winSFX;
+
     private bool isCaught;
+    private bool hasWon;
 
     private void Awake()
     {
@@ -35,6 +41,11 @@ public class GameUIManager : MonoBehaviour
             Color c = caughtFlashImage.color;
             c.a = 0f;
             caughtFlashImage.color = c;
+        }
+
+        if (winPanel != null)
+        {
+            winPanel.SetActive(false);
         }
     }
 
@@ -149,11 +160,33 @@ public class GameUIManager : MonoBehaviour
         caughtFlashImage.color = caughtColor;
     }
 
+       public void HandlePlayerWin()
+    {
+        if (hasWon) return;
+        hasWon = true;
+        GameState.SetPaused(false);
+        Time.timeScale = 0f;
+
+        if (pausePanel != null)
+        {
+            pausePanel.SetActive(false);
+        }
+        if (winPanel != null)
+        {
+            caughtPanel.SetActive(true);
+        }
+        if (winSFX != null)
+        {
+            winSFX.Play();
+        }
+    }
+
     private void ReloadCurrentScene()
     {
         Time.timeScale = 1f;
         GameState.SetPaused(false);
         isCaught = false;
+        hasWon = false;
         Scene current = SceneManager.GetActiveScene();
         SceneManager.LoadScene(current.name);
     }

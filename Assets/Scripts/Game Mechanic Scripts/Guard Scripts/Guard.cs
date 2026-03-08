@@ -10,7 +10,6 @@ public class Guard : MonoBehaviour
     [SerializeField] private float range;
     [SerializeField] private float colliderDistance;
     [SerializeField] private BoxCollider2D boxCollider;
-    [SerializeField] private LayerMask playerLayer;
 
     private bool hasCaughtPlayer = false;
     private PlayerCaught cachedPlayer;
