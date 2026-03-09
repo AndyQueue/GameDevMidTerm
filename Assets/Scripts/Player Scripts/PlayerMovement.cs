@@ -35,9 +35,8 @@ public class PlayerMovement : MonoBehaviour
     private Color originalColor;
     private readonly Color hidingColor = new Color(1f, 1f, 1f, 0.5f);
 
-
-    public float MoveSpeedCopy => moveSpeed;
-    public float HideSpeedCopy => crouchSpeed;
+    // public float MoveSpeedCopy => moveSpeed;
+    // public float HideSpeedCopy => crouchSpeed;
 
     private void Awake()
     {
@@ -70,7 +69,6 @@ public class PlayerMovement : MonoBehaviour
 
         Vector2 move = input.Get<Vector2>();
         horizontalInput = move.x;
-
     }
 
     public void OnJump(InputValue input)
@@ -133,7 +131,7 @@ public class PlayerMovement : MonoBehaviour
         RaycastHit2D hitRight = Physics2D.Raycast(origin + (Vector2.right * playerCol.bounds.extents.x), Vector2.down, groundCheckDistance, groundLayer | obstacleLayer);
         return hitCenter.collider != null || hitLeft.collider != null || hitRight.collider != null;
     }
-
+    
     private bool BehindHidable()
     {
         // Check if player is touching a hidable object 
@@ -187,7 +185,6 @@ public class PlayerMovement : MonoBehaviour
         // Non-player-controlled movement (for door animation)
         if (isAutoMoving)
         {
-
             Vector2 dir = autoMoveTarget - (Vector2)transform.position;
             if (Mathf.Abs(dir.x) < 0.05f)
             {

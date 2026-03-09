@@ -1,6 +1,4 @@
 using UnityEngine;
-// Dust Particle Effect for player jumping 
-// https://www.youtube.com/watch?v=ERXFU4JRPNI
 
 [RequireComponent(typeof(Animator))]
 public class PlayerAnimation : MonoBehaviour
